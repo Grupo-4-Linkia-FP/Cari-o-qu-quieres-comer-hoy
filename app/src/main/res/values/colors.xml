@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gradient_start">#FAD961</color>
+    <color name="gradient_end">#F76B1C</color>
+    <color name="text_primary">#000000</color>
+    <color name="button_background">#F87171</color>
+    <color name="hint_color">#FFFFFF</color>
+    <color name="link_color">#E53935</color>
+        <color name="my_light_primary">#FF6F6F</color>
+        <color name="my_light_primary_variant">#FF8A8A</color>
+        <color name="my_light_secondary">#FCA5A5</color>
+        <color name="my_light_accent">#FFC107</color>
+
+
+
+
+</resources>
