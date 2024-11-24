@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "182283458185",
+    "project_id": "damlogin-bc92d",
+    "storage_bucket": "damlogin-bc92d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182283458185:android:b93a5a17812c960eb95858",
+        "android_client_info": {
+          "package_name": "com.example.codeseasy.com.firebaseauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcRMePvj5qWWJRBUWOcdJWvGQfRjAT3vI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182283458185:android:fc3d7c6784f9d9beb95858",
+        "android_client_info": {
+          "package_name": "com.example.cqqch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcRMePvj5qWWJRBUWOcdJWvGQfRjAT3vI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

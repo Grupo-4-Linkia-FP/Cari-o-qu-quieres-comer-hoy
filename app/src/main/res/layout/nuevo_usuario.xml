@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondocomida"
+    tools:context=".NuevoUsuario">
+
+    <TextView
+        android:id="@+id/tvContrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="386dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="298dp"
+        android:background="#4D4D4D"
+        android:padding="10dp"
+        android:text="CONTRASEÑA"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btNuevoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="584dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="214dp"
+        android:backgroundTint="#4D4D4D"
+        android:text="Nuevo usuario"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etContrasena"
+        android:layout_width="217dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="465dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="221dp"
+        android:background="#fffaf4"
+        android:ems="10"
+        android:hint="Ingrese su contraseña"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="198dp"
+        android:layout_marginEnd="153dp"
+        android:layout_marginBottom="486dp"
+        android:background="#4D4D4D"
+        android:padding="10dp"
+        android:text="USUARIO"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsuario"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="406dp"
+        android:background="#fffaf4"
+        android:ems="10"
+        android:hint="Ingrese su usuario"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabnuevousuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="640dp"
+        android:layout_marginEnd="322dp"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="#969595"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
