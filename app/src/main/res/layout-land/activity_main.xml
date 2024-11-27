@@ -1,143 +1,122 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondocomidaland"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
-    <!--Colocamos los objetos del diseño de manera adapatada a una
-    visión horizontal-->
-    <Button
-        android:id="@+id/btValidar"
-        android:layout_width="wrap_content"
+    <!-- Icono -->
+
+    <!-- Sección de formulario (campo de correo electrónico, contraseña, botones) -->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="36dp"
+        android:contentDescription="Icono de aplicación"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/form_section"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#4D4D4D"
-        android:text="Validar"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.236"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glmedio"
-        app:layout_constraintVertical_bias="0.418" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/app_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintVertical_bias="0.5">
 
-    <TextView
-        android:id="@+id/tvContrasena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#4D4D4D"
-        android:padding="10dp"
-        android:text="CONTRASEÑA"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/glmedio"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.709" />
+        <!-- Texto principal -->
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotobold"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:text="CARIÑO\nQUÉ QUIERES COMER HOY"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btNuevoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#4D4D4D"
-        android:text="Nuevo usuario"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.786"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glmedio"
-        app:layout_constraintVertical_bias="0.418" />
+        <!-- Campo de correo electrónico -->
+        <EditText
+            android:id="@+id/email_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Tu correo electrónico"
+            android:background="@drawable/rounded_edit_text"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintWidth_percent="0.7" />
 
-    <EditText
-        android:id="@+id/etContrasena"
-        android:layout_width="425dp"
-        android:layout_height="57dp"
-        android:padding="16dp"
-        android:background="#fffaf4"
-        android:ems="10"
-        android:hint="  Ingrese su contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@id/glmedio"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.695" />
+        <!-- Campo de contraseña -->
+        <EditText
+            android:id="@+id/password_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Tu contraseña"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_edit_text"
+            android:fontFamily="@font/robotoregular"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/email_field"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintWidth_percent="0.7" />
 
-    <TextView
-        android:id="@+id/tvUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#4D4D4D"
-        android:padding="10dp"
-        android:text="USUARIO"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/glmedio"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.231" />
+        <!-- Botón de registrarse -->
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button"
+            android:fontFamily="@font/robotoregular"
+            android:text="Registrarse"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/password_field"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            app:layout_constraintWidth_percent="0.6" />
 
+        <!-- Texto de iniciar sesión -->
+        <TextView
+            android:id="@+id/btnIniciarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ya tengo cuenta. Iniciar sesión"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/btnRegistrarse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="425dp"
-        android:layout_height="57dp"
-        android:padding="16dp"
-        android:background="#fffaf4"
-        android:ems="10"
-        android:hint="Ingrese su usuario"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@id/glmedio"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.195" />
-
-    <!--Creamos las guias y las colocamos en porcentajes
-     para adaptar el diseño a horizontal-->
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glarriba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glmedio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glabajo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glizquierda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glderecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>
