@@ -1,0 +1,94 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
+    tools:context=".IniciarSesion">
+
+    <!-- Icono -->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:contentDescription="Icono de aplicación"
+        android:src="@drawable/ic_iniciar_sesion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
+
+    <!-- Texto principal -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="301dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/robotobold"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="Iniciar Sesión"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_icon" />
+
+
+    <!-- Campo de correo electrónico -->
+    <EditText
+        android:id="@+id/email_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tu correo electrónico"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/robotoregular"
+        android:textSize="20sp"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Campo de contraseña -->
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tu contraseña"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/robotoregular"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/email_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Botón de registrarse -->
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="284dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/selector_button"
+        android:fontFamily="@font/robotoregular"
+        android:text="Iniciar sesión"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_field"
+        app:layout_constraintWidth_percent="0.6" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
