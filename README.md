@@ -51,7 +51,7 @@ Los usuarios pueden agregar recetas con los siguientes detalles:
 
 - **Cómo funcionará:**
   - Desde la lista de restaurantes, el usuario podrá pulsar sobre el icono de corazón. Se hará lo mismo con el apartado de Cocinar (Recetas)
-  - Al marcar un restaurante como favorito, al igual que al marcar una Receya. Se almacenará en Firebase.
+  - Al marcar un restaurante como favorito, al igual que al marcar una Receta. Se almacenará en Firebase.
   - Habrá un apartado exclusivo para ver solo los restaurantes y recetas marcados como favoritos.
 
 ### 🎲 **2. Funcionalidad de "Cariño, elige tú"**
