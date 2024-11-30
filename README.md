@@ -7,7 +7,7 @@ CQQCH es una aplicación desarrollada en Android Studio que tiene como objetivo 
 ## 🚀 **Características principales**
 
 ### 🏢 **1. Gestión de Restaurantes**
-- Los usuarios pueden agregar restaurantes con los siguientes detalles:
+Los usuarios pueden agregar restaurantes con los siguientes detalles:
   - **Nombre** 🏷️
   - **Dirección** 📍
   - **Nota** (puntuación del 1 al 5) ⭐
@@ -17,7 +17,7 @@ CQQCH es una aplicación desarrollada en Android Studio que tiene como objetivo 
   - **Precio aproximado** 💰
   - **Comentarios adicionales** 📝
 
-- Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
+- Cada restaurante se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus rstaurantes. Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
 
 ### 📋 **2. Visualización de Restaurantes**
 - Los usuarios pueden ver una lista de los restaurantes que han añadido, con todos los detalles visibles:
@@ -26,13 +26,23 @@ CQQCH es una aplicación desarrollada en Android Studio que tiene como objetivo 
 
 
 ### 🍳 **3. Gestión de Recetas**
-Los usuarios pueden agregar recetas con los siguientes detalles:
-  - **Nombre** 🏷️
-  - **Categoría** 🍴 (como Pasta, Carne, Pescado, Vegetariano, etc.)
-  - **Preparación** 📍
-  - **Nota** (puntuación del 1 al 5) ⭐
-  - **Precio** 💰
-  - **Tiempo** 📝
+
+Los usuarios pueden agregar sus recetas personales con los siguientes detalles:
+
+- **Nombre de la receta** 🏷️
+- **Categoría** 🍽️ (Pasta, Carne, Pescado, Vegetariano, etc.)
+- **Preparación** ✍️ (indicaciones detalladas de cómo preparar la receta)
+- **Nota** (puntuación del 1 al 5) ⭐
+- **Precio estimado** 💰
+- **Tiempo de preparación** ⏱️
+
+- Cada receta se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus recetas. La gestión de recetas se realiza de manera intuitiva y permite a los usuarios centralizar sus ideas culinarias.Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
+
+![Formulario de recetas](https://via.placeholder.com/600x400?text=Formulario+Recetas)
+
+- **Navegación fluida:**  
+  Incluye un botón para volver al menú principal después de guardar o visualizar las recetas.
+
 
     
 ### 📋 4. Visualización de Recetas
