@@ -33,9 +33,15 @@ Los usuarios pueden agregar recetas con los siguientes detalles:
   - **Nota** (puntuación del 1 al 5) ⭐
   - **Precio** 💰
   - **Tiempo** 📝
-  
 
-### 🧭 **4. Navegación Intuitiva**
+    
+### 📋 4. Visualización de Recetas
+Los usuarios pueden ver una lista de los restaurantes que han añadido, con todos los detalles visibles:
+Categoría seleccionada.
+Indicaciones claras de los campos introducidos.
+
+
+### 🧭 **5. Navegación Intuitiva**
 - Botones de navegación como "Volver al Menú" permiten a los usuarios desplazarse entre las pantallas de forma fluida.
 
 
