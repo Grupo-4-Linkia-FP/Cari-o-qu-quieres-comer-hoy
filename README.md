@@ -17,7 +17,7 @@ Los usuarios pueden agregar restaurantes con los siguientes detalles:
   - **Precio aproximado** 💰
   - **Comentarios adicionales** 📝
 
-  Cada restaurante se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus rstaurantes. Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
+  Cada restaurante se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus restaurantes. Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
 
 ### 📋 **2. Visualización de Restaurantes**
 - Los usuarios pueden ver una lista de los restaurantes que han añadido, con todos los detalles visibles:
@@ -36,7 +36,7 @@ Los usuarios pueden agregar sus recetas personales con los siguientes detalles:
 - **Precio estimado** 💰
 - **Tiempo de preparación** ⏱️
 
-  Cada receta se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus recetas. La gestión de recetas se realiza de manera intuitiva y permite a los usuarios centralizar sus ideas culinarias.Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
+Cada receta se asocia al usuario que la crea y se guarda en Firebase, garantizando que otros usuarios no puedan visualizar ni editar sus recetas. La gestión de recetas se realiza de manera intuitiva y permite a los usuarios centralizar sus ideas culinarias.Los datos se almacenan en Firebase para asegurar persistencia y sincronización en diferentes dispositivos.
 
 
     
