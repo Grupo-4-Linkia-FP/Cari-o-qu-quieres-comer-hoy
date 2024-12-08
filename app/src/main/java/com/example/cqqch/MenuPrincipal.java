@@ -5,81 +5,59 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
-
-public class MenuPrincipal extends AppCompatActivity {
-
-    // Variables
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private ImageButton menuButton;
+public class MenuPrincipal extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Usa el layout base
+        setContentView(R.layout.activity_base);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_principal);
 
-        // Inicializar los elementos del layout
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        menuButton = findViewById(R.id.menu_button);
+        // Infla el contenido específico de MenuPrincipal
+        getLayoutInflater().inflate(R.layout.menu_principal, findViewById(R.id.content_frame));
 
-        // Configurar el evento de clic para el botón de menú
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Abrir o cerrar el menú lateral
-                if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                } else {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }
-            }
-        });
+        // Configura navegación
+        setupNavigation();
 
-        // Configurar la navegación para las opciones del menú lateral
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                if (id == R.id.nav_perfil) {
-                    Intent profileIntent = new Intent(MenuPrincipal.this, PerfilActivity.class);
-                    startActivity(profileIntent);
-                } else if (id == R.id.nav_favoritos) {
-                    Intent favoritesIntent = new Intent(MenuPrincipal.this, FavoritosActivity.class);
-                    startActivity(favoritesIntent);
-                } else if (id == R.id.nav_cerrar_sesion) {
-                    cerrarSesion();
-                } else {
-                    Log.d("MenuPrincipal", "Elemento del menú no reconocido: " + item.getTitle());
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
-            }
-
-        });
+        // Configura los botones de MenuPrincipal
+        setupButtons();
     }
 
-    /**
-     * Método para manejar el cierre de sesión
-     */
-    private void cerrarSesion() {
-        // Aquí puedes agregar lógica para limpiar datos o cerrar sesión en el servidor
-        Log.d("MenuPrincipal", "Cerrando sesión...");
+    private void setupButtons() {
+        // Botón IR
+        LinearLayout btnIr = findViewById(R.id.btn_ir_container);
+        btnIr.setOnClickListener(v -> {
+            Log.d("MenuPrincipal", "Botón IR presionado");
+            Intent intent = new Intent(MenuPrincipal.this, IrActivity.class);
+            startActivity(intent); // Navegar a IrActivity
+        });
 
-        // Redirigir al usuario a la pantalla de inicio de sesión
-        Intent loginIntent = new Intent(MenuPrincipal.this, IniciarSesion.class);
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Limpiar la pila de actividades
-        startActivity(loginIntent);
-        finish(); // Finalizar la actividad actual
+        // Botón COCINAR
+        LinearLayout btnCocinar = findViewById(R.id.btn_cocinar_container);
+        btnCocinar.setOnClickListener(v -> {
+            Log.d("MenuPrincipal", "Botón COCINAR presionado");
+            Intent intent = new Intent(MenuPrincipal.this, CocinarActivity.class);
+            startActivity(intent);
+        });
+
+        // Botón PEDIR
+        LinearLayout btnPedir = findViewById(R.id.btn_pedir_container);
+        btnPedir.setOnClickListener(v -> {
+            Log.d("MenuPrincipal", "Botón PEDIR presionado");
+            Intent intent = new Intent(MenuPrincipal.this, PedirActivity.class);
+            startActivity(intent);
+        });
+
+        // Botón ELIGE TÚ
+        LinearLayout btnEligeTu = findViewById(R.id.btn_elige_tu_container);
+        btnEligeTu.setOnClickListener(v -> {
+            Log.d("MenuPrincipal", "Botón ELIGE TÚ presionado");
+            Intent intent = new Intent(MenuPrincipal.this, EligeTuActivity.class);
+            startActivity(intent);
+        });
     }
 }

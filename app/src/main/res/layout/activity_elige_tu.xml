@@ -7,4 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".EligeTuActivity">
 
+    <!-- Imagen Principal -->
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="333dp"
+        android:layout_height="369dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Imagen principal"
+        android:src="@drawable/ic_eligetu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botón Cocinar Elige Tu  -->
+    <Button
+        android:id="@+id/btn_cocinar_eligetu"
+        android:layout_width="288dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/selector_button"
+        android:text="Cocinar"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/main_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <!-- Botón Ir Elige Tu  -->
+    <Button
+        android:id="@+id/btn_ir_eligetu"
+        android:layout_width="288dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_button"
+        android:text="Ir"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_cocinar_eligetu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <!-- Botón Pedir Elige Tu -->
+    <Button
+        android:id="@+id/btn_pedir_eligetu"
+        android:layout_width="288dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_button"
+        android:text="Pedir"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_ir_eligetu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
