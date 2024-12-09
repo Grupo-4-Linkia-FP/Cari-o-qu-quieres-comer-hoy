@@ -14,6 +14,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * BaseActivity sirve como clase base para otras actividades de la aplicación.
+ * Proporciona funcionalidades comunes como la gestión del menú lateral y del menú inferior.
+ */
 public class BaseActivity extends AppCompatActivity {
 
     protected DrawerLayout drawerLayout;
@@ -27,13 +31,20 @@ public class BaseActivity extends AppCompatActivity {
         // No se llama a setContentView() aquí, ya que las subclases lo hacen.
     }
 
+    /**
+     * Configura el menú lateral (navigation drawer) y el menú inferior (bottom navigation).
+     * Este método debe ser llamado por todas las subclases después de establecer su diseño.
+     */
     protected void setupNavigation() {
+        // Inicializa el DrawerLayout y establece un color transparente para el scrim (sombra)
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
 
+        // Inicializa el menú lateral
         navigationView = findViewById(R.id.navigation_view);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        // Configura el comportamiento del menú lateral
         if (navigationView != null) {
             navigationView.setBackgroundColor(Color.WHITE);
             navigationView.setItemBackgroundResource(android.R.color.transparent);
@@ -44,17 +55,19 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
 
+        // Configura el comportamiento del menú inferior
         if (bottomNavigationView != null) {
             bottomNavigationView.setBackgroundColor(Color.TRANSPARENT);
-            bottomNavigationView.setElevation(0f);
+            bottomNavigationView.setElevation(0f); // Elimina la sombra
             bottomNavigationView.setItemBackgroundResource(android.R.color.transparent);
 
             bottomNavigationView.setOnItemSelectedListener(item -> {
-                handleBottomNavigationClick(item);
+                handleBottomNavigationClick(item); // Maneja los clics en los elementos del menú inferior
                 return true;
             });
         }
 
+        // Configura el botón del menú lateral para abrir/cerrar el DrawerLayout
         menuButton = findViewById(R.id.menu_button);
         if (menuButton != null) {
             menuButton.setOnClickListener(v -> {
@@ -68,7 +81,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * Lógica por defecto para el navigation drawer lateral.
+     * Maneja los clics en los elementos del menú lateral.
+     * Las subclases pueden sobrescribir este método para manejar elementos adicionales.
+     *
+     * @param item El elemento del menú que se seleccionó.
      */
     protected void handleNavigationDrawerClick(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -86,7 +102,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * Lógica por defecto para el bottom navigation.
+     * Maneja los clics en los elementos del menú inferior.
+     * Las subclases pueden sobrescribir este método para manejar acciones adicionales.
+     *
+     * @param item El elemento del menú que se seleccionó.
      */
     protected void handleBottomNavigationClick(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -101,8 +120,12 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Maneja el cierre de sesión.
+     * Limpia el stack de actividades y redirige al usuario a la pantalla de inicio de sesión.
+     */
     private void cerrarSesion() {
-        Intent intent = new Intent(this, IniciarSesion.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

@@ -2,6 +2,7 @@ package com.example.cqqch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class IrActivity extends BaseActivity {
         Button btnAnadirRestaurante = findViewById(R.id.btn_add_restaurant);
 
         btnVerRestaurantes.setOnClickListener(v -> {
-            Toast.makeText(this, "Ver Restaurantes", Toast.LENGTH_SHORT).show();
+            Log.d("IrActivity", "Botón Ver Restaurantes presionado");
             Intent intent = new Intent(IrActivity.this, VerRestaurantesActivity.class);
             startActivity(intent);
         });
