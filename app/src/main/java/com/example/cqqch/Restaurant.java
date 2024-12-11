@@ -8,8 +8,10 @@ public class Restaurant {
     private double rating; // Nota
     private String comment; // Comentario
     private boolean isFavorite;
+    private boolean canGo; // Respuesta a "Se puede ir?"
+    private boolean canOrder; // Respuesta a "Se puede pedir?"
 
-    public Restaurant(String name, String address, String category, String price, double rating, String comment, boolean isFavorite) {
+    public Restaurant(String name, String address, String category, String price, double rating, String comment, boolean isFavorite, boolean canGo, boolean canOrder) {
         this.name = name;
         this.address = address;
         this.category = category;
@@ -17,6 +19,8 @@ public class Restaurant {
         this.rating = rating;
         this.comment = comment;
         this.isFavorite = isFavorite;
+        this.canGo = canGo;
+        this.canOrder = canOrder;
     }
 
     public String getName() {
@@ -50,5 +54,12 @@ public class Restaurant {
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
-}
 
+    public boolean isCanGo() {
+        return canGo;
+    }
+
+    public boolean isCanOrder() {
+        return canOrder;
+    }
+}

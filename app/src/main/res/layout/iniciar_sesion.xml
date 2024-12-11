@@ -90,5 +90,19 @@
         app:layout_constraintTop_toBottomOf="@id/password_field"
         app:layout_constraintWidth_percent="0.6" />
 
+    <!-- TextView para recuperar la contrasena -->
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="@color/material_dynamic_neutral30"
+        android:textSize="22sp"
+        android:fontFamily="@font/robotobold"
+        app:layout_constraintTop_toBottomOf="@id/btnIniciarSesion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,16 @@
 package com.example.cqqch;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -20,54 +22,72 @@ public class IniciarSesion extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailField, passwordField;
     private Button btnIniciarSesion;
+    private TextView forgotPasswordLink;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.iniciar_sesion); // Verifica que iniciar_sesion.xml esté correctamente en res/layout/
+        setContentView(R.layout.iniciar_sesion);
 
         // Inicializa Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Vincula los elementos del layout
+        // Vincula los elementos del diseño
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
+        forgotPasswordLink = findViewById(R.id.forgot_password);
 
-        // Verifica si las vistas no son nulas (evitar problemas si hay errores en el ID)
-        if (emailField == null || passwordField == null || btnIniciarSesion == null) {
-            Toast.makeText(this, "Error al vincular los elementos del diseño. Revisa los IDs.", Toast.LENGTH_SHORT).show();
-            return; // Salir del método si hay un error al vincular las vistas
-        }
+        // Configura el botón de inicio de sesión
+        btnIniciarSesion.setOnClickListener(v -> {
+            String email = emailField.getText().toString().trim();
+            String password = passwordField.getText().toString().trim();
 
-        // Configura el evento de clic para el botón de iniciar sesión
-        btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailField.getText().toString().trim();
-                String password = passwordField.getText().toString().trim();
+            if (validateInputs(email, password)) {
+                loginUsuario(email, password);
+            }
+        });
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(IniciarSesion.this, "Por favor ingresa todos los campos", Toast.LENGTH_SHORT).show();
-                } else if (!esEmailValido(email)) {
-                    Toast.makeText(IniciarSesion.this, "Por favor ingresa un correo electrónico válido", Toast.LENGTH_SHORT).show();
-                } else if (!esPasswordValida(password)) {
-                    Toast.makeText(IniciarSesion.this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
-                } else {
-                    loginUsuario(email, password);
-                }
+        // Configura el enlace de "¿Olvidaste tu contraseña?"
+        forgotPasswordLink.setOnClickListener(v -> {
+            String email = emailField.getText().toString().trim();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(IniciarSesion.this, "Por favor ingresa tu correo electrónico para recuperar tu contraseña", Toast.LENGTH_SHORT).show();
+            } else if (!esEmailValido(email)) {
+                Toast.makeText(IniciarSesion.this, "Por favor ingresa un correo electrónico válido", Toast.LENGTH_SHORT).show();
+            } else {
+                recuperarPassword(email);
             }
         });
     }
 
+    private boolean validateInputs(String email, String password) {
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Por favor ingresa tu correo electrónico", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!esEmailValido(email)) {
+            Toast.makeText(this, "Por favor ingresa un correo electrónico válido", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Por favor ingresa tu contraseña", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!esPasswordValida(password)) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     private boolean esEmailValido(String email) {
-        // Valida que el email tenga un formato correcto
+        // Valida el formato del correo electrónico
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean esPasswordValida(String password) {
-        // Comprueba que la contraseña tenga al menos 6 caracteres
+        // Valida que la contraseña tenga al menos 6 caracteres
         return password.length() >= 6;
     }
 
@@ -77,23 +97,37 @@ public class IniciarSesion extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            Toast.makeText(IniciarSesion.this, "Login exitoso, bienvenido " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Login exitoso, bienvenido " + user.getEmail(), Toast.LENGTH_SHORT).show();
                             // Redirige al menú principal
                             Intent intent = new Intent(IniciarSesion.this, MenuPrincipal.class);
                             startActivity(intent);
+                            finish(); // Cierra la actividad actual
                         }
                     } else {
-                        String errorMessage;
-                        try {
-                            throw task.getException();
-                        } catch (FirebaseAuthInvalidUserException e) {
-                            errorMessage = "No existe el usuario";
-                        } catch (FirebaseAuthInvalidCredentialsException e) {
-                            errorMessage = "Credenciales incorrectas";
-                        } catch (Exception e) {
-                            errorMessage = "Error en el login: " + (task.getException() != null ? task.getException().getMessage() : "desconocido");
-                        }
-                        Toast.makeText(IniciarSesion.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        manejarErroresDeAutenticacion(task.getException());
+                    }
+                });
+    }
+
+    private void manejarErroresDeAutenticacion(Exception exception) {
+        String errorMessage;
+        if (exception instanceof FirebaseAuthInvalidUserException) {
+            errorMessage = "No existe el usuario";
+        } else if (exception instanceof FirebaseAuthInvalidCredentialsException) {
+            errorMessage = "Credenciales incorrectas";
+        } else {
+            errorMessage = "Error en el login: " + (exception != null ? exception.getMessage() : "desconocido");
+        }
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    private void recuperarPassword(String email) {
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Correo de recuperación enviado a " + email, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Error al enviar el correo de recuperación: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

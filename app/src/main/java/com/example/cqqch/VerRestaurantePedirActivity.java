@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VerRestaurantesActivity extends BaseActivity {
+public class VerRestaurantePedirActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private RestaurantAdapter adapter;
@@ -22,53 +22,50 @@ public class VerRestaurantesActivity extends BaseActivity {
 
         setupNavigation();
 
-        // Inflar el diseño específico en el content_frame del BaseActivity
-        getLayoutInflater().inflate(R.layout.activity_ver_restaurantes, findViewById(R.id.content_frame));
+        // Infla el diseño específico en el content_frame del BaseActivity
+        getLayoutInflater().inflate(R.layout.activity_ver_restaurante_pedir, findViewById(R.id.content_frame));
 
         // Configurar RecyclerView
         setupRecyclerView();
     }
 
     private void setupRecyclerView() {
-        // Encuentra el RecyclerView
         recyclerView = findViewById(R.id.restaurant_list);
+
         if (recyclerView == null) {
-            Log.e("VerRestaurantesActivity", "RecyclerView no se encontró. Verifica el ID en el XML.");
+            Log.e("VerRestaurantesPedir", "RecyclerView no se encontró. Verifica el ID en el XML.");
             return;
         }
 
-        // Configura el LayoutManager y el adaptador
+        // Configurar LayoutManager y Adaptador
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        restaurantList = generateDummyRestaurants();
+        restaurantList = generateRestaurantsForPedir();
         adapter = new RestaurantAdapter(restaurantList, this::onFavoriteClicked);
         recyclerView.setAdapter(adapter);
     }
 
-    // Manejo del clic en el corazón (favorito)
     private void onFavoriteClicked(Restaurant restaurant) {
         restaurant.setFavorite(!restaurant.isFavorite());
         adapter.notifyDataSetChanged();
-
+        Log.d("VerRestaurantesPedir", restaurant.getName() + " marcado como favorito: " + restaurant.isFavorite());
     }
 
-    // Generar datos ficticios para la lista
-    private List<Restaurant> generateDummyRestaurants() {
-        List<Restaurant> restaurants = new ArrayList<>();
+    private List<Restaurant> generateRestaurantsForPedir() {
+        List<Restaurant> allRestaurants = new ArrayList<>();
 
-        // Agrega datos ficticios
-        restaurants.add(new Restaurant("Restaurante 1", "Dirección 1", "Categoría 1", "$$", 4.5, "Buen ambiente", false, true, false));
-        restaurants.add(new Restaurant("Restaurante 2", "Dirección 2", "Categoría 2", "$$$", 4.0, "Excelente comida", false, false, true));
-        restaurants.add(new Restaurant("Restaurante 3", "Dirección 3", "Categoría 3", "$", 3.8, "Servicio rápido", false, true, true));
+        // Agregar datos ficticios
+        allRestaurants.add(new Restaurant("Restaurante 1", "Dirección 1", "Categoría 1", "$$", 4.5, "Buen ambiente", false, true, true));
+        allRestaurants.add(new Restaurant("Restaurante 2", "Dirección 2", "Categoría 2", "$$$", 4.0, "Excelente comida", false, true, false));
+        allRestaurants.add(new Restaurant("Restaurante 3", "Dirección 3", "Categoría 3", "$", 3.8, "Servicio rápido", false, false, true));
 
-        // Filtrar solo los que tienen "Se puede ir?" como "Sí"
+        // Filtrar solo los restaurantes con "Se puede pedir?" = true
         List<Restaurant> filteredList = new ArrayList<>();
-        for (Restaurant restaurant : restaurants) {
-            if (restaurant.isCanGo()) {
+        for (Restaurant restaurant : allRestaurants) {
+            if (restaurant.isCanOrder()) {
                 filteredList.add(restaurant);
             }
         }
 
         return filteredList;
     }
-
 }
