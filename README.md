@@ -52,7 +52,7 @@ Indicaciones claras de los campos introducidos.
 
 ---
 
-## 🌟 **Próximas Funcionalidades**
+## 🌟 **Funcionalidades implementadas**
 
 ### ❤️ **1. Sistema de Favoritos**
 - **¿Qué es?**
