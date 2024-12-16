@@ -66,7 +66,11 @@ Indicaciones claras de los campos introducidos.
   - Habrá un apartado exclusivo para ver solo los restaurantes y recetas marcados como favoritos.
 
 ### 🎲 **2. Funcionalidad de "Cariño, elige tú"**
-- Una herramienta que ayudará a los usuarios indecisos a elegir un restaurante o receta según filtros.
+  - Una herramienta que ayudará a los usuarios indecisos a elegir un restaurante o receta según varios filtros.
+
+### 🗑️ **3. Implementación: Borrar Restaurante o Receta
+  - Permite a los usuarios eliminar un restaurante o receta de la base de datos y la lista visible. Cada elemento (Restaurante o Receta) en su respectiva lista tendrá un icono de Borrado.
+  - Tras borrar un elemento, la lista se actualiza automáticamente para reflejar los cambios.
 
 ---
 
