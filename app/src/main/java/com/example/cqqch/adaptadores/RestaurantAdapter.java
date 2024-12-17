@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.cqqch.R;
 import com.example.cqqch.modelos.Restaurant;
 
@@ -40,21 +39,22 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         holder.name.setText(restaurant.getName());
         holder.address.setText(restaurant.getAddress());
-        holder.category.setText(restaurant.getCategory());
-        holder.price.setText(restaurant.getPrice());
+        holder.category.setText("Categoría: " + restaurant.getCategory());
+        holder.price.setText("Precio: " + restaurant.getPrice() + "€");
         holder.rating.setText("Rating: " + restaurant.getRating());
-        holder.comment.setText(restaurant.getComment());
+        holder.comment.setText("Comentario: " + restaurant.getComment());
+
+        // Aquí ahora usamos las TextView definidas en el ViewHolder
+        holder.tvCanGo.setText("Se puede ir: " + (restaurant.isCanGo() ? "Si" : "No"));
+        holder.tvCanOrder.setText("Se puede pedir: " + (restaurant.isCanOrder() ? "Si" : "No"));
 
         holder.favoriteIcon.setImageResource(
                 restaurant.isFavorite() ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
         );
 
         holder.favoriteIcon.setOnClickListener(v -> favoriteClickListener.onFavoriteClick(restaurant));
-
-        // Configura el icono de eliminar
         holder.deleteIcon.setOnClickListener(v -> deleteClickListener.onDeleteClick(restaurant));
     }
-
 
     @Override
     public int getItemCount() {
@@ -63,6 +63,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
         TextView name, address, category, price, rating, comment;
+        TextView tvCanGo, tvCanOrder; // Añadimos estas variables para 'Se puede ir' y 'Se puede pedir'
         ImageView favoriteIcon, deleteIcon;
 
         public RestaurantViewHolder(@NonNull View itemView) {
@@ -75,6 +76,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             comment = itemView.findViewById(R.id.restaurant_comment);
             favoriteIcon = itemView.findViewById(R.id.favorite_icon);
             deleteIcon = itemView.findViewById(R.id.delete_icon);
+
+            // Inicializamos las nuevas TextViews
+            tvCanGo = itemView.findViewById(R.id.tvCanGo);
+            tvCanOrder = itemView.findViewById(R.id.tvCanOrder);
         }
     }
 

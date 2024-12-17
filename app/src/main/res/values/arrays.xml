@@ -2,6 +2,7 @@
 <resources>
     <!--  Categorías para Restaurantes  -->
     <string-array name="categorias_restaurantes">
+        <item></item>
         <item>Italianos</item>
         <item>Asiáticos</item>
         <item>Chino</item>
@@ -30,6 +31,7 @@
     </string-array>
     <!--  Categorías para Recetas  -->
     <string-array name="categorias_recetas">
+        <item></item>
         <item>Carne</item>
         <item>Pescado y Marisco</item>
         <item>Pasta y Arroces</item>
@@ -46,14 +48,17 @@
     </string-array>
     <!--  Opciones para el desplegable de Sí/No  -->
     <string-array name="opciones_si_no">
+        <item></item>
         <item>Si</item>
         <item>No</item>
     </string-array>
     <string-array name="tipo_restaurante_receta">
+        <item></item>
         <item>Restaurantes</item>
         <item>Recetas</item>
     </string-array>
     <string-array name="notas">
+        <item></item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -61,6 +66,7 @@
         <item>5</item>
     </string-array>
     <string-array name="precios_rango">
+        <item></item>
         <item>0 a 10</item>
         <item>11 a 20</item>
         <item>21 a 30</item>
@@ -73,11 +79,13 @@
         <item>91 a 100</item>
     </string-array>
     <string-array name="tipos_restaurantes_recetas">
+        <item></item>
         <item>Restaurantes</item>
         <item>Recetas</item>
     </string-array>
     <!--  Rangos de Precio  -->
     <string-array name="rangos_precio">
+        <item></item>
         <item>0 a 10</item>
         <item>11 a 20</item>
         <item>21 a 30</item>

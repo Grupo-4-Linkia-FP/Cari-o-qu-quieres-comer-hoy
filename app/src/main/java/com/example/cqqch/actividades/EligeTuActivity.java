@@ -112,46 +112,82 @@ public class EligeTuActivity extends BaseActivity {
             return;
         }
 
-        String tipoSeleccionado = spTipo.getSelectedItem().toString();
-        String categoriaSeleccionada = spCategoria.getSelectedItem().toString();
-        String favoritoSeleccionado = spFavorito.getSelectedItem().toString();
-
-        // Asegúrate de que el valor del spinner spNota sea un número válido
-        int notaSeleccionada;
-        try {
-            notaSeleccionada = Integer.parseInt(spNota.getSelectedItem().toString());
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "La nota seleccionada no es un número válido", Toast.LENGTH_SHORT).show();
-            return;
+        // Si el campo está vacío, significa sin filtro
+        String tipoSeleccionado = spTipo.getSelectedItem().toString().trim();
+        if (tipoSeleccionado.isEmpty()) {
+            // Si tipo está vacío, escogemos uno por defecto, por ejemplo "Restaurantes"
+            // o lo mantienes como es (random). Pero es mejor elegir uno fijo:
+            tipoSeleccionado = "Restaurantes";
         }
 
-        String precioSeleccionado = spPrecio.getSelectedItem().toString();
+        String categoriaSeleccionada = spCategoria.getSelectedItem().toString().trim();
+        // Si categoría está vacía, sin filtro -> null
+        if (categoriaSeleccionada.isEmpty()) {
+            categoriaSeleccionada = null;
+        }
+
+        String favoritoSeleccionado = spFavorito.getSelectedItem().toString().trim();
+        Boolean favoritoBool = null;
+        if (!favoritoSeleccionado.isEmpty()) {
+            favoritoBool = favoritoSeleccionado.equals("Si");
+        }
+
+        String notaStr = spNota.getSelectedItem().toString().trim();
+        int notaSeleccionada = 0;
+        if (!notaStr.isEmpty()) {
+            try {
+                notaSeleccionada = Integer.parseInt(notaStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "La nota seleccionada no es un número válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        // Si está vacío, se queda en 0, indicando sin filtro de nota
+
+        String precioSeleccionado = spPrecio.getSelectedItem().toString().trim();
+        // Si precio está vacío -> sin filtro
+        if (precioSeleccionado.isEmpty()) {
+            precioSeleccionado = null;
+        }
 
         if (tipoSeleccionado.equals("Restaurantes")) {
-            cargarRestaurantes(categoriaSeleccionada, favoritoSeleccionado, notaSeleccionada, precioSeleccionado);
+            cargarRestaurantes(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
         } else {
-            cargarRecetas(categoriaSeleccionada, favoritoSeleccionado, notaSeleccionada, precioSeleccionado);
+            cargarRecetas(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
         }
     }
 
-    private void cargarRestaurantes(String categoria, String favorito, int nota, String precio) {
+    private void cargarRestaurantes(String categoria, Boolean favorito, int nota, String precio) {
         listaRestaurantes.clear();
         database.child("Restaurantes").child(user.getUid())
                 .get().addOnSuccessListener(snapshot -> {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Restaurant restaurant = data.getValue(Restaurant.class);
+                        if (restaurant != null) {
+                            // Filtro de categoría
+                            if (categoria != null && !restaurant.getCategory().equals(categoria)) {
+                                continue;
+                            }
 
-                        if (restaurant != null
-                                && restaurant.getCategory().equals(categoria)
-                                && (favorito.equals("Si") == restaurant.isFavorite())
-                                && restaurant.getRating() == nota
-                                && cumpleRangoPrecio(restaurant.getPrice(), precio)) {
+                            // Filtro de favorito
+                            if (favorito != null && restaurant.isFavorite() != favorito) {
+                                continue;
+                            }
+
+                            // Filtro de nota, si nota != 0 filtra
+                            if (nota != 0 && restaurant.getRating() != nota) {
+                                continue;
+                            }
+
+                            // Filtro de precio
+                            if (precio != null && !cumpleRangoPrecio(restaurant.getPrice(), precio)) {
+                                continue;
+                            }
 
                             listaRestaurantes.add(restaurant);
                         }
                     }
 
-                    // Usa callbacks con tipos correctos
                     restauranteAdapter = new RestaurantAdapter(listaRestaurantes, this::onFavoriteClicked, this::onDeleteClicked);
                     rvResultadosFiltro.setAdapter(restauranteAdapter);
 
@@ -161,24 +197,33 @@ public class EligeTuActivity extends BaseActivity {
                 });
     }
 
-    private void cargarRecetas(String categoria, String favorito, int nota, String precio) {
+    private void cargarRecetas(String categoria, Boolean favorito, int nota, String precio) {
         listaRecetas.clear();
         database.child("Recetas").child(user.getUid())
                 .get().addOnSuccessListener(snapshot -> {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Receta receta = data.getValue(Receta.class);
+                        if (receta != null) {
+                            if (categoria != null && !receta.getCategory().equals(categoria)) {
+                                continue;
+                            }
 
-                        if (receta != null
-                                && receta.getCategory().equals(categoria)
-                                && (favorito.equals("Si") == receta.isFavorite())
-                                && receta.getRating() == nota
-                                && cumpleRangoPrecio(receta.getPrice(), precio)) {
+                            if (favorito != null && receta.isFavorite() != favorito) {
+                                continue;
+                            }
+
+                            if (nota != 0 && receta.getRating() != nota) {
+                                continue;
+                            }
+
+                            if (precio != null && !cumpleRangoPrecio(receta.getPrice(), precio)) {
+                                continue;
+                            }
 
                             listaRecetas.add(receta);
                         }
                     }
 
-                    // Usa métodos separados para recetas
                     recetaAdapter = new RecetaAdapter(listaRecetas, this::onFavoriteClickedReceta, this::onDeleteClickedReceta);
                     rvResultadosFiltro.setAdapter(recetaAdapter);
 
@@ -187,6 +232,7 @@ public class EligeTuActivity extends BaseActivity {
                     }
                 });
     }
+
 
     // Comprueba si el precio está en el rango. E.g: "10 a 20"
     private boolean cumpleRangoPrecio(String precio, String rango) {
@@ -205,22 +251,22 @@ public class EligeTuActivity extends BaseActivity {
     // Métodos para Restaurantes (Restaurant)
     private void onFavoriteClicked(Restaurant restaurant) {
         Toast.makeText(this, restaurant.getName() + " marcado como favorito", Toast.LENGTH_SHORT).show();
-        // Aquí podrías actualizar en Firebase el campo favorite
+
     }
 
     private void onDeleteClicked(Restaurant restaurant) {
         Toast.makeText(this, restaurant.getName() + " eliminado", Toast.LENGTH_SHORT).show();
-        // Aquí podrías eliminar el restaurante de la DB
+
     }
 
     // Métodos para Recetas (Receta)
     private void onFavoriteClickedReceta(Receta receta) {
         Toast.makeText(this, receta.getName() + " marcado como favorito", Toast.LENGTH_SHORT).show();
-        // Aquí podrías actualizar en Firebase el campo favorite
+
     }
 
     private void onDeleteClickedReceta(Receta receta) {
         Toast.makeText(this, receta.getName() + " eliminado", Toast.LENGTH_SHORT).show();
-        // Aquí podrías eliminar la receta de la DB
+
     }
 }

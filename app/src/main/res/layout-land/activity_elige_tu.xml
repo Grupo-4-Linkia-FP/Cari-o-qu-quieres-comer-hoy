@@ -15,8 +15,8 @@
         <!-- Imagen principal a la izquierda -->
         <ImageView
             android:id="@+id/main_image"
-            android:layout_width="251dp"
-            android:layout_height="300dp"
+            android:layout_width="260dp"
+            android:layout_height="199dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_eligetu"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:text="Guardar"
+                        android:text="Mostrar"
                         android:textSize="22sp"
                         android:textAllCaps="false"
                         android:background="@drawable/selector_button"
@@ -163,7 +163,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:scrollbars="vertical"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

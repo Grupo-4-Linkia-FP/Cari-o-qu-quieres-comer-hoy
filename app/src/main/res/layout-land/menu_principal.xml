@@ -25,7 +25,7 @@
         android:id="@+id/buttons_container"
         android:layout_width="726dp"
         android:layout_height="166dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="26dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"

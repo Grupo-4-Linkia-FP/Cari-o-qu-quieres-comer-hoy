@@ -9,7 +9,8 @@
     <!-- Imagen Superior -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="120dp"
+        android:layout_marginTop="35dp">
 
         <ImageView
             android:id="@+id/header_image"
@@ -26,13 +27,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="180dp"
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:orientation="vertical">
 
             <!-- Encabezado de Favoritos Restaurantes -->
             <TextView
@@ -49,9 +50,16 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFavoritosRestaurantes"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 android:layout_marginBottom="16dp" />
+
+            <!-- Separador visible -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginVertical="16dp" />
 
             <!-- Encabezado de Favoritos Recetas -->
             <TextView
@@ -68,7 +76,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFavoritosRecetas"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical" />
 
         </LinearLayout>

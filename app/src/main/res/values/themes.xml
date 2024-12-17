@@ -1,24 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme -->
+
+    <!-- Tema base usando Material3 DayNight -->
     <style name="Base.Theme.CQQCH" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Colores personalizados -->
+        <!-- Ajusta tus colores usando atributos globales.
+             Estos colores se definen en colors.xml y colors-night.xml -->
         <item name="colorPrimary">@color/my_light_primary</item>
-        <item name="colorPrimaryVariant">@color/my_light_primary_variant</item>
-        <item name="colorSecondary">@color/my_light_secondary</item>
-        <item name="colorAccent">@color/my_light_accent</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
     </style>
 
-    <!-- Tema principal de la aplicación -->
+    <!-- Tema principal que hereda del tema base -->
     <style name="Theme.CQQCH" parent="Base.Theme.CQQCH">
-        <!-- Barras del sistema transparentes -->
+        <!-- Ajustes para la barra de navegación y estado -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/white</item>
+        <!-- Usamos colorSurface en vez de color fijo -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
 
-        <!-- Ajustar el color de los iconos en la barra de estado -->
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <!-- Indicar que en modo claro la barra de estado es clara.
+        <item name="android:windowLightStatusBar">true</item>
 
-        <!-- Forzar transparencia en la ventana principal -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
+        <!- Fondo de la ventana -->
+        <item name="android:windowBackground">?attr/colorBackground</item>
     </style>
+
 </resources>
