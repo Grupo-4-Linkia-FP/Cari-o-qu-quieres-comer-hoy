@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@drawable/gradient_background"
-    tools:context=".BaseActivity">
+    tools:context=".base.BaseActivity">
 
     <!-- Contenido Principal -->
     <androidx.constraintlayout.widget.ConstraintLayout

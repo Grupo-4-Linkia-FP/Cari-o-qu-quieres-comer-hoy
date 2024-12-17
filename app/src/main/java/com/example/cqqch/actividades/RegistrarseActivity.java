@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cqqch.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrarseActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class RegistrarseActivity extends AppCompatActivity {
     private EditText emailField, passwordField;
     private Button btnRegistrarse;
     private TextView btnIniciarSesion;
+    private EditText nameField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class RegistrarseActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Vincula los elementos del layout de registro
+        nameField = findViewById(R.id.name_field);
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         btnRegistrarse = findViewById(R.id.btnRegistrarse);
@@ -71,18 +75,38 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
     private void registerUsuario(String email, String password) {
+        String name = nameField.getText().toString().trim();
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Por favor ingresa un nombre", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(RegistrarseActivity.this, "Registro exitoso, bienvenido " + (user != null ? user.getEmail() : ""), Toast.LENGTH_SHORT).show();
-                        // Redirige al menú principal
-                        Intent intent = new Intent(RegistrarseActivity.this, MenuPrincipal.class);
-                        startActivity(intent);
-                        finish();
+                        if (user != null) {
+                            String userId = user.getUid();
+                            // Guarda el nombre en Realtime Database
+                            FirebaseDatabase.getInstance().getReference("users")
+                                    .child(userId)
+                                    .child("name")
+                                    .setValue(name)
+                                    .addOnCompleteListener(dbTask -> {
+                                        if (dbTask.isSuccessful()) {
+                                            Toast.makeText(RegistrarseActivity.this, "Registro exitoso, bienvenido " + name, Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(RegistrarseActivity.this, MenuPrincipal.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(RegistrarseActivity.this, "Error al guardar nombre", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
                     } else {
                         Toast.makeText(RegistrarseActivity.this, "Error en el registro", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 }

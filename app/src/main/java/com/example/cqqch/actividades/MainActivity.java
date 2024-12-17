@@ -1,10 +1,12 @@
-package com.example.cqqch;
+package com.example.cqqch.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
+
+import com.example.cqqch.R;
 
 public class MainActivity extends AppCompatActivity {
 

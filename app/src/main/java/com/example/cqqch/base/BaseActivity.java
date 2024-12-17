@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.base;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.cqqch.R;
+import com.example.cqqch.actividades.AjustesActivity;
+import com.example.cqqch.actividades.FavoritosActivity;
+import com.example.cqqch.actividades.MainActivity;
+import com.example.cqqch.actividades.MenuPrincipal;
+import com.example.cqqch.actividades.PerfilActivity;
+import com.example.cqqch.actividades.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 

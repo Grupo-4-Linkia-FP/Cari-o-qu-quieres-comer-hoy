@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PedirActivity">
+    tools:context=".actividades.PedirActivity">
 
     <!-- Imagen Principal -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="326dp"
         android:layout_marginTop="32dp"
         android:contentDescription="Imagen principal"
-        android:src="@drawable/ic_adomicilio"
+        android:src="@drawable/img_adomicilio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,7 @@
         android:textColor="#FFFFFF"
         android:padding="16dp"
         android:textSize="24sp"
+        android:fontFamily="@font/robotobold"
         app:layout_constraintTop_toBottomOf="@id/main_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,7 @@
         android:textColor="#FFFFFF"
         android:padding="16dp"
         android:textSize="24sp"
+        android:fontFamily="@font/robotobold"
         app:layout_constraintTop_toBottomOf="@id/btn_ver_restaurante"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

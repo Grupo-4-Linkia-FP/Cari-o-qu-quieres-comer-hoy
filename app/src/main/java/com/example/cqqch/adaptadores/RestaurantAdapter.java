@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.adaptadores;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cqqch.R;
+import com.example.cqqch.modelos.Restaurant;
+
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
     private List<Restaurant> restaurantList;
     private OnFavoriteClickListener favoriteClickListener;
+    private OnDeleteClickListener deleteClickListener;
 
-    public RestaurantAdapter(List<Restaurant> restaurantList, OnFavoriteClickListener favoriteClickListener) {
+    public RestaurantAdapter(List<Restaurant> restaurantList, OnFavoriteClickListener favoriteClickListener, OnDeleteClickListener deleteClickListener) {
         this.restaurantList = restaurantList;
         this.favoriteClickListener = favoriteClickListener;
+        this.deleteClickListener = deleteClickListener;
     }
 
     @NonNull
@@ -45,6 +50,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         );
 
         holder.favoriteIcon.setOnClickListener(v -> favoriteClickListener.onFavoriteClick(restaurant));
+
+        // Configura el icono de eliminar
+        holder.deleteIcon.setOnClickListener(v -> deleteClickListener.onDeleteClick(restaurant));
     }
 
 
@@ -55,7 +63,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
         TextView name, address, category, price, rating, comment;
-        ImageView favoriteIcon;
+        ImageView favoriteIcon, deleteIcon;
 
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,10 +74,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             rating = itemView.findViewById(R.id.restaurant_rating);
             comment = itemView.findViewById(R.id.restaurant_comment);
             favoriteIcon = itemView.findViewById(R.id.favorite_icon);
+            deleteIcon = itemView.findViewById(R.id.delete_icon);
         }
     }
 
     public interface OnFavoriteClickListener {
         void onFavoriteClick(Restaurant restaurant);
+    }
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(Restaurant restaurant);
     }
 }

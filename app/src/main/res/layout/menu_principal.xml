@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuPrincipal">
+    tools:context=".actividades.MenuPrincipal">
 
     <!-- Texto principal -->
     <TextView
         android:id="@+id/title_text"
         android:layout_width="306dp"
         android:layout_height="88dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/robotobold"
         android:text="¡Hola! ¿Qué quieres comer hoy?"
         android:textColor="#000000"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/title_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintWidth_percent="0.7">
 
         <ImageView

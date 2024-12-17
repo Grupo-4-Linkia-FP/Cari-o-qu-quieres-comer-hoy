@@ -1,8 +1,11 @@
-package com.example.cqqch;
+package com.example.cqqch.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.cqqch.R;
+import com.example.cqqch.base.BaseActivity;
 
 public class PedirActivity extends BaseActivity {
 

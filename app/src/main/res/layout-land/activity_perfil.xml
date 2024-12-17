@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilActivity">
+    tools:context=".actividades.PerfilActivity">
 
     <!-- Imagen de perfil a la izquierda -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_marginStart="80dp"
         android:contentDescription="Imagen de perfil"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_perfil_m1"
+        android:src="@drawable/img_perfil_m1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,10 +39,9 @@
     <!-- Contenedor a la derecha con los botones -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_section"
-        android:layout_width="456dp"
-        android:layout_height="237dp"
+        android:layout_width="441dp"
+        android:layout_height="399dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -50,26 +49,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.356">
 
+        <!-- Opción Cambiar Foto Perfil -->
+        <LinearLayout
+            android:id="@+id/btn_change_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/selector_button"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="18dp"
+                android:contentDescription="Icono cambiar foto"
+                android:src="@drawable/ic_perfil_lateral" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotobold"
+                android:text="Cambiar Foto de Perfil"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+
         <!-- Opción Cambiar Contraseña -->
         <LinearLayout
             android:id="@+id/btn_change_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/selector_button"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintTop_toBottomOf="@id/btn_change_photo"
+            app:layout_constraintWidth_percent="0.6">
 
             <ImageView
                 android:id="@+id/icon_change_password"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="18dp"
                 android:contentDescription="Icono cambiar contraseña"
                 android:src="@drawable/ic_pass" />
 
@@ -92,11 +122,11 @@
             android:background="@drawable/selector_button"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_change_password"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintWidth_percent="0.6">
 
             <ImageView
                 android:id="@+id/icon_favorites"
@@ -125,11 +155,11 @@
             android:background="@drawable/selector_button"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_favorites_container"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintWidth_percent="0.6">
 
             <ImageView
                 android:id="@+id/icon_logout"
@@ -146,7 +176,7 @@
                 android:fontFamily="@font/robotobold"
                 android:text="Cerrar Sesión"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:textSize="19sp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

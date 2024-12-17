@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".IniciarSesion">
+    tools:context=".actividades.IniciarSesion">
 
     <!-- Icono -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="219dp"
         android:layout_marginStart="36dp"
         android:contentDescription="Icono de aplicación"
-        android:src="@drawable/ic_iniciar_sesion"
+        android:src="@drawable/img_iniciar_sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -94,13 +94,27 @@
             android:fontFamily="@font/robotoregular"
             android:text="Iniciar sesión"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/password_field"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
             app:layout_constraintWidth_percent="0.6" />
+
+        <!-- TextView para recuperar la contrasena -->
+        <TextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="@color/material_dynamic_neutral30"
+            android:textSize="22sp"
+            android:fontFamily="@font/robotobold"
+            app:layout_constraintTop_toBottomOf="@id/btnIniciarSesion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

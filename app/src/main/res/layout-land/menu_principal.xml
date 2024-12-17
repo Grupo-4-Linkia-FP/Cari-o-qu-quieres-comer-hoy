@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuPrincipal">
+    tools:context=".actividades.MenuPrincipal">
 
     <!-- Texto principal -->
     <TextView
@@ -15,7 +15,7 @@
         android:text="¡Hola! ¿Qué quieres comer hoy?"
         android:textColor="#000000"
         android:textSize="28sp"
-        android:textStyle="bold"
+        android:layout_marginTop="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -23,14 +23,14 @@
     <!-- Contenedor principal de botones, no cambia -->
     <LinearLayout
         android:id="@+id/buttons_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_width="726dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-        android:layout_marginTop="18dp"
-        app:layout_constraintTop_toBottomOf="@id/title_text"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/title_text">
 
         <!-- Columna izquierda -->
         <LinearLayout
@@ -38,8 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <!-- Botón IR -->
             <LinearLayout
@@ -75,28 +75,28 @@
                 android:id="@+id/btn_cocinar_container"
                 android:layout_width="215dp"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:layout_margin="8dp"
                 android:background="@drawable/selector_button"
-                android:padding="16dp"
-                android:layout_margin="8dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/icon_cocinar"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_cocinar"
-                    android:contentDescription="Icono Cocinar" />
+                    android:contentDescription="Icono Cocinar"
+                    android:src="@drawable/ic_cocinar" />
 
                 <TextView
                     android:id="@+id/btn_cocinar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
                     android:text="COCINAR"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/robotobold" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -106,36 +106,36 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <!-- Botón PEDIR -->
             <LinearLayout
                 android:id="@+id/btn_pedir_container"
                 android:layout_width="215dp"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:layout_margin="8dp"
                 android:background="@drawable/selector_button"
-                android:padding="16dp"
-                android:layout_margin="8dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/icon_pedir"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_pedir"
-                    android:contentDescription="Icono Pedir" />
+                    android:contentDescription="Icono Pedir"
+                    android:src="@drawable/ic_pedir" />
 
                 <TextView
                     android:id="@+id/btn_pedir_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
                     android:text="PEDIR"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/robotobold" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <!-- Botón ELIGE TÚ -->
@@ -143,28 +143,28 @@
                 android:id="@+id/btn_elige_tu_container"
                 android:layout_width="215dp"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:layout_margin="8dp"
                 android:background="@drawable/selector_button"
-                android:padding="16dp"
-                android:layout_margin="8dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/icon_elige_tu"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_elige_tu"
-                    android:contentDescription="Icono Elige Tú" />
+                    android:contentDescription="Icono Elige Tú"
+                    android:src="@drawable/ic_elige_tu" />
 
                 <TextView
                     android:id="@+id/btn_elige_tu_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
                     android:text="ELIGE TÚ"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/robotobold" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

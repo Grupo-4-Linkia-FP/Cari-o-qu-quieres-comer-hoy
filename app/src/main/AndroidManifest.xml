@@ -13,60 +13,67 @@
         android:theme="@style/Theme.CQQCH"
         tools:targetApi="31">
         <activity
-            android:name=".RecuperarPasswordActivity"
+            android:name=".actividades.MisFavoritosActivity"
             android:exported="false" />
         <activity
-            android:name=".VerRestaurantePedirActivity"
+            android:name=".actividades.CambiarContrasenaActivity"
             android:exported="false" />
         <activity
-            android:name=".AddRecetaActivity"
+            android:name=".actividades.SelectImagePerfilActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".actividades.VerRestaurantePedirActivity"
             android:exported="false" />
         <activity
-            android:name=".VerRecetasActivity"
+            android:name=".actividades.AddRecetaActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrarseActivity"
+            android:name=".actividades.VerRecetasActivity"
             android:exported="false" />
         <activity
-            android:name=".AddRestaurantActivity"
+            android:name=".actividades.RegistrarseActivity"
             android:exported="false" />
         <activity
-            android:name=".VerRestaurantesActivity"
+            android:name=".actividades.AddRestaurantActivity"
             android:exported="false" />
         <activity
-            android:name=".AjustesActivity"
-            android:exported="false" />
-        <activity android:name=".BaseActivity" />
-        <activity
-            android:name=".SearchActivity"
+            android:name=".actividades.VerRestaurantesActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoritosActivity"
+            android:name=".actividades.AjustesActivity"
+            android:exported="false" />
+        <activity android:name=".base.BaseActivity" />
+        <activity
+            android:name=".actividades.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".PerfilActivity"
+            android:name=".actividades.FavoritosActivity"
             android:exported="false" />
         <activity
-            android:name=".EligeTuActivity"
+            android:name=".actividades.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".PedirActivity"
+            android:name=".actividades.EligeTuActivity"
             android:exported="false" />
         <activity
-            android:name=".CocinarActivity"
+            android:name=".actividades.PedirActivity"
             android:exported="false" />
         <activity
-            android:name=".IrActivity"
+            android:name=".actividades.CocinarActivity"
             android:exported="false" />
         <activity
-            android:name=".IniciarSesion"
+            android:name=".actividades.IrActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.IniciarSesion"
             android:exported="true"
             android:theme="@style/Theme.CQQCH" />
         <activity
-            android:name=".MenuPrincipal"
+            android:name=".actividades.MenuPrincipal"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".actividades.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

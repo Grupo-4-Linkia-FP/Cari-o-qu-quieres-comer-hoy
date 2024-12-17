@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IrActivity">
+    tools:context=".actividades.IrActivity">
 
     <!-- Imagen Principal -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="340dp"
         android:layout_marginTop="32dp"
         android:contentDescription="Imagen principal"
-        android:src="@drawable/ic_restaurante"
+        android:src="@drawable/img_restaurante"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

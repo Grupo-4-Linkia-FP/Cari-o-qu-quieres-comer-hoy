@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -27,7 +26,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Icono de eliminar -->
+
     <!-- Categoría -->
+    <ImageView
+        android:id="@+id/delete_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="Eliminar"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favorite_icon" />
+
     <TextView
         android:id="@+id/receta_category"
         android:layout_width="0dp"
@@ -38,7 +49,7 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/receta_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/delete_icon" />
 
     <!-- Ingredientes -->
     <TextView
@@ -51,7 +62,7 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/receta_category"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/delete_icon" />
 
     <!-- Tiempo de preparación -->
     <TextView
@@ -64,7 +75,7 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/receta_ingredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/delete_icon" />
 
     <!-- Puntuación -->
     <TextView
@@ -77,7 +88,7 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/receta_preparation_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/delete_icon" />
 
     <!-- Precio -->
     <TextView
@@ -90,14 +101,14 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/receta_rating"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/delete_icon" />
 
     <!-- Descripción -->
     <TextView
         android:id="@+id/receta_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Descripción"
+        android:text="Descripción: "
         android:textColor="#555555"
         android:fontFamily="@font/robotoregular"
         android:textSize="16sp"

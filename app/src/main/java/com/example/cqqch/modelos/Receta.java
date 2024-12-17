@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.modelos;
 
 public class Receta {
     private String name;
@@ -9,6 +9,10 @@ public class Receta {
     private String price; // Precio medio
     private String description; // Descripción de la receta
     private boolean isFavorite; // Si es favorita
+
+    public Receta() {
+        // Constructor vacío requerido por Firebase
+    }
 
     public Receta(String name, String category, String ingredients, int preparationTime, double rating, String price, String description, boolean isFavorite) {
         this.name = name;

@@ -1,10 +1,14 @@
-package com.example.cqqch;
+package com.example.cqqch.actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.cqqch.R;
+import com.example.cqqch.actividades.VerRestaurantesActivity;
+import com.example.cqqch.base.BaseActivity;
 
 public class IrActivity extends BaseActivity {
 

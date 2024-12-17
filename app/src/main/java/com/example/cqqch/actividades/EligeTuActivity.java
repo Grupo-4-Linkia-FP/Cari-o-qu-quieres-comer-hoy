@@ -1,7 +1,10 @@
-package com.example.cqqch;
+package com.example.cqqch.actividades;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.example.cqqch.R;
+import com.example.cqqch.base.BaseActivity;
 
 public class EligeTuActivity extends BaseActivity {
 

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EligeTuActivity">
+    tools:context=".actividades.EligeTuActivity">
 
     <!-- Imagen Principal -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="369dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Imagen principal"
-        android:src="@drawable/ic_eligetu"
+        android:src="@drawable/img_eligetu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VerRestaurantesActivity">
+    tools:context=".actividades.VerRestaurantesActivity">
 
     <!-- Imagen Superior -->
     <ImageView
         android:id="@+id/header_image"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_ver_rest"
+        android:src="@drawable/img_ver_rest"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

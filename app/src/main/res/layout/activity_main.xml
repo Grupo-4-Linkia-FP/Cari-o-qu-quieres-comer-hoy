@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
-    tools:context=".MainActivity">
+    tools:context=".actividades.MainActivity">
 
     <!-- Icono -->
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="250dp"
         android:layout_height="200dp"
         android:contentDescription="Icono de aplicación"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

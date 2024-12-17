@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.adaptadores;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cqqch.R;
+import com.example.cqqch.modelos.Receta;
+
 import java.util.List;
 
 public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaViewHolder> {
 
     private List<Receta> recetaList;
     private OnFavoriteClickListener favoriteClickListener;
+    private OnDeleteClickListener deleteClickListener;
 
-    public RecetaAdapter(List<Receta> recetaList, OnFavoriteClickListener favoriteClickListener) {
+    public RecetaAdapter(List<Receta> recetaList, OnFavoriteClickListener favoriteClickListener, OnDeleteClickListener deleteClickListener) {
         this.recetaList = recetaList;
         this.favoriteClickListener = favoriteClickListener;
+        this.deleteClickListener = deleteClickListener;
     }
 
     @NonNull
@@ -34,9 +39,9 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaView
         Receta receta = recetaList.get(position);
 
         holder.name.setText(receta.getName());
-        holder.category.setText(receta.getCategory());
+        holder.category.setText("Categoría: " + receta.getCategory());
         holder.ingredients.setText("Ingredientes: " + receta.getIngredients());
-        holder.preparationTime.setText(receta.getPreparationTime() + " min");
+        holder.preparationTime.setText("Tiempo: " + receta.getPreparationTime() + " min");
         holder.rating.setText("Puntuación: " + receta.getRating());
         holder.price.setText("Precio: " + receta.getPrice());
         holder.description.setText(receta.getDescription());
@@ -45,7 +50,11 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaView
                 receta.isFavorite() ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
         );
 
+        // Configurar acción del icono de favorito
         holder.favoriteIcon.setOnClickListener(v -> favoriteClickListener.onFavoriteClick(receta));
+
+        // Configurar acción del icono de eliminar
+        holder.deleteIcon.setOnClickListener(v -> deleteClickListener.onDeleteClick(receta));
     }
 
     @Override
@@ -55,7 +64,7 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaView
 
     public static class RecetaViewHolder extends RecyclerView.ViewHolder {
         TextView name, category, ingredients, preparationTime, rating, price, description;
-        ImageView favoriteIcon;
+        ImageView favoriteIcon, deleteIcon;
 
         public RecetaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,10 +76,15 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaView
             price = itemView.findViewById(R.id.receta_price);
             description = itemView.findViewById(R.id.receta_description);
             favoriteIcon = itemView.findViewById(R.id.favorite_icon);
+            deleteIcon = itemView.findViewById(R.id.delete_icon);
         }
     }
 
     public interface OnFavoriteClickListener {
         void onFavoriteClick(Receta receta);
+    }
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(Receta receta);
     }
 }

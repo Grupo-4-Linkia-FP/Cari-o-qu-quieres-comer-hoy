@@ -1,4 +1,4 @@
-package com.example.cqqch;
+package com.example.cqqch.modelos;
 
 public class Restaurant {
     private String name;
@@ -22,6 +22,11 @@ public class Restaurant {
         this.canGo = canGo;
         this.canOrder = canOrder;
     }
+
+    public Restaurant() {
+        // Constructor vacío requerido por Firebase
+    }
+
 
     public String getName() {
         return name;

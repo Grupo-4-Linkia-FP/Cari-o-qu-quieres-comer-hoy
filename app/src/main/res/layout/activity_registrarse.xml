@@ -4,19 +4,38 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
-    tools:context=".RegistrarseActivity">
+    tools:context=".actividades.RegistrarseActivity">
 
     <!-- Icono -->
     <ImageView
         android:id="@+id/app_icon"
-        android:layout_width="352dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="588dp"
+        android:layout_height="301dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="Icono de registro"
-        android:src="@drawable/ic_pareja_comiendo"
+        android:src="@drawable/img_pareja"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Campo nombre usuario-->
+    <EditText
+        android:id="@+id/name_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/robotoregular"
+        android:textSize="20sp"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/app_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="28dp"
+        app:layout_constraintWidth_percent="0.8" />
 
 
     <!-- Campo de correo electrónico -->
@@ -31,10 +50,10 @@
         android:padding="12dp"
         android:textColor="#000000"
         android:textColorHint="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/app_icon"
+        app:layout_constraintTop_toBottomOf="@id/name_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintWidth_percent="0.8" />
 
     <!-- Campo de contraseña -->
