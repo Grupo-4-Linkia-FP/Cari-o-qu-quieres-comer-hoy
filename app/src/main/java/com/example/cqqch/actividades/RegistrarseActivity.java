@@ -1,11 +1,10 @@
 package com.example.cqqch.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,7 +40,7 @@ public class RegistrarseActivity extends AppCompatActivity {
 
         // Ajusta el texto con HTML si lo deseas
         String htmlText = "Ya tengo cuenta. <font color='#E53935'>Iniciar sesión</font>";
-        btnIniciarSesion.setText(Html.fromHtml(htmlText));
+        btnIniciarSesion.setText(HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
         // Evento click para el botón de registrarse
         btnRegistrarse.setOnClickListener(v -> {

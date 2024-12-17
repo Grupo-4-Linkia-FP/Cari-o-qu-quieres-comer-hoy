@@ -1,70 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".actividades.EligeTuActivity">
 
-    <!-- Imagen Principal -->
-    <ImageView
-        android:id="@+id/main_image"
-        android:layout_width="333dp"
-        android:layout_height="369dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Imagen principal"
-        android:src="@drawable/img_eligetu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Imagen Superior -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Botón Cocinar Elige Tu  -->
-    <Button
-        android:id="@+id/btn_cocinar_eligetu"
-        android:layout_width="288dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/selector_button"
-        android:text="Cocinar"
-        android:textColor="#FFFFFF"
-        android:padding="16dp"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/main_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.7" />
+        <ImageView
+            android:id="@+id/header_image"
+            android:layout_width="match_parent"
+            android:layout_height="226dp"
 
-    <!-- Botón Ir Elige Tu  -->
-    <Button
-        android:id="@+id/btn_ir_eligetu"
-        android:layout_width="288dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/selector_button"
-        android:text="Ir"
-        android:textColor="#FFFFFF"
-        android:padding="16dp"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_cocinar_eligetu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.7" />
+            android:src="@drawable/img_eligetu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Botón Pedir Elige Tu -->
-    <Button
-        android:id="@+id/btn_pedir_eligetu"
-        android:layout_width="288dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/selector_button"
-        android:text="Pedir"
-        android:textColor="#FFFFFF"
-        android:padding="16dp"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_ir_eligetu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.7" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Formulario con ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <!-- Spinner Tipo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona Restaurantes o Recetas"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spTipo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Spinner Categoría -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona una Categoría"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Spinner Favorito -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorito (Sí/No)"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spFavorito"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Spinner Nota -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona Nota (1-5)"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spNota"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Spinner Precio -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona Rango de Precio"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/btnGuardarReceta"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Guardar"
+                    android:textSize="22sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/selector_button"
+                    android:textColor="@android:color/white" />
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/btnVolverMenuReceta"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Volver"
+                    android:textSize="22sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/selector_button"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- RecyclerView para mostrar resultados -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvResultadosFiltro"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="vertical"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

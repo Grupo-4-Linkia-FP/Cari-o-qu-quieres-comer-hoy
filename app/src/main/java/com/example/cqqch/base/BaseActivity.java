@@ -13,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.cqqch.R;
 import com.example.cqqch.actividades.AjustesActivity;
-import com.example.cqqch.actividades.FavoritosActivity;
+import com.example.cqqch.actividades.MisFavoritosActivity;
 import com.example.cqqch.actividades.MainActivity;
 import com.example.cqqch.actividades.MenuPrincipal;
 import com.example.cqqch.actividades.PerfilActivity;
@@ -98,7 +98,7 @@ public class BaseActivity extends AppCompatActivity {
         if (id == R.id.nav_perfil) {
             startActivity(new Intent(this, PerfilActivity.class));
         } else if (id == R.id.nav_favoritos) {
-            startActivity(new Intent(this, FavoritosActivity.class));
+            startActivity(new Intent(this, MisFavoritosActivity.class));
         } else if (id == R.id.nav_ajustes) {
             startActivity(new Intent(this, AjustesActivity.class));
         } else if (id == R.id.nav_cerrar_sesion) {
@@ -119,7 +119,7 @@ public class BaseActivity extends AppCompatActivity {
         if (id == R.id.nav_home) {
             startActivity(new Intent(this, MenuPrincipal.class));
         } else if (id == R.id.nav_favorites) {
-            startActivity(new Intent(this, FavoritosActivity.class));
+            startActivity(new Intent(this, MisFavoritosActivity.class));
         } else if (id == R.id.nav_search) {
             startActivity(new Intent(this, SearchActivity.class));
         } else if (id == R.id.nav_profile) {
