@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.CQQCH" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores personalizados -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="colorPrimaryVariant">@color/my_light_primary_variant</item>
+        <item name="colorSecondary">@color/my_light_secondary</item>
+        <item name="colorAccent">@color/my_light_accent</item>
     </style>
 
-    <style name="Theme.CQQCH" parent="Base.Theme.CQQCH" />
+    <!-- Tema principal de la aplicación -->
+    <style name="Theme.CQQCH" parent="Base.Theme.CQQCH">
+        <!-- Barras del sistema transparentes -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+
+        <!-- Ajustar el color de los iconos en la barra de estado -->
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+
+        <!-- Forzar transparencia en la ventana principal -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorSurface">@android:color/transparent</item>
+    </style>
 </resources>

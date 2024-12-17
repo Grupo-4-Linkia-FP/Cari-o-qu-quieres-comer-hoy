@@ -1,112 +1,171 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondocomidaland"
-    tools:context=".MenuPrincipal">
+    tools:context=".actividades.MenuPrincipal">
 
-    <Button
-        android:id="@+id/btPedir"
-        android:layout_width="232dp"
-        android:layout_height="66dp"
-        android:backgroundTint="#4D4D4D"
-        android:text="PEDIR"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.648" />
-
-
-    <Button
-        android:id="@+id/btCocinar"
-        android:layout_width="232dp"
-        android:layout_height="66dp"
-        android:backgroundTint="#4D4D4D"
-        android:text="COCINAR"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <Button
-        android:id="@+id/btIr"
-        android:layout_width="232dp"
-        android:layout_height="66dp"
-        android:backgroundTint="#4D4D4D"
-        android:text="IR"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.085" />
-
-    <Button
-        android:id="@+id/btCET"
-        android:layout_width="281dp"
-        android:layout_height="69dp"
-        android:backgroundTint="#4D4D4D"
-        android:text="CARIÑO ELIGE TÚ"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.93" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabmenuprincipal"
+    <!-- Texto principal -->
+    <TextView
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#969595"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@id/glabajo"
-        app:layout_constraintEnd_toEndOf="@id/glderecha"
-        app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toStartOf="@id/glizquierda"
-        app:layout_constraintTop_toBottomOf="@id/glarriba"
-        app:layout_constraintVertical_bias="0.933"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        android:fontFamily="@font/robotobold"
+        android:text="¡Hola! ¿Qué quieres comer hoy?"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!--Creamos las guias y las colocamos en porcentajes
-        para adaptar el diseño a horizontal-->
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glarriba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!-- Contenedor principal de botones, no cambia -->
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="726dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text">
 
+        <!-- Columna izquierda -->
+        <LinearLayout
+            android:id="@+id/left_column"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glabajo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+            <!-- Botón IR -->
+            <LinearLayout
+                android:id="@+id/btn_ir_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glizquierda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+                <ImageView
+                    android:id="@+id/icon_ir"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono IR"
+                    android:src="@drawable/ic_ir" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glderecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+                <TextView
+                    android:id="@+id/btn_ir_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="IR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Botón COCINAR -->
+            <LinearLayout
+                android:id="@+id/btn_cocinar_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_cocinar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Cocinar"
+                    android:src="@drawable/ic_cocinar" />
+
+                <TextView
+                    android:id="@+id/btn_cocinar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="COCINAR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Columna derecha -->
+        <LinearLayout
+            android:id="@+id/right_column"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Botón PEDIR -->
+            <LinearLayout
+                android:id="@+id/btn_pedir_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_pedir"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Pedir"
+                    android:src="@drawable/ic_pedir" />
+
+                <TextView
+                    android:id="@+id/btn_pedir_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="PEDIR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Botón ELIGE TÚ -->
+            <LinearLayout
+                android:id="@+id/btn_elige_tu_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_elige_tu"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Elige Tú"
+                    android:src="@drawable/ic_elige_tu" />
+
+                <TextView
+                    android:id="@+id/btn_elige_tu_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="ELIGE TÚ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

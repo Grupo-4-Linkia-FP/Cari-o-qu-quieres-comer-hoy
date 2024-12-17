@@ -13,13 +13,67 @@
         android:theme="@style/Theme.CQQCH"
         tools:targetApi="31">
         <activity
-            android:name=".MenuPrincipal"
+            android:name=".actividades.MisFavoritosActivity"
             android:exported="false" />
         <activity
-            android:name=".NuevoUsuario"
+            android:name=".actividades.CambiarContrasenaActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".actividades.SelectImagePerfilActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".actividades.VerRestaurantePedirActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.AddRecetaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.VerRecetasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.RegistrarseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.AddRestaurantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.VerRestaurantesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.AjustesActivity"
+            android:exported="false" />
+        <activity android:name=".base.BaseActivity" />
+        <activity
+            android:name=".actividades.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.FavoritosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.EligeTuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.PedirActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.CocinarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.IrActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.IniciarSesion"
+            android:exported="true"
+            android:theme="@style/Theme.CQQCH" />
+        <activity
+            android:name=".actividades.MenuPrincipal"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
