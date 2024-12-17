@@ -48,9 +48,6 @@
             android:name=".actividades.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".actividades.FavoritosActivity"
-            android:exported="false" />
-        <activity
             android:name=".actividades.PerfilActivity"
             android:exported="false" />
         <activity
