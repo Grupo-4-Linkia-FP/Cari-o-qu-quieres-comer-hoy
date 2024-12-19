@@ -4,5 +4,15 @@
         <!-- En modo oscuro, la barra de estado debe tener iconos claros -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowBackground">?attr/colorBackground</item>
+        <item name="colorBackground">@color/menuBackground</item>
+        <item name="colorOnBackground">@color/menuTextColor</item>
     </style>
+
+    <style name="NavigationViewTheme" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextColor">?attr/colorOnBackground</item>
+        <item name="itemIconTint">?attr/colorOnBackground</item>
+        <item name="android:background">?attr/colorBackground</item>
+    </style>
+
+
 </resources>

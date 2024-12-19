@@ -2,33 +2,32 @@
 
     <!-- Tema base usando Material3 DayNight -->
     <style name="Base.Theme.CQQCH" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Ajusta tus colores usando atributos globales.
-             Estos colores se definen en colors.xml y colors-night.xml -->
+        <!-- Colores base para temas -->
         <item name="colorPrimary">@color/my_light_primary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
-
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
-
-        <item name="colorBackground">@color/colorBackground</item>
-        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorBackground">@color/menuBackground</item>
+        <item name="colorOnBackground">@color/menuTextColor</item>
     </style>
 
     <!-- Tema principal que hereda del tema base -->
     <style name="Theme.CQQCH" parent="Base.Theme.CQQCH">
         <!-- Ajustes para la barra de navegación y estado -->
+        <item name="colorBackground">@color/menuBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <!-- Usamos colorSurface en vez de color fijo -->
         <item name="android:statusBarColor">?attr/colorSurface</item>
-
-        <!-- Indicar que en modo claro la barra de estado es clara.
-        <item name="android:windowLightStatusBar">true</item>
-
-        <!- Fondo de la ventana -->
         <item name="android:windowBackground">?attr/colorBackground</item>
+        <item name="colorOnBackground">@color/menuTextColor</item>
     </style>
+
+    <style name="NavigationViewTheme" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextColor">?attr/colorOnBackground</item>
+        <item name="itemIconTint">?attr/colorOnBackground</item>
+        <item name="android:background">?attr/colorBackground</item>
+    </style>
+
 
 </resources>

@@ -24,6 +24,10 @@
     <color name="colorOnSurface">#1C1B1F</color>
 
     <color name="colorBackground">#FFFFFF</color>
-    <color name="colorOnBackground">#1C1B1F</color>
+    <color name="colorOnBackground">#000000</color>
+
+    <color name="menuBackground">#FFFFFF</color> <!-- Fondo blanco -->
+    <color name="menuTextColor">#000000</color> <!-- Texto negro -->
+
 
 </resources>

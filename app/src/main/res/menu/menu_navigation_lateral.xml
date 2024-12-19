@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Opción Perfil -->
@@ -24,4 +23,5 @@
         android:id="@+id/nav_cerrar_sesion"
         android:icon="@drawable/ic_cerrar_sesion"
         android:title="Cerrar Sesión" />
+
 </menu>

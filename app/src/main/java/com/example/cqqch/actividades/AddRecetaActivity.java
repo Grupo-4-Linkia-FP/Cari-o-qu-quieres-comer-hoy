@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddRecetaActivity extends BaseActivity {
 
     private EditText etNombreReceta, etIngredientes, etTiempoPreparacion, etPuntuacion, etPrecio, etDescripcion;
@@ -55,7 +58,7 @@ public class AddRecetaActivity extends BaseActivity {
         // Configura el Spinner de categorías
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this,
-                R.array.categorias_recetas, // Define estas categorías en res/values/arrays.xml
+                R.array.categorias_recetas,
                 android.R.layout.simple_spinner_item
         );
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,21 +118,21 @@ public class AddRecetaActivity extends BaseActivity {
             return;
         }
 
-        // Crear la receta
-        Receta receta = new Receta(
-                nombre,
-                categoria,
-                ingredientes,
-                tiempoPreparacion,
-                puntuacion,
-                precio,
-                descripcion,
-                false // Por defecto, no es favorita
-        );
+        // Crear un mapa de datos para guardar la receta
+        Map<String, Object> recetaData = new HashMap<>();
+        recetaData.put("name", nombre);
+        recetaData.put("nameLowerCase", nombre.toLowerCase()); // Guardar nombre en minúsculas para búsquedas
+        recetaData.put("category", categoria);
+        recetaData.put("ingredients", ingredientes);
+        recetaData.put("preparationTime", tiempoPreparacion);
+        recetaData.put("rating", puntuacion);
+        recetaData.put("price", precio);
+        recetaData.put("description", descripcion);
+        recetaData.put("isFavorite", false); // Por defecto no es favorita
 
         // Guardar en la base de datos
         String userId = currentUser.getUid();
-        database.child("Recetas").child(userId).push().setValue(receta)
+        database.child("Recetas").child(userId).push().setValue(recetaData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Receta guardada correctamente", Toast.LENGTH_SHORT).show();
