@@ -6,27 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".actividades.EligeTuActivity">
 
-    <!-- Imagen Superior -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!-- AppBarLayout para contener la imagen superior -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:background="@android:color/transparent">
 
         <ImageView
             android:id="@+id/header_image"
-            android:layout_width="match_parent"
-            android:layout_height="226dp"
+            android:layout_width="439dp"
+            android:layout_height="211dp"
+            android:src="@drawable/img_eligetu" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            android:src="@drawable/img_eligetu"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Formulario con ScrollView -->
+    <!-- ScrollView con Behavior para no superponer la imagen -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:padding="16dp">
 
         <LinearLayout
@@ -129,7 +127,7 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Guardar"
+                    android:text="Mostrar"
                     android:textSize="22sp"
                     android:textAllCaps="false"
                     android:background="@drawable/selector_button"
@@ -155,10 +153,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvResultadosFiltro"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="16dp" />
         </LinearLayout>
     </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

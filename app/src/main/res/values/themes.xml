@@ -1,24 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme -->
+
+    <!-- Tema base usando Material3 DayNight -->
     <style name="Base.Theme.CQQCH" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Colores personalizados -->
+        <!-- Colores base para temas -->
         <item name="colorPrimary">@color/my_light_primary</item>
-        <item name="colorPrimaryVariant">@color/my_light_primary_variant</item>
-        <item name="colorSecondary">@color/my_light_secondary</item>
-        <item name="colorAccent">@color/my_light_accent</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorBackground">@color/menuBackground</item>
+        <item name="colorOnBackground">@color/menuTextColor</item>
     </style>
 
-    <!-- Tema principal de la aplicación -->
+    <!-- Tema principal que hereda del tema base -->
     <style name="Theme.CQQCH" parent="Base.Theme.CQQCH">
-        <!-- Barras del sistema transparentes -->
+        <!-- Ajustes para la barra de navegación y estado -->
+        <item name="colorBackground">@color/menuBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/white</item>
-
-        <!-- Ajustar el color de los iconos en la barra de estado -->
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-
-        <!-- Forzar transparencia en la ventana principal -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowBackground">?attr/colorBackground</item>
+        <item name="colorOnBackground">@color/menuTextColor</item>
     </style>
+
+    <style name="NavigationViewTheme" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextColor">?attr/colorOnBackground</item>
+        <item name="itemIconTint">?attr/colorOnBackground</item>
+        <item name="android:background">?attr/colorBackground</item>
+    </style>
+
+
 </resources>

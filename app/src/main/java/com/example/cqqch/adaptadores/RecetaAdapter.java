@@ -43,7 +43,7 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.RecetaView
         holder.ingredients.setText("Ingredientes: " + receta.getIngredients());
         holder.preparationTime.setText("Tiempo: " + receta.getPreparationTime() + " min");
         holder.rating.setText("Puntuación: " + receta.getRating());
-        holder.price.setText("Precio: " + receta.getPrice());
+        holder.price.setText("Precio: " + receta.getPrice() + "€");
         holder.description.setText(receta.getDescription());
 
         holder.favoriteIcon.setImageResource(

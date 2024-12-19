@@ -15,8 +15,8 @@
 
     <!-- Icono Historia -->
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_info"
         android:title="Buscar" />
 
 

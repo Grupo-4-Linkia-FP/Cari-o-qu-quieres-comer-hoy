@@ -8,9 +8,11 @@
     tools:context=".actividades.AddRecetaActivity">
 
     <!-- Header Image -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:fitsSystemWindows="true"
+        android:background="?attr/colorSurface">
 
         <ImageView
             android:id="@+id/header_image"
@@ -22,7 +24,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Form inside a ScrollView -->
     <ScrollView
@@ -89,7 +91,7 @@
             <EditText
                 android:id="@+id/etIngredientesReceta"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:hint="Ej: 200g de harina, 3 huevos..."
                 android:textSize="18sp"
                 android:background="@drawable/edittext_background"

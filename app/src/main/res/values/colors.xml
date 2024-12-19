@@ -13,7 +13,21 @@
         <color name="my_light_secondary">#FCA5A5</color>
         <color name="my_light_accent">#FFC107</color>
 
+    <!-- Colores modo claro -->
+    <color name="colorPrimary">#6750A4</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
 
+    <color name="colorSecondary">#625B71</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#1C1B1F</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+
+    <color name="menuBackground">#FFFFFF</color> <!-- Fondo blanco -->
+    <color name="menuTextColor">#000000</color> <!-- Texto negro -->
 
 
 </resources>

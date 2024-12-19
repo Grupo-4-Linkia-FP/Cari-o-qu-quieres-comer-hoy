@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddRestaurantActivity extends BaseActivity {
 
     private EditText etNombre, etDireccion, etNota, etPrecios, etComentarios;
@@ -27,11 +30,10 @@ public class AddRestaurantActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Primero llama a super, luego setContentView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Inflar el layout secundario dentro del frame del layout base
+        // Infla el layout secundario dentro del frame del layout base
         ViewGroup contentFrame = findViewById(R.id.content_frame);
         View addRestaurantView = getLayoutInflater().inflate(R.layout.activity_add_restaurant, contentFrame, true);
 
@@ -54,7 +56,7 @@ public class AddRestaurantActivity extends BaseActivity {
         btnGuardar = addRestaurantView.findViewById(R.id.btnGuardarRestaurante);
         Button btnVolver = addRestaurantView.findViewById(R.id.btnVolverMenuRestaurante);
 
-        // Asignar adaptadores a los Spinners (asegúrate de tener los arrays en res/values/arrays.xml)
+        // Asignar adaptadores a los Spinners
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this, R.array.categorias_restaurantes, android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -69,9 +71,8 @@ public class AddRestaurantActivity extends BaseActivity {
         // Evento clic para guardar restaurante
         btnGuardar.setOnClickListener(v -> guardarRestaurante());
 
-        //Evento clic para volver a la pantalla anterior sin guardar
+        // Evento clic para volver a la pantalla anterior sin guardar
         btnVolver.setOnClickListener(v -> finish());
-
     }
 
     private void guardarRestaurante() {
@@ -85,10 +86,7 @@ public class AddRestaurantActivity extends BaseActivity {
         String direccion = etDireccion.getText().toString().trim();
         String notaStr = etNota.getText().toString().trim();
 
-        // Primero verifica que spinners no estén vacíos y tengan una selección
-        if (spCategoria.getSelectedItem() == null
-                || spSePuedeIr.getSelectedItem() == null
-                || spSePuedePedir.getSelectedItem() == null) {
+        if (spCategoria.getSelectedItem() == null || spSePuedeIr.getSelectedItem() == null || spSePuedePedir.getSelectedItem() == null) {
             Toast.makeText(this, "Por favor, selecciona las opciones", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -128,22 +126,22 @@ public class AddRestaurantActivity extends BaseActivity {
             }
         }
 
-        // Crea el restaurante
-        Restaurant restaurante = new Restaurant(
-                nombre,
-                direccion,
-                categoria,
-                precios,
-                nota,
-                comentarios,
-                false, // Por defecto, no es favorito
-                sePuedeIr,
-                sePuedePedir
-        );
+        // Crear mapa de datos para guardar el restaurante
+        Map<String, Object> restaurantData = new HashMap<>();
+        restaurantData.put("name", nombre);
+        restaurantData.put("nameLowerCase", nombre.toLowerCase()); // Guardar nombre en minúsculas
+        restaurantData.put("address", direccion);
+        restaurantData.put("category", categoria);
+        restaurantData.put("price", precios);
+        restaurantData.put("rating", nota);
+        restaurantData.put("comment", comentarios);
+        restaurantData.put("isFavorite", false);
+        restaurantData.put("canGo", sePuedeIr);
+        restaurantData.put("canOrder", sePuedePedir);
 
-        // Guarda en la base de datos con `push()`
+        // Guardar en la base de datos
         String userId = currentUser.getUid();
-        database.child("Restaurantes").child(userId).push().setValue(restaurante)
+        database.child("Restaurantes").child(userId).push().setValue(restaurantData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Restaurante guardado correctamente", Toast.LENGTH_SHORT).show();
