@@ -1,0 +1,218 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".actividades.EditRestaurantActivity">
+
+    <!-- Etiqueta para Nombre -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Restaurante:"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Nombre del restaurante -->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Nombre del restaurante"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para Dirección -->
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Dirección:"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    <!-- Dirección -->
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Dirección"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAddress"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para Categoría -->
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Categoría:"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAddress" />
+
+    <!-- Categoría -->
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCategory"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para Precio -->
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Precio:"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spCategory" />
+
+    <!-- Precio -->
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Precio"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice"
+        android:background="@drawable/edittext_background" />
+
+
+    <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nota:"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPrice" />
+
+    <!-- Nota -->
+    <EditText
+        android:id="@+id/etRating"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Nota (1-5)"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRating"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para Comentario -->
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Comentario:"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etRating" />
+
+    <!-- Comentario -->
+    <EditText
+        android:id="@+id/etComment"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:hint="Comentario"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvComment"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para "Se puede ir" -->
+    <TextView
+        android:id="@+id/tvCanGo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="¿Se puede ir?"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etComment" />
+
+    <!-- Se puede ir -->
+    <Spinner
+        android:id="@+id/spCanGo"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCanGo"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Etiqueta para "Se puede pedir" -->
+    <TextView
+        android:id="@+id/tvCanOrder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="¿Se puede pedir?"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spCanGo" />
+
+    <!-- Se puede pedir -->
+    <Spinner
+        android:id="@+id/spCanOrder"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCanOrder"
+        android:background="@drawable/edittext_background" />
+
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="266dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:text="Guardar"
+        android:textSize="22sp"
+        android:background="@drawable/selector_button"
+        app:layout_constraintTop_toBottomOf="@id/spCanOrder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,12 @@
 package com.example.cqqch.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,121 +30,188 @@ import java.util.List;
 
 public class MisFavoritosActivity extends BaseActivity {
 
-    private RecyclerView rvFavoritos;
+    private static final String TAG = "MisFavoritosActivity";
+
+    // Adaptadores
     private RestaurantAdapter restaurantAdapter;
     private RecetaAdapter recetaAdapter;
 
+    // Listas de datos
     private List<Restaurant> listaRestaurantes;
     private List<Receta> listaRecetas;
 
+    // Firebase
     private DatabaseReference database;
     private FirebaseUser user;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        // Inflar layout específico dentro de activity_base
+        View favoritesView = getLayoutInflater().inflate(
+                R.layout.activity_mis_favoritos,
+                findViewById(R.id.content_frame)
+        );
 
-        // Inflar layout específico
-        View misFavotirosView = getLayoutInflater().inflate(R.layout.activity_mis_favoritos, findViewById(R.id.content_frame));
-
-        // Configura la navegación
+        // Configura la navegación lateral (Drawer) si corresponde
         setupNavigation();
 
         // Inicializar RecyclerViews
-        RecyclerView rvFavoritosRestaurantes = misFavotirosView.findViewById(R.id.rvFavoritosRestaurantes);
-        RecyclerView rvFavoritosRecetas = misFavotirosView.findViewById(R.id.rvFavoritosRecetas);
+        RecyclerView rvFavoritosRestaurantes = favoritesView.findViewById(R.id.rvFavoritosRestaurantes);
+        RecyclerView rvFavoritosRecetas = favoritesView.findViewById(R.id.rvFavoritosRecetas);
 
         rvFavoritosRestaurantes.setLayoutManager(new LinearLayoutManager(this));
         rvFavoritosRecetas.setLayoutManager(new LinearLayoutManager(this));
 
+        // Inicializar listas
         listaRestaurantes = new ArrayList<>();
         listaRecetas = new ArrayList<>();
 
+        // Obtener usuario actual de Firebase
         user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            // Si no hay usuario logueado, muestra mensaje y termina la Activity
+            Toast.makeText(this, "No estás autenticado. Inicia sesión para ver favoritos.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // Obtener referencia a la base de datos
         database = FirebaseDatabase.getInstance().getReference();
 
-        // Cargar favoritos separados
+        // Cargar favoritos (restaurantes y recetas) por separado
         cargarFavoritosRestaurantes(rvFavoritosRestaurantes);
         cargarFavoritosRecetas(rvFavoritosRecetas);
     }
 
-    private void cargarFavoritosRestaurantes(RecyclerView recyclerView) {
-        database.child("Restaurantes").child(user.getUid())
-                .orderByChild("favorite").equalTo(true)
+    /**
+     * Carga los restaurantes marcados como favoritos (campo "favorite" = true)
+     * para el usuario actual, y los asigna a un RecyclerView.
+     */
+    private void cargarFavoritosRestaurantes(@NonNull RecyclerView recyclerView) {
+        database.child("Restaurantes")
+                .child(user.getUid())
+                .orderByChild("favorite")
+                .equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         listaRestaurantes.clear();
                         for (DataSnapshot data : snapshot.getChildren()) {
                             Restaurant restaurant = data.getValue(Restaurant.class);
-                            if (restaurant != null) listaRestaurantes.add(restaurant);
+                            if (restaurant != null) {
+                                listaRestaurantes.add(restaurant);
+                            }
                         }
-                        restaurantAdapter = new RestaurantAdapter(listaRestaurantes, MisFavoritosActivity.this::onFavoriteClicked, MisFavoritosActivity.this::onDeleteClicked);
+                        restaurantAdapter = new RestaurantAdapter(
+                                listaRestaurantes,
+                                MisFavoritosActivity.this::onFavoriteClicked,
+                                MisFavoritosActivity.this::onDeleteClicked,
+                                MisFavoritosActivity.this::onEditClicked
+                        );
                         recyclerView.setAdapter(restaurantAdapter);
+
+                        if (listaRestaurantes.isEmpty()) {
+                            Log.d(TAG, "No hay restaurantes favoritos para este usuario.");
+                        }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("FavoritosActivity", "Error al cargar favoritos de restaurantes", error.toException());
+                        Log.e(TAG, "Error al cargar favoritos de restaurantes", error.toException());
                     }
                 });
     }
 
-    private void cargarFavoritosRecetas(RecyclerView recyclerView) {
-        database.child("Recetas").child(user.getUid())
-                .orderByChild("favorite").equalTo(true)
+    /**
+     * Carga las recetas marcadas como favoritas (campo "favorite" = true)
+     * para el usuario actual, y las asigna a un RecyclerView.
+     */
+    private void cargarFavoritosRecetas(@NonNull RecyclerView recyclerView) {
+        database.child("Recetas")
+                .child(user.getUid())
+                .orderByChild("favorite")
+                .equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         listaRecetas.clear();
                         for (DataSnapshot data : snapshot.getChildren()) {
                             Receta receta = data.getValue(Receta.class);
-                            if (receta != null) listaRecetas.add(receta);
+                            if (receta != null) {
+                                listaRecetas.add(receta);
+                            }
                         }
-                        recetaAdapter = new RecetaAdapter(listaRecetas, MisFavoritosActivity.this::onFavoriteClickedReceta, MisFavoritosActivity.this::onDeleteClickedReceta);
+                        recetaAdapter = new RecetaAdapter(
+                                listaRecetas,
+                                MisFavoritosActivity.this::onFavoriteClickedReceta,
+                                MisFavoritosActivity.this::onDeleteClickedReceta,
+                                MisFavoritosActivity.this::onEditClickedReceta
+                        );
                         recyclerView.setAdapter(recetaAdapter);
+
+                        if (listaRecetas.isEmpty()) {
+                            Log.d(TAG, "No hay recetas favoritas para este usuario.");
+                        }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("FavoritosActivity", "Error al cargar favoritos de recetas", error.toException());
+                        Log.e(TAG, "Error al cargar favoritos de recetas", error.toException());
                     }
                 });
     }
 
-    private void mostrarResultados() {
-        if (!listaRestaurantes.isEmpty()) {
-            restaurantAdapter = new RestaurantAdapter(listaRestaurantes, this::onFavoriteClicked, this::onDeleteClicked);
-            rvFavoritos.setAdapter(restaurantAdapter);
-        }
 
-        if (!listaRecetas.isEmpty()) {
-            recetaAdapter = new RecetaAdapter(listaRecetas, this::onFavoriteClickedReceta, this::onDeleteClickedReceta);
-            rvFavoritos.setAdapter(recetaAdapter);
-        }
-
-        if (listaRestaurantes.isEmpty() && listaRecetas.isEmpty()) {
-            Toast.makeText(this, "No hay favoritos seleccionados", Toast.LENGTH_SHORT).show();
-        }
-    }
-
+    // Cuando se hace clic en favorito de un Restaurant
     private void onFavoriteClicked(Restaurant restaurant) {
-        Toast.makeText(this, restaurant.getName() + " marcado/desmarcado como favorito", Toast.LENGTH_SHORT).show();
+        // Aquí podrías actualizar Firebase para marcar/desmarcar favorito
+        Toast.makeText(this,
+                        restaurant.getName() + " marcado/desmarcado como favorito",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
+    // Cuando se hace clic en eliminar un Restaurant
     private void onDeleteClicked(Restaurant restaurant) {
-        Toast.makeText(this, restaurant.getName() + " eliminado", Toast.LENGTH_SHORT).show();
+        // Lógica para eliminarlo de Firebase si corresponde
+        Toast.makeText(this,
+                        restaurant.getName() + " eliminado",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
+    // Cuando se hace clic en favorito de una Receta
     private void onFavoriteClickedReceta(Receta receta) {
-        Toast.makeText(this, receta.getName() + " marcado/desmarcado como favorito", Toast.LENGTH_SHORT).show();
+        // Aquí podrías actualizar Firebase para marcar/desmarcar favorito
+        Toast.makeText(this,
+                        receta.getName() + " marcado/desmarcado como favorito",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
+    // Cuando se hace clic en eliminar una Receta
     private void onDeleteClickedReceta(Receta receta) {
-        Toast.makeText(this, receta.getName() + " eliminado", Toast.LENGTH_SHORT).show();
+        // Lógica para eliminarla de Firebase si corresponde
+        Toast.makeText(this,
+                        receta.getName() + " eliminada",
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
+    // Cuando se hace clic en editar un Restaurant
+    private void onEditClicked(Restaurant restaurant) {
+        Intent intent = new Intent(this, EditRestaurantActivity.class);
+        intent.putExtra("restaurant", restaurant);
+        startActivity(intent);
+    }
+
+    // Cuando se hace clic en editar una Receta
+    private void onEditClickedReceta(Receta receta) {
+        Intent intent = new Intent(this, EditRecipeActivity.class);
+        intent.putExtra("receta", receta);
+        startActivity(intent);
+    }
 }
