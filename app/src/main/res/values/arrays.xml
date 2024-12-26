@@ -29,6 +29,7 @@
         <item>Vasco</item>
         <item>Catalán</item>
     </string-array>
+
     <!--  Categorías para Recetas  -->
     <string-array name="categorias_recetas">
         <item></item>
@@ -46,6 +47,7 @@
         <item>Desayunos y Brunch</item>
         <item>Comida Rápida y Snacks</item>
     </string-array>
+
     <!--  Opciones para el desplegable de Sí/No  -->
     <string-array name="opciones_si_no">
         <item></item>

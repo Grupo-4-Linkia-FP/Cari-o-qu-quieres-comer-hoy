@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cqqch.R;
-import com.example.cqqch.modelos.Restaurant;
 import com.example.cqqch.base.BaseActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,18 +32,18 @@ public class AddRestaurantActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Infla el layout secundario dentro del frame del layout base
+        // Infla el layout específico dentro del content_frame
         ViewGroup contentFrame = findViewById(R.id.content_frame);
         View addRestaurantView = getLayoutInflater().inflate(R.layout.activity_add_restaurant, contentFrame, true);
 
-        // Llama a setupNavigation() después de inflar el layout
+        // Configura la navegación
         setupNavigation();
 
         // Inicializa Firebase
         database = FirebaseDatabase.getInstance().getReference();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Vincula los elementos del layout
+        // Vincula las vistas
         etNombre = addRestaurantView.findViewById(R.id.etNombreRestaurante);
         etDireccion = addRestaurantView.findViewById(R.id.etDireccionRestaurante);
         etNota = addRestaurantView.findViewById(R.id.etNotaRestaurante);
@@ -56,7 +55,7 @@ public class AddRestaurantActivity extends BaseActivity {
         btnGuardar = addRestaurantView.findViewById(R.id.btnGuardarRestaurante);
         Button btnVolver = addRestaurantView.findViewById(R.id.btnVolverMenuRestaurante);
 
-        // Asignar adaptadores a los Spinners
+        // Configura los Spinners
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this, R.array.categorias_restaurantes, android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -126,10 +125,21 @@ public class AddRestaurantActivity extends BaseActivity {
             }
         }
 
+        // Generar un ID único para el restaurante
+        String userId = currentUser.getUid();
+        String restaurantId = database.child("Restaurantes").child(userId).push().getKey();
+
+        // Verificar que se generó el ID correctamente
+        if (restaurantId == null) {
+            Toast.makeText(this, "Error generando ID único", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Crear mapa de datos para guardar el restaurante
         Map<String, Object> restaurantData = new HashMap<>();
+        restaurantData.put("id", restaurantId); // ID único generado
         restaurantData.put("name", nombre);
-        restaurantData.put("nameLowerCase", nombre.toLowerCase()); // Guardar nombre en minúsculas
+        restaurantData.put("nameLowerCase", nombre.toLowerCase());
         restaurantData.put("address", direccion);
         restaurantData.put("category", categoria);
         restaurantData.put("price", precios);
@@ -139,9 +149,8 @@ public class AddRestaurantActivity extends BaseActivity {
         restaurantData.put("canGo", sePuedeIr);
         restaurantData.put("canOrder", sePuedePedir);
 
-        // Guardar en la base de datos
-        String userId = currentUser.getUid();
-        database.child("Restaurantes").child(userId).push().setValue(restaurantData)
+        // Guardar en Firebase
+        database.child("Restaurantes").child(userId).child(restaurantId).setValue(restaurantData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Restaurante guardado correctamente", Toast.LENGTH_SHORT).show();

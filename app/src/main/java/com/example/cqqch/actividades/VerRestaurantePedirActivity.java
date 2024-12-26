@@ -1,5 +1,6 @@
 package com.example.cqqch.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +49,7 @@ public class VerRestaurantePedirActivity extends BaseActivity {
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         restaurantList = new ArrayList<>();
-        adapter = new RestaurantAdapter(restaurantList, this::onFavoriteClicked, this::onDeleteClicked);
+        adapter = new RestaurantAdapter(restaurantList, this::onFavoriteClicked, this::onDeleteClicked, this::onEditClicked);
         recyclerView.setAdapter(adapter);
 
         // Cargar los datos reales desde Firebase
@@ -144,4 +145,11 @@ public class VerRestaurantePedirActivity extends BaseActivity {
                     });
         }
     }
+
+    private void onEditClicked(Restaurant restaurant) {
+        Intent intent = new Intent(this, EditRestaurantActivity.class);
+        intent.putExtra("restaurant", restaurant);
+        startActivity(intent);
+    }
+
 }

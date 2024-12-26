@@ -1,5 +1,6 @@
 package com.example.cqqch.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,39 +26,53 @@ import java.util.List;
 
 public class VerRecetasActivity extends BaseActivity {
 
+    private static final String TAG = "VerRecetasActivity";
+
     private RecyclerView recyclerView;
     private RecetaAdapter adapter;
-    private List<Receta> listaRecetas;
+    private final List<Receta> listaRecetas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Infla el diseño específico en el content_frame del BaseActivity
-        View verRecetasView = getLayoutInflater().inflate(R.layout.activity_ver_recetas, findViewById(R.id.content_frame), true);
+        // 1) Inflar el layout específico en el content_frame del BaseActivity
+        View verRecetasView = getLayoutInflater().inflate(
+                R.layout.activity_ver_recetas,
+                findViewById(R.id.content_frame),
+                true
+        );
 
-        // Configura la navegación
+        // 2) Configurar la navegación (Drawer, etc.)
         setupNavigation();
 
-        // Inicializa la lista y el RecyclerView
-        listaRecetas = new ArrayList<>();
+        // 3) Inicializar vistas
         recyclerView = verRecetasView.findViewById(R.id.recetas_list);
-
         if (recyclerView == null) {
-            Log.e("VerRecetasActivity", "RecyclerView no se encontró. Verifica el ID en el XML.");
+            Log.e(TAG, "RecyclerView no se encontró. Verifica el ID en el XML.");
             return;
         }
 
-        // Configura el RecyclerView
+        // 4) Configurar RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecetaAdapter(listaRecetas, this::onFavoriteClicked, this::onDeleteClicked);
+
+        // 5) Inicializar el adaptador
+        adapter = new RecetaAdapter(
+                listaRecetas,           // Lista de recetas
+                this::onFavoriteClicked,  // Favorito
+                this::onDeleteClicked,    // Eliminar
+                this::onEditClicked       // Editar
+        );
         recyclerView.setAdapter(adapter);
 
-        // Cargar los datos de Firebase
+        // 6) Cargar datos de Firebase
         cargarRecetas();
     }
 
+    /**
+     * Carga las recetas del usuario actual desde Firebase.
+     */
     private void cargarRecetas() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
@@ -65,8 +80,10 @@ public class VerRecetasActivity extends BaseActivity {
             return;
         }
 
-        String userId = currentUser.getUid();
-        FirebaseDatabase.getInstance().getReference("Recetas").child(userId)
+        final String userId = currentUser.getUid();
+        FirebaseDatabase.getInstance()
+                .getReference("Recetas")
+                .child(userId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,72 +94,123 @@ public class VerRecetasActivity extends BaseActivity {
                                 listaRecetas.add(receta);
                             }
                         }
+                        // Notificamos cambios al adaptador
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("VerRecetasActivity", "Error al cargar recetas", error.toException());
-                        Toast.makeText(VerRecetasActivity.this, "Error al cargar recetas", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Error al cargar recetas", error.toException());
+                        Toast.makeText(VerRecetasActivity.this,
+                                "Error al cargar recetas",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
+    /**
+     * Evento: el usuario hace clic en el ícono de favorito de una receta.
+     */
     private void onFavoriteClicked(Receta receta) {
-        receta.setFavorite(!receta.isFavorite());
+        // 1) Invertimos localmente el estado de favorito
+        boolean nuevoValor = !receta.isFavorite();
+        receta.setFavorite(nuevoValor);
         adapter.notifyDataSetChanged();
 
-        // Actualiza el estado de favorito en Firebase
+        // 2) Actualizamos en Firebase
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            String userId = currentUser.getUid();
-            FirebaseDatabase.getInstance().getReference("Recetas")
+            final String userId = currentUser.getUid();
+            FirebaseDatabase.getInstance()
+                    .getReference("Recetas")
                     .child(userId)
+                    // Aquí podemos usar un ID único en vez de "orderByChild("name")"
+                    // si tu modelo tiene un campo 'id' para la receta.
                     .orderByChild("name")
                     .equalTo(receta.getName())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                snapshot.getRef().child("favorite").setValue(receta.isFavorite());
+                                snapshot.getRef()
+                                        .child("favorite")
+                                        .setValue(nuevoValor)
+                                        .addOnSuccessListener(aVoid -> {
+                                            // Éxito
+                                            Log.d(TAG, "Favorito actualizado en Firebase");
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            // Error -> revertir
+                                            receta.setFavorite(!nuevoValor);
+                                            adapter.notifyDataSetChanged();
+                                            Log.e(TAG, "Error al actualizar favorito", e);
+                                        });
                             }
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.e("VerRecetasActivity", "Error al actualizar favorito", databaseError.toException());
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Error en la búsqueda
+                            Log.e(TAG, "Error al actualizar favorito", error.toException());
                         }
                     });
         }
     }
 
+    /**
+     * Evento: el usuario hace clic en el ícono de eliminar de una receta.
+     */
     private void onDeleteClicked(Receta receta) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            FirebaseDatabase.getInstance().getReference("Recetas")
-                    .child(userId)
-                    .orderByChild("name")
-                    .equalTo(receta.getName())
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                snapshot.getRef().removeValue()
-                                        .addOnSuccessListener(aVoid -> {
-                                            Toast.makeText(VerRecetasActivity.this, "Receta eliminada", Toast.LENGTH_SHORT).show();
-                                            listaRecetas.remove(receta);
-                                            adapter.notifyDataSetChanged();
-                                        })
-                                        .addOnFailureListener(e -> Toast.makeText(VerRecetasActivity.this, "Error al eliminar", Toast.LENGTH_SHORT).show());
-                            }
-                        }
+        if (currentUser == null) return;
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.e("VerRecetasActivity", "Error al eliminar receta", databaseError.toException());
+        final String userId = currentUser.getUid();
+        FirebaseDatabase.getInstance()
+                .getReference("Recetas")
+                .child(userId)
+                .orderByChild("name")
+                .equalTo(receta.getName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            snapshot.getRef().removeValue()
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(
+                                                VerRecetasActivity.this,
+                                                "Receta eliminada",
+                                                Toast.LENGTH_SHORT
+                                        ).show();
+                                        listaRecetas.remove(receta);
+                                        adapter.notifyDataSetChanged();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(
+                                                VerRecetasActivity.this,
+                                                "Error al eliminar",
+                                                Toast.LENGTH_SHORT
+                                        ).show();
+                                        Log.e(TAG, "Error al eliminar receta", e);
+                                    });
                         }
-                    });
-        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e(TAG, "Error en la consulta para eliminar", error.toException());
+                    }
+                });
     }
+
+    /**
+     * Evento: el usuario hace clic en el ícono de editar de una receta.
+     * Si no manejas la edición, puedes eliminar este método.
+     */
+    private void onEditClicked(Receta receta) {
+        // Lanzamos la pantalla de edición
+        Intent intent = new Intent(this, EditRecipeActivity.class);
+        intent.putExtra("receta", receta);
+        startActivity(intent);
+    }
+
 }

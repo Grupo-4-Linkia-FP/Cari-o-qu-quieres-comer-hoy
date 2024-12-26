@@ -13,6 +13,12 @@
         android:theme="@style/Theme.CQQCH"
         tools:targetApi="31">
         <activity
+            android:name=".actividades.EditRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.EditRestaurantActivity"
+            android:exported="false" />
+        <activity
             android:name=".actividades.AcercaDeActivity"
             android:exported="false" />
         <activity
@@ -49,7 +55,6 @@
             android:name=".actividades.AjustesActivity"
             android:exported="false" />
         <activity android:name=".base.BaseActivity" />
-
         <activity
             android:name=".actividades.PerfilActivity"
             android:exported="false" />
