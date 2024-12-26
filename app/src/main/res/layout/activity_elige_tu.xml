@@ -6,23 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".actividades.EligeTuActivity">
 
-    <!-- AppBarLayout para contener la imagen superior -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
-        android:background="@android:color/transparent">
+    <!-- Contenedor para la imagen superior -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp">
 
         <ImageView
             android:id="@+id/header_image"
-            android:layout_width="439dp"
-            android:layout_height="211dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/img_eligetu" />
-    </com.google.android.material.appbar.AppBarLayout>
+    </FrameLayout>
 
     <!-- ScrollView con Behavior para no superponer la imagen -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="230dp"
         android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:padding="16dp">
@@ -35,18 +36,21 @@
             android:paddingBottom="16dp">
 
             <!-- Spinner Tipo -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona Restaurantes o Recetas"
+                android:layout_marginBottom="8dp"
+                android:text="Selecciona Ir, Pedir o Recetas"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spTipo"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="16dp" />
 
@@ -54,7 +58,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona una Categoría"
+                android:text="@string/select_category"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -63,6 +68,7 @@
                 android:id="@+id/spCategoria"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="16dp" />
 
@@ -70,8 +76,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favorito (Sí/No)"
+                android:text="@string/favorite"
                 android:textSize="18sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -79,6 +86,7 @@
                 android:id="@+id/spFavorito"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="16dp" />
 
@@ -86,8 +94,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona Nota (1-5)"
+                android:text="@string/rating"
                 android:textSize="18sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -95,6 +104,7 @@
                 android:id="@+id/spNota"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="16dp" />
 
@@ -102,7 +112,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selecciona Rango de Precio"
+                android:text="@string/select_price"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -111,6 +122,7 @@
                 android:id="@+id/spPrecio"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="16dp" />
 
@@ -127,7 +139,7 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Mostrar"
+                    android:text="@string/mostrar"
                     android:textSize="22sp"
                     android:textAllCaps="false"
                     android:background="@drawable/selector_button"
@@ -142,7 +154,7 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Volver"
+                    android:text="@string/volver"
                     android:textSize="22sp"
                     android:textAllCaps="false"
                     android:background="@drawable/selector_button"

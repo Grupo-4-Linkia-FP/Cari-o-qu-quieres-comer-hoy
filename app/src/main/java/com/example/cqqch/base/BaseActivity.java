@@ -1,6 +1,7 @@
 package com.example.cqqch.base;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -158,9 +159,16 @@ public class BaseActivity extends AppCompatActivity {
      * Limpia el stack de actividades y redirige al usuario a la pantalla de inicio de sesión.
      */
     private void cerrarSesion() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UsuarioPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear(); // Limpia los datos de sesión
+        editor.apply();
+
+        // Redirigir al usuario a la pantalla de inicio de sesión
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
+
 }

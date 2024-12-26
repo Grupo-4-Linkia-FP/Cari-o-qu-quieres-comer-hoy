@@ -1,5 +1,6 @@
 package com.example.cqqch.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +53,7 @@ public class VerRestaurantesActivity extends BaseActivity {
 
         // Configura el RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RestaurantAdapter(listaRestaurantes, this::onFavoriteClicked, this::onDeleteClicked);
+        adapter = new RestaurantAdapter(listaRestaurantes, this::onFavoriteClicked, this::onDeleteClicked, this::onEditClicked);
 
         recyclerView.setAdapter(adapter);
 
@@ -60,35 +61,60 @@ public class VerRestaurantesActivity extends BaseActivity {
         cargarRestaurantes();
     }
 
+    /**
+     * Método para cargar los restaurantes desde Firebase y mostrarlos en la lista.
+     * Solo se incluyen restaurantes que respondieron "Sí" a la pregunta "¿Se puede ir?".
+     */
     private void cargarRestaurantes() {
+        // Obtiene el usuario actualmente autenticado
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Verifica si el usuario está autenticado
         if (currentUser == null) {
             Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Obtiene el ID del usuario autenticado
         String userId = currentUser.getUid();
+
+        // Referencia a la base de datos Firebase en la ruta "Restaurantes/{userId}"
         FirebaseDatabase.getInstance().getReference("Restaurantes").child(userId)
                 .addValueEventListener(new ValueEventListener() {
+
+                    // Se ejecuta cuando se reciben los datos de Firebase
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        // Limpia la lista antes de agregar nuevos datos
                         listaRestaurantes.clear();
+
+                        // Itera a través de todos los hijos en el nodo actual
                         for (DataSnapshot restauranteSnapshot : snapshot.getChildren()) {
+                            // Convierte cada snapshot en un objeto Restaurant
                             Restaurant restaurante = restauranteSnapshot.getValue(Restaurant.class);
-                            if (restaurante != null) {
+
+                            // Agrega a la lista solo los restaurantes donde "canGo" sea true
+                            if (restaurante != null && restaurante.isCanGo()) {
                                 listaRestaurantes.add(restaurante);
                             }
                         }
+
+                        // Notifica al adaptador que la lista ha cambiado para que se actualice la vista
                         adapter.notifyDataSetChanged();
                     }
 
+                    // Se ejecuta si ocurre un error al intentar leer los datos
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        // Registra el error en los logs
                         Log.e("VerRestaurantesActivity", "Error al cargar restaurantes", error.toException());
+
+                        // Muestra un mensaje al usuario indicando que hubo un problema
                         Toast.makeText(VerRestaurantesActivity.this, "Error al cargar restaurantes", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 
     private void onFavoriteClicked(Restaurant restaurant) {
         restaurant.setFavorite(!restaurant.isFavorite());
@@ -147,5 +173,13 @@ public class VerRestaurantesActivity extends BaseActivity {
                     });
         }
     }
+
+    private void onEditClicked(Restaurant restaurant) {
+
+        Intent intent = new Intent(this, EditRestaurantActivity.class);
+        intent.putExtra("restaurant", restaurant);
+        startActivity(intent);
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.cqqch.actividades;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -28,13 +29,16 @@ public class IniciarSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.iniciar_sesion);
 
+        // Inicializa Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        // Vincula las vistas
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         forgotPasswordLink = findViewById(R.id.forgot_password);
 
+        // Botón para iniciar sesión
         btnIniciarSesion.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
@@ -44,6 +48,7 @@ public class IniciarSesion extends AppCompatActivity {
             }
         });
 
+        // Enlace para recuperar contraseña
         forgotPasswordLink.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             if (TextUtils.isEmpty(email)) {
@@ -80,6 +85,13 @@ public class IniciarSesion extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+                        // Guardar estado de sesión
+                        SharedPreferences sharedPreferences = getSharedPreferences("UsuarioPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.apply();
+
+                        // Redirigir al menú principal
                         Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, MenuPrincipal.class));
                         finish();

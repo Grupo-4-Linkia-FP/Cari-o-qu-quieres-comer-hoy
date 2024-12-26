@@ -55,6 +55,7 @@
                 android:layout_height="48dp"
                 android:hint="Ej: Restaurante La Buena Mesa"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 android:background="@drawable/edittext_background"
                 android:padding="12dp"
                 android:layout_marginBottom="12dp" />
@@ -75,8 +76,11 @@
                 android:layout_height="48dp"
                 android:hint="Ej: Calle Falsa 123"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:background="@drawable/edittext_background"
                 android:padding="12dp"
+                android:focusable="false"
+                android:clickable="true"
                 android:layout_marginBottom="12dp" />
 
             <!-- Campo Nota -->
@@ -94,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="Ej: 4"
+                android:textColor="@color/black"
                 android:inputType="number"
                 android:textSize="16sp"
                 android:background="@drawable/edittext_background"
@@ -116,6 +121,7 @@
                 android:layout_height="48dp"
                 android:hint="Ej: 20.50"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:inputType="numberDecimal"
                 android:background="@drawable/edittext_background"
                 android:padding="12dp"
@@ -135,6 +141,7 @@
                 android:id="@+id/spCategoria"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="12dp" />
 
@@ -152,6 +159,7 @@
                 android:id="@+id/spSePuedeIr"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="12dp" />
 
@@ -169,6 +177,7 @@
                 android:id="@+id/spSePuedePedir"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:textColor="@color/black"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="12dp" />
 
@@ -188,6 +197,7 @@
                 android:layout_height="52dp"
                 android:hint="Escribe tus comentarios"
                 android:textSize="18sp"
+                android:textColor="@color/black"
                 android:background="@drawable/edittext_background"
                 android:padding="12dp"
                 android:layout_marginBottom="16dp" />

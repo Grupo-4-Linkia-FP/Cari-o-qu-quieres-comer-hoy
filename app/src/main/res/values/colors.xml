@@ -11,7 +11,9 @@
         <color name="my_light_primary">#FF6F6F</color>
         <color name="my_light_primary_variant">#FF8A8A</color>
         <color name="my_light_secondary">#FCA5A5</color>
-        <color name="my_light_accent">#FFC107</color>
+    <color name="my_light_accent">#85FFFFFF</color>
+    <color name="favorite_color">#D4FF5722</color>
+    <color name="default_color">#D4FFF8D1</color>
 
     <!-- Colores modo claro -->
     <color name="colorPrimary">#6750A4</color>
@@ -28,6 +30,10 @@
 
     <color name="menuBackground">#FFFFFF</color> <!-- Fondo blanco -->
     <color name="menuTextColor">#000000</color> <!-- Texto negro -->
+    <color name="azul_claro">#9D80D4FF</color>
+    <color name="spinner_background_color">#85FBF7E6</color>
+
+    <color name="edittext_background_color">#B2FBF7E6</color> <!-- Color claro -->
 
 
 </resources>

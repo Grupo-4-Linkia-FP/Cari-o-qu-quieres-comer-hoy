@@ -1,8 +1,8 @@
 package com.example.cqqch.actividades;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -24,17 +24,19 @@ public class AjustesActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_base); // Configurar la base
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base); // Configurar la base
+
+
+        View acercaDeView = getLayoutInflater().inflate(R.layout.activity_ajustes, findViewById(R.id.content_frame)); // Inflar el layout específico
 
         setupNavigation(); // Configurar navegación de BaseActivity
-        getLayoutInflater().inflate(R.layout.activity_ajustes, findViewById(R.id.content_frame)); // Inflar el layout específico
 
         // Inicializar vistas
-        notificationsEnabled = findViewById(R.id.notifications_enabled);
-        notificationsMessages = findViewById(R.id.notifications_messages);
-        notificationsRecommendations = findViewById(R.id.notifications_recommendations);
-        deleteAccountButton = findViewById(R.id.delete_account_button);
+        notificationsEnabled = acercaDeView.findViewById(R.id.notifications_enabled);
+        notificationsMessages = acercaDeView.findViewById(R.id.notifications_messages);
+        notificationsRecommendations = acercaDeView.findViewById(R.id.notifications_recommendations);
+        deleteAccountButton = acercaDeView.findViewById(R.id.delete_account_button);
 
         // Cargar preferencias guardadas
         loadPreferences();
