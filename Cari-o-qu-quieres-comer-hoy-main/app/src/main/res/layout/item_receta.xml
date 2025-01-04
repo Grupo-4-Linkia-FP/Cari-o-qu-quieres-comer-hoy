@@ -1,0 +1,153 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/my_light_accent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Imagen representativa de la receta -->
+        <ImageView
+            android:id="@+id/receta_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/recipe_image_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/receta_description" />
+
+        <!-- Nombre de la receta -->
+        <TextView
+            android:id="@+id/receta_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/recipe_name"
+            android:fontFamily="@font/robotobold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon" />
+
+        <!-- Categoría -->
+        <TextView
+            android:id="@+id/receta_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/receta_name"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Ingredientes -->
+        <TextView
+            android:id="@+id/receta_ingredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredients"
+            android:textColor="#555555"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/receta_category"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toStartOf="@id/edit_icon" />
+
+        <!-- Tiempo de preparación -->
+        <TextView
+            android:id="@+id/receta_preparation_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/preparation_time"
+            android:textColor="#555555"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/receta_ingredients"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Puntuación -->
+        <TextView
+            android:id="@+id/receta_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:text="@string/rating"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/edit_icon"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintTop_toBottomOf="@id/receta_preparation_time" />
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/receta_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textColor="#555555"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/receta_rating"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Descripción  -->
+        <TextView
+            android:id="@+id/receta_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:textColor="#555555"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/receta_price"
+            app:layout_constraintStart_toEndOf="@id/receta_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <!-- Ícono de favorito -->
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/favorite"
+            android:src="@drawable/ic_heart_outline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Ícono de eliminar -->
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/delete"
+            app:layout_constraintTop_toBottomOf="@id/edit_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp" />
+
+        <!-- Ícono de editar -->
+        <ImageView
+            android:id="@+id/edit_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/edit"
+            app:layout_constraintTop_toBottomOf="@id/favorite_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

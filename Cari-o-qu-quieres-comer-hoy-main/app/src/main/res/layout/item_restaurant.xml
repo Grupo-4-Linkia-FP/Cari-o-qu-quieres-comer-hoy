@@ -1,0 +1,158 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/my_light_accent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Imagen a la izquierda -->
+        <ImageView
+            android:id="@+id/response_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/response_image_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvCanOrder" />
+
+        <!-- Nombre del restaurante -->
+        <TextView
+            android:id="@+id/restaurant_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_name"
+            android:layout_marginTop="6dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/robotobold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/response_image"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon" />
+
+        <!-- Dirección del restaurante -->
+        <TextView
+            android:id="@+id/restaurant_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textSize="16sp"
+            android:textColor="#555555"
+            android:fontFamily="@font/robotoregular"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_name"
+            app:layout_constraintStart_toEndOf="@id/response_image"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Categoría -->
+        <TextView
+            android:id="@+id/restaurant_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_address"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/restaurant_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_category"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Rating -->
+        <TextView
+            android:id="@+id/restaurant_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_price"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Comentario -->
+        <TextView
+            android:id="@+id/restaurant_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/comment"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_rating"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Se puede ir -->
+        <TextView
+            android:id="@+id/tvCanGo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/can_go"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/restaurant_comment"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Se puede pedir -->
+        <TextView
+            android:id="@+id/tvCanOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/can_order"
+            android:textSize="16sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="#555"
+            app:layout_constraintTop_toBottomOf="@id/tvCanGo"
+            app:layout_constraintStart_toEndOf="@id/response_image" />
+
+        <!-- Ícono de favorito -->
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/favorite"
+            android:src="@drawable/ic_heart_outline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Ícono de eliminar -->
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/delete"
+            app:layout_constraintTop_toBottomOf="@id/edit_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp" />
+
+        <!-- Ícono de editar -->
+        <ImageView
+            android:id="@+id/edit_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/edit"
+            app:layout_constraintTop_toBottomOf="@id/favorite_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

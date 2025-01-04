@@ -1,0 +1,171 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actividades.MenuPrincipal">
+
+    <!-- Texto principal -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotobold"
+        android:text="¡Hola! ¿Qué quieres comer hoy?"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Contenedor principal de botones, no cambia -->
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="726dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="26dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text">
+
+        <!-- Columna izquierda -->
+        <LinearLayout
+            android:id="@+id/left_column"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Botón IR -->
+            <LinearLayout
+                android:id="@+id/btn_ir_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_ir"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono IR"
+                    android:src="@drawable/ic_ir" />
+
+                <TextView
+                    android:id="@+id/btn_ir_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="IR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Botón COCINAR -->
+            <LinearLayout
+                android:id="@+id/btn_cocinar_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_cocinar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Cocinar"
+                    android:src="@drawable/ic_cocinar" />
+
+                <TextView
+                    android:id="@+id/btn_cocinar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="COCINAR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Columna derecha -->
+        <LinearLayout
+            android:id="@+id/right_column"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Botón PEDIR -->
+            <LinearLayout
+                android:id="@+id/btn_pedir_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_pedir"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Pedir"
+                    android:src="@drawable/ic_pedir" />
+
+                <TextView
+                    android:id="@+id/btn_pedir_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="PEDIR"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <!-- Botón ELIGE TÚ -->
+            <LinearLayout
+                android:id="@+id/btn_elige_tu_container"
+                android:layout_width="215dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/selector_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/icon_elige_tu"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Icono Elige Tú"
+                    android:src="@drawable/ic_elige_tu" />
+
+                <TextView
+                    android:id="@+id/btn_elige_tu_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robotobold"
+                    android:text="ELIGE TÚ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

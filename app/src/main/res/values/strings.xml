@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">CQQCH</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_main3">MainActivity3</string>
+    <string name="title_activity_nuevousuario">NuevousuarioActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="restaurant_name">Nombre de restaurante: </string>
+    <string name="address">Dirección: </string>
+    <string name="category">Categoría: </string>
+    <string name="price">Precio: </string>
+    <string name="rating">Nota: </string>
+    <string name="comment">Comentario: </string>
+    <string name="can_go">Se puede ir: </string>
+    <string name="can_order">Se puede pedir: </string>
+    <string name="favorite">Favorito</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="select_price">Selecciona Rango de Precio: </string>
+    <string name="select_category">Selecciona una Categoría: </string>
+    <string name="select_rest">Selecciona Restaurantes o Recetas</string>
+    <string name="response_image_description">Foto</string>
+    <string name="ingredients">Ingridientes: </string>
+    <string name="preparation_time">Tiempo de preparación: </string>
+    <string name="imagen_principal">Imagen principal</string>
+
+    <string name="recipe_image_description">Foto</string>
+    <string name="recipe_name">Nombre de receta: </string>
+    <string name="description">Descripción: </string>
+
+    <string name="comas"> Separar ingredientes con comas</string>
+    <string name="label_name">Nombre de la Receta:</string>
+    <string name="hint_name">Ej. Tarta de Manzana</string>
+    <string name="label_description">Descripción:</string>
+    <string name="hint_description">Breve descripción de la receta</string>
+    <string name="label_ingredients">Ingredientes:</string>
+    <string name="hint_ingredients">Ej. Harina, Azúcar, Manzanas</string>
+    <string name="label_preparation_time">Tiempo de preparación (min):</string>
+    <string name="hint_preparation_time">Ej. 30</string>
+    <string name="label_price">Precio estimado:</string>
+    <string name="hint_price">Ej. 10€</string>
+    <string name="label_rating">Nota (1-5):</string>
+    <string name="hint_rating">Ej. 4.5</string>
+
+
+    <!-- Strings Botones -->
+    <string name="guardar">Guardar</string>
+    <string name="volver">Volver</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="ver_restaurantes">Ver Restaurantes</string>
+    <string name="add_restaurante">Añadir Restaurante</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+    </string>
+</resources>

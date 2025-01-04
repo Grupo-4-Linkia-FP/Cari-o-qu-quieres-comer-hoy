@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Categorías para Restaurantes  -->
+    <string-array name="categorias_restaurantes">
+        <item></item>
+        <item>Italianos</item>
+        <item>Asiáticos</item>
+        <item>Chino</item>
+        <item>Japonés</item>
+        <item>Tailandés</item>
+        <item>Coreano</item>
+        <item>Mexicanos</item>
+        <item>Franceses</item>
+        <item>Griegos</item>
+        <item>Tapas y Pinchos</item>
+        <item>Comida Rápida</item>
+        <item>Casual</item>
+        <item>Gourmet o Alta Cocina</item>
+        <item>Vegano y Vegetariano</item>
+        <item>Temáticos</item>
+        <item>Buffet Libre</item>
+        <item>Barbacoas y Parrillas</item>
+        <item>Marisquerías</item>
+        <item>Pizzerías</item>
+        <item>Rosticerías</item>
+        <item>Regional Español</item>
+        <item>Andaluz</item>
+        <item>Gallego</item>
+        <item>Vasco</item>
+        <item>Catalán</item>
+    </string-array>
+
+    <!--  Categorías para Recetas  -->
+    <string-array name="categorias_recetas">
+        <item></item>
+        <item>Carne</item>
+        <item>Pescado y Marisco</item>
+        <item>Pasta y Arroces</item>
+        <item>Vegano y Vegetariano</item>
+        <item>Sopas y Cremas</item>
+        <item>Ensaladas</item>
+        <item>Postres y Repostería</item>
+        <item>Pan y Bollería</item>
+        <item>Platos Internacionales</item>
+        <item>Entrantes y Aperitivos</item>
+        <item>Salsas y Guarniciones</item>
+        <item>Desayunos y Brunch</item>
+        <item>Comida Rápida y Snacks</item>
+    </string-array>
+
+    <!--  Categorías para combinadas  -->
+    <string-array name="categorias_todas">
+        <item></item>
+        <item>Italianos</item>
+        <item>Asiáticos</item>
+        <item>Chino</item>
+        <item>Japonés</item>
+        <item>Tailandés</item>
+        <item>Coreano</item>
+        <item>Mexicanos</item>
+        <item>Franceses</item>
+        <item>Griegos</item>
+        <item>Tapas y Pinchos</item>
+        <item>Comida Rápida</item>
+        <item>Casual</item>
+        <item>Gourmet o Alta Cocina</item>
+        <item>Vegano y Vegetariano</item>
+        <item>Temáticos</item>
+        <item>Buffet Libre</item>
+        <item>Barbacoas y Parrillas</item>
+        <item>Marisquerías</item>
+        <item>Pizzerías</item>
+        <item>Rosticerías</item>
+        <item>Regional Español</item>
+        <item>Andaluz</item>
+        <item>Gallego</item>
+        <item>Vasco</item>
+        <item>Catalán</item>
+        <item>Carne</item>
+        <item>Pescado y Marisco</item>
+        <item>Pasta y Arroces</item>
+        <item>Vegano y Vegetariano</item>
+        <item>Sopas y Cremas</item>
+        <item>Ensaladas</item>
+        <item>Postres y Repostería</item>
+        <item>Pan y Bollería</item>
+        <item>Platos Internacionales</item>
+        <item>Entrantes y Aperitivos</item>
+        <item>Salsas y Guarniciones</item>
+        <item>Desayunos y Brunch</item>
+        <item>Comida Rápida y Snacks</item>
+    </string-array>
+
+    <!--  Opciones para el desplegable de Sí/No  -->
+    <string-array name="opciones_si_no">
+        <item></item>
+        <item>Si</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="tipo_restaurante_receta">
+        <item></item>
+        <item>Restaurantes</item>
+        <item>Recetas</item>
+    </string-array>
+    <string-array name="notas">
+        <item></item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="precios_rango">
+        <item></item>
+        <item>0 a 10</item>
+        <item>11 a 20</item>
+        <item>21 a 30</item>
+        <item>31 a 40</item>
+        <item>41 a 50</item>
+        <item>51 a 60</item>
+        <item>61 a 70</item>
+        <item>71 a 80</item>
+        <item>81 a 90</item>
+        <item>91 a 100</item>
+    </string-array>
+    <string-array name="tipos_restaurantes_recetas">
+        <item></item>
+        <item>Ir</item>
+        <item>Pedir</item>
+        <item>Recetas</item>
+    </string-array>
+    <!--  Rangos de Precio  -->
+    <string-array name="rangos_precio">
+        <item></item>
+        <item>0 a 10</item>
+        <item>11 a 20</item>
+        <item>21 a 30</item>
+        <item>31 a 40</item>
+        <item>41 a 50</item>
+        <item>51 a 60</item>
+        <item>61 a 70</item>
+        <item>71 a 80</item>
+        <item>81 a 90</item>
+        <item>91 a 100</item>
+    </string-array>
+</resources>

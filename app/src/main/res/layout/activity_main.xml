@@ -1,0 +1,73 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
+    tools:context=".actividades.MainActivity">
+
+    <!-- Icono -->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:contentDescription="Icono de aplicación"
+        android:src="@drawable/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="58dp" />
+
+    <!-- Texto principal -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="366dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/robotobold"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="CARIÑO\nQUÉ QUIERES COMER HOY"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_icon" />
+
+
+    <!-- Botón de registrarse -->
+    <Button
+        android:id="@+id/btnRegistrarse"
+        android:layout_width="284dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/selector_button"
+        android:fontFamily="@font/robotoregular"
+        android:text="Registrarse"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <!-- Texto de iniciar sesión -->
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="284dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="30dp"
+        android:text="Iniciar sesión"
+        android:background="@drawable/selector_button"
+        android:fontFamily="@font/robotoregular"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegistrarse"
+        app:layout_constraintWidth_percent="0.6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

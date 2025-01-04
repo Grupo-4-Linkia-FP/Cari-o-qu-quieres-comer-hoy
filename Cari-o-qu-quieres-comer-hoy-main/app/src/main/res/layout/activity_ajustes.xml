@@ -1,0 +1,95 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    tools:context=".actividades.AjustesActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajustes"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="44dp"
+            android:textColor="?attr/colorOnBackground" />
+
+        <!-- Preferencias de Notificación -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notificaciones"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="?attr/colorOnBackground" />
+
+        <CheckBox
+            android:id="@+id/notifications_enabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activar notificaciones"
+            android:checked="true"
+            android:textColor="?attr/colorOnBackground"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipos de notificaciones"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="?attr/colorOnBackground" />
+
+        <CheckBox
+            android:id="@+id/notifications_messages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mensajes"
+            android:checked="true"
+            android:textColor="?attr/colorOnBackground" />
+
+        <CheckBox
+            android:id="@+id/notifications_recommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recomendaciones"
+            android:checked="true"
+            android:textColor="?attr/colorOnBackground"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Eliminar cuenta -->
+        <TextView
+            android:id="@+id/tvCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cuenta"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="?attr/colorOnBackground" />
+
+        <Button
+            android:id="@+id/delete_account_button"
+            android:layout_width="266dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Eliminar cuenta"
+            android:textSize="22sp"
+            android:textAllCaps="false"
+            android:background="@drawable/selector_button"
+            app:layout_constraintTop_toBottomOf="@id/tvCuenta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </LinearLayout>
+</ScrollView>
