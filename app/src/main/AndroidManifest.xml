@@ -28,6 +28,12 @@
             android:name=".actividades.EditRestaurantActivity"
             android:exported="false" />
         <activity
+            android:name=".actividades.EditRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.EditRestaurantActivity"
+            android:exported="false" />
+        <activity
             android:name=".actividades.AcercaDeActivity"
             android:exported="false" />
         <activity
