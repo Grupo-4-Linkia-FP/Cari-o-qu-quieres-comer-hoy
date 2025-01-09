@@ -1,6 +1,5 @@
 package com.example.cqqch.actividades;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +24,8 @@ public class AjustesActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_base); // Configurar la base
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base); // Configurar la base
 
 
         View acercaDeView = getLayoutInflater().inflate(R.layout.activity_ajustes, findViewById(R.id.content_frame)); // Inflar el layout específico

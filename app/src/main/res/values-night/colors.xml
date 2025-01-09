@@ -14,5 +14,7 @@
     <color name="menuTextColor">#FFFFFF</color> <!-- Texto blanco -->
     <color name="colorBackground">#000000</color> <!-- Fondo general negro -->
     <color name="colorOnBackground">#FFFFFF</color>
+    <color name="spinner_background_color">#DAAF3C4E</color>
+    <color name="edittext_background_color">#DAAF3C4E</color>
 
 </resources>

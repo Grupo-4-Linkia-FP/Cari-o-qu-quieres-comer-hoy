@@ -48,7 +48,8 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/receta_name"
             app:layout_constraintStart_toEndOf="@id/receta_image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon"/>
 
         <!-- Ingredientes -->
         <TextView
@@ -74,7 +75,8 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/receta_ingredients"
             app:layout_constraintStart_toEndOf="@id/receta_image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon"/>
 
         <!-- Puntuación -->
         <TextView
@@ -100,7 +102,8 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/receta_rating"
             app:layout_constraintStart_toEndOf="@id/receta_image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon"/>
 
         <!-- Descripción  -->
         <TextView
@@ -113,7 +116,8 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/receta_price"
             app:layout_constraintStart_toEndOf="@id/receta_image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favorite_icon"/>
 
 
         <!-- Ícono de favorito -->

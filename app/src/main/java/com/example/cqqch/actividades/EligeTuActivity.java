@@ -101,7 +101,7 @@ public class EligeTuActivity extends BaseActivity {
 
         ArrayAdapter<CharSequence> adapterCategorias = ArrayAdapter.createFromResource(
                 this,
-                R.array.categorias_recetas,
+                R.array.categorias_todas,
                 android.R.layout.simple_spinner_item
         );
         adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -140,8 +140,9 @@ public class EligeTuActivity extends BaseActivity {
 
         String tipoSeleccionado = spTipo.getSelectedItem().toString().trim();
         if (tipoSeleccionado.isEmpty()) {
-            // Si está vacío por alguna razón, lo forzamos a "Restaurantes"
-            tipoSeleccionado = "Restaurantes";
+            // Selección aleatoria entre "Ir", "Pedir" y "Recetas"
+            String[] opciones = {"Ir", "Pedir", "Recetas"};
+            tipoSeleccionado = opciones[(int) (Math.random() * opciones.length)];
         }
 
         String categoriaSeleccionada = spCategoria.getSelectedItem().toString().trim();
@@ -171,39 +172,44 @@ public class EligeTuActivity extends BaseActivity {
             precioSeleccionado = null;
         }
 
-        if (tipoSeleccionado.equals("Restaurantes")) {
-            cargarRestaurantes(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
-        } else {
-            cargarRecetas(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
+        switch (tipoSeleccionado) {
+            case "Ir":
+                cargarOpcionesIr(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
+                break;
+            case "Pedir":
+                cargarOpcionesPedir(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
+                break;
+
+            case "Recetas":
+                cargarRecetas(categoriaSeleccionada, favoritoBool, notaSeleccionada, precioSeleccionado);
+                break;
+
+            default:
+                Toast.makeText(this, "Opción no válida", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void cargarRestaurantes(String categoria, Boolean favorito, int nota, String precio) {
+
+    private void cargarOpcionesIr(String categoria, Boolean favorito, int nota, String precio) {
         listaRestaurantes.clear();
         database.child("Restaurantes").child(user.getUid())
                 .get()
                 .addOnSuccessListener(snapshot -> {
+                    List<Restaurant> tempLista = new ArrayList<>();
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Restaurant restaurant = data.getValue(Restaurant.class);
                         if (restaurant != null) {
-                            // Filtro categoría
-                            if (categoria != null && !restaurant.getCategory().equals(categoria)) {
-                                continue;
-                            }
-                            // Filtro favorito
-                            if (favorito != null && restaurant.isFavorite() != favorito) {
-                                continue;
-                            }
-                            // Filtro nota
-                            if (nota != 0 && restaurant.getRating() != nota) {
-                                continue;
-                            }
-                            // Filtro precio
-                            if (precio != null && !cumpleRangoPrecio(restaurant.getPrice(), precio)) {
-                                continue;
-                            }
-                            listaRestaurantes.add(restaurant);
+                            if (!restaurant.isCanGo()) continue; // Solo restaurantes para "Ir"
+                            if (categoria != null && !restaurant.getCategory().equals(categoria)) continue;
+                            if (favorito != null && restaurant.isFavorite() != favorito) continue;
+                            if (nota != 0 && restaurant.getRating() != nota) continue;
+                            if (precio != null && !cumpleRangoPrecio(restaurant.getPrice(), precio)) continue;
+                            tempLista.add(restaurant);
                         }
+                    }
+
+                    if (!tempLista.isEmpty()) {
+                        listaRestaurantes.add(tempLista.get((int) (Math.random() * tempLista.size())));
                     }
 
                     restauranteAdapter = new RestaurantAdapter(
@@ -215,7 +221,43 @@ public class EligeTuActivity extends BaseActivity {
                     rvResultadosFiltro.setAdapter(restauranteAdapter);
 
                     if (listaRestaurantes.isEmpty()) {
-                        Toast.makeText(this, "No se encontraron resultados", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "No se encontraron resultados para 'Ir'", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void cargarOpcionesPedir(String categoria, Boolean favorito, int nota, String precio) {
+        listaRestaurantes.clear();
+        database.child("Restaurantes").child(user.getUid())
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    List<Restaurant> tempLista = new ArrayList<>();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Restaurant restaurant = data.getValue(Restaurant.class);
+                        if (restaurant != null) {
+                            if (!restaurant.isCanOrder()) continue; // Solo restaurantes para "Pedir"
+                            if (categoria != null && !restaurant.getCategory().equals(categoria)) continue;
+                            if (favorito != null && restaurant.isFavorite() != favorito) continue;
+                            if (nota != 0 && restaurant.getRating() != nota) continue;
+                            if (precio != null && !cumpleRangoPrecio(restaurant.getPrice(), precio)) continue;
+                            tempLista.add(restaurant);
+                        }
+                    }
+
+                    if (!tempLista.isEmpty()) {
+                        listaRestaurantes.add(tempLista.get((int) (Math.random() * tempLista.size())));
+                    }
+
+                    restauranteAdapter = new RestaurantAdapter(
+                            listaRestaurantes,
+                            this::onFavoriteClicked,
+                            this::onDeleteClicked,
+                            this::onEditClicked
+                    );
+                    rvResultadosFiltro.setAdapter(restauranteAdapter);
+
+                    if (listaRestaurantes.isEmpty()) {
+                        Toast.makeText(this, "No se encontraron resultados para 'Pedir'", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -225,6 +267,7 @@ public class EligeTuActivity extends BaseActivity {
         database.child("Recetas").child(user.getUid())
                 .get()
                 .addOnSuccessListener(snapshot -> {
+                    List<Receta> tempLista = new ArrayList<>(); // Lista temporal
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Receta receta = data.getValue(Receta.class);
                         if (receta != null) {
@@ -244,8 +287,13 @@ public class EligeTuActivity extends BaseActivity {
                             if (precio != null && !cumpleRangoPrecio(receta.getPrice(), precio)) {
                                 continue;
                             }
-                            listaRecetas.add(receta);
+                            tempLista.add(receta); // Agregar a la lista temporal
                         }
+                    }
+
+                    if (!tempLista.isEmpty()) {
+                        Receta randomReceta = tempLista.get((int) (Math.random() * tempLista.size())); // Seleccionar uno aleatorio
+                        listaRecetas.add(randomReceta);
                     }
 
                     recetaAdapter = new RecetaAdapter(

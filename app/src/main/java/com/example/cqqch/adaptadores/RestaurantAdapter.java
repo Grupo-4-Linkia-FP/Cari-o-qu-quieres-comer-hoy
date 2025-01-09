@@ -1,5 +1,9 @@
 package com.example.cqqch.adaptadores;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,12 +46,47 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         holder.name.setText(restaurant.getName());
         holder.address.setText(restaurant.getAddress());
-        holder.category.setText("Categoría: " + restaurant.getCategory());
-        holder.price.setText("Precio: " + restaurant.getPrice() + "€");
-        holder.rating.setText("Rating: " + restaurant.getRating());
-        holder.comment.setText("Comentario: " + restaurant.getComment());
-        holder.tvCanGo.setText("Se puede ir: " + (restaurant.isCanGo() ? "Sí" : "No"));
-        holder.tvCanOrder.setText("Se puede pedir: " + (restaurant.isCanOrder() ? "Sí" : "No"));
+        // Categoría
+        String tituloCategoria = "Categoría: ";
+        String contenidoCategoria = restaurant.getCategory();
+        SpannableString spannableCategoria = new SpannableString(tituloCategoria + contenidoCategoria);
+        spannableCategoria.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloCategoria.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.category.setText(spannableCategoria);
+
+        // Precio
+        String tituloPrecio = "Precio: ";
+        String contenidoPrecio = restaurant.getPrice() + "€";
+        SpannableString spannablePrecio = new SpannableString(tituloPrecio + contenidoPrecio);
+        spannablePrecio.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloPrecio.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.price.setText(spannablePrecio);
+
+        // Rating
+        String tituloRating = "Rating: ";
+        String contenidoRating = String.format("%.1f", restaurant.getRating());
+        SpannableString spannableRating = new SpannableString(tituloRating + contenidoRating);
+        spannableRating.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloRating.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.rating.setText(spannableRating);
+
+        // Comentario
+        String tituloComentario = "Comentario: ";
+        String contenidoComentario = restaurant.getComment();
+        SpannableString spannableComentario = new SpannableString(tituloComentario + contenidoComentario);
+        spannableComentario.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloComentario.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.comment.setText(spannableComentario);
+
+        // Se puede ir
+        String tituloCanGo = "Se puede ir: ";
+        String contenidoCanGo = restaurant.isCanGo() ? "Sí" : "No";
+        SpannableString spannableCanGo = new SpannableString(tituloCanGo + contenidoCanGo);
+        spannableCanGo.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloCanGo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.tvCanGo.setText(spannableCanGo);
+
+        // Se puede pedir
+        String tituloCanOrder = "Se puede pedir: ";
+        String contenidoCanOrder = restaurant.isCanOrder() ? "Sí" : "No";
+        SpannableString spannableCanOrder = new SpannableString(tituloCanOrder + contenidoCanOrder);
+        spannableCanOrder.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloCanOrder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.tvCanOrder.setText(spannableCanOrder);
 
         // Asignar la imagen basada en las respuestas
         int imageResource = getImageBasedOnAnswers(restaurant.isCanGo(), restaurant.isCanOrder());

@@ -7,201 +7,220 @@
     android:padding="16dp"
     tools:context=".actividades.EditRecipeActivity">
 
-    <!-- Etiqueta para Nombre de la receta -->
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_name"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- ScrollView para habilitar desplazamiento -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- Nombre de la receta -->
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/hint_name"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!-- Etiqueta para Descripción -->
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/description"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etRating"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Nombre de la receta -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_name"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Descripción de la receta -->
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/hint_description"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Nombre de la receta -->
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/hint_name"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Etiqueta para Ingredientes -->
-    <TextView
-        android:id="@+id/tvIngredients"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/ingredients"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/spCategory"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Categoría -->
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/category"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/etName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Ingredientes -->
-    <EditText
-        android:id="@+id/etIngredients"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/comas"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvIngredients"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Categoría (Spinner) -->
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvCategory"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Etiqueta para Tiempo de preparación -->
-    <TextView
-        android:id="@+id/tvPreparationTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_preparation_time"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etIngredients"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Ingredientes -->
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_ingredients"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/spCategory"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tiempo de preparación -->
-    <EditText
-        android:id="@+id/etPreparationTime"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/hint_preparation_time"
-        android:inputType="number"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvPreparationTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Ingredientes -->
+            <EditText
+                android:id="@+id/etIngredients"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/comas"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvIngredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Etiqueta para Precio -->
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_price"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etPreparationTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Tiempo de preparación -->
+            <TextView
+                android:id="@+id/tvPreparationTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_preparation_time"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/etIngredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Precio -->
-    <EditText
-        android:id="@+id/etPrice"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/hint_price"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Tiempo de preparación -->
+            <EditText
+                android:id="@+id/etPreparationTime"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/hint_preparation_time"
+                android:layout_marginTop="6dp"
+                android:inputType="number"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvPreparationTime"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Etiqueta para Nota -->
-    <TextView
-        android:id="@+id/tvRating"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_rating"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Precio -->
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_price"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/etPreparationTime"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Nota -->
-    <EditText
-        android:id="@+id/etRating"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:hint="@string/hint_rating"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvRating"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Precio -->
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/hint_price"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Etiqueta para Categoría -->
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/category"
-        android:textSize="18sp"
-        android:fontFamily="@font/robotobold"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Etiqueta para Nota -->
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_rating"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/etPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Categoría (Spinner) -->
-    <Spinner
-        android:id="@+id/spCategory"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_background"
-        app:layout_constraintTop_toBottomOf="@id/tvCategory"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Nota -->
+            <EditText
+                android:id="@+id/etRating"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/hint_rating"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvRating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Etiqueta para Descripción -->
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_description"
+                android:textSize="20sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintTop_toBottomOf="@id/etRating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Guardar -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="266dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/guardar"
-        android:textSize="22sp"
-        android:textAllCaps="false"
-        android:background="@drawable/selector_button"
-        app:layout_constraintTop_toBottomOf="@id/etDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Descripción -->
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="@string/hint_description"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_background"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Botón Guardar -->
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="266dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/guardar"
+                android:textSize="22sp"
+                android:textAllCaps="false"
+                android:background="@drawable/selector_button"
+                app:layout_constraintTop_toBottomOf="@id/etDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

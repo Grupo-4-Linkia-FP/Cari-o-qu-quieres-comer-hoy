@@ -1,5 +1,6 @@
 package com.example.cqqch.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,21 @@ import android.widget.Toast;
 
 import com.example.cqqch.R;
 import com.example.cqqch.base.BaseActivity;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.android.libraries.places.api.model.Place.Field;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddRestaurantActivity extends BaseActivity {
@@ -43,6 +53,11 @@ public class AddRestaurantActivity extends BaseActivity {
         database = FirebaseDatabase.getInstance().getReference();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        // Inicializa Google Places
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyBXRYteELnxnpd4IZqpiuQUIdsgsPaFEBU");
+        }
+
         // Vincula las vistas
         etNombre = addRestaurantView.findViewById(R.id.etNombreRestaurante);
         etDireccion = addRestaurantView.findViewById(R.id.etDireccionRestaurante);
@@ -67,11 +82,34 @@ public class AddRestaurantActivity extends BaseActivity {
         spSePuedeIr.setAdapter(yesNoAdapter);
         spSePuedePedir.setAdapter(yesNoAdapter);
 
+        // Configura el campo de dirección para abrir el autocompletado
+        etDireccion.setOnClickListener(v -> {
+            List<Field> fields = Arrays.asList(Field.ID, Field.NAME, Field.ADDRESS, Field.LAT_LNG);
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                    .build(this);
+            startActivityForResult(intent, 100);
+        });
+
         // Evento clic para guardar restaurante
         btnGuardar.setOnClickListener(v -> guardarRestaurante());
 
         // Evento clic para volver a la pantalla anterior sin guardar
         btnVolver.setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                etDireccion.setText(place.getAddress());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Toast.makeText(this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void guardarRestaurante() {

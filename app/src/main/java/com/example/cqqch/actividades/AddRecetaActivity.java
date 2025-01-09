@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.cqqch.R;
 import com.example.cqqch.base.BaseActivity;
-import com.example.cqqch.modelos.Receta;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +43,7 @@ public class AddRecetaActivity extends BaseActivity {
         database = FirebaseDatabase.getInstance().getReference();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // 4) Vincula las vistas
+        // Vincula las vistas
         etNombreReceta = addRecetaView.findViewById(R.id.etNombreReceta);
         etIngredientes = addRecetaView.findViewById(R.id.etIngredientesReceta);
         etTiempoPreparacion = addRecetaView.findViewById(R.id.etTiempoPreparacion);
@@ -55,7 +54,7 @@ public class AddRecetaActivity extends BaseActivity {
         btnGuardar = addRecetaView.findViewById(R.id.btnGuardarReceta);
         Button btnVolver = addRecetaView.findViewById(R.id.btnVolverMenuReceta);
 
-        // 5) Configura el Spinner de categorías
+        // Configura el Spinner de categorías
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.categorias_recetas,
@@ -73,13 +72,13 @@ public class AddRecetaActivity extends BaseActivity {
      * Crea una nueva receta en Firebase con un ID único generado por push().
      */
     private void guardarReceta() {
-        // 1) Verificamos que el usuario esté autenticado
+        // Verificamos que el usuario esté autenticado
         if (currentUser == null) {
             Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // 2) Obtenemos los valores del formulario
+        // Obtenemos los valores del formulario
         String nombre = etNombreReceta.getText().toString().trim();
         String ingredientes = etIngredientes.getText().toString().trim();
         String tiempoPrepStr = etTiempoPreparacion.getText().toString().trim();
@@ -88,7 +87,7 @@ public class AddRecetaActivity extends BaseActivity {
         String descripcion = etDescripcion.getText().toString().trim();
         String categoria = spCategoriaReceta.getSelectedItem().toString();
 
-        // 3) Validamos campos obligatorios
+        // Validamos campos obligatorios
         if (nombre.isEmpty() || ingredientes.isEmpty() ||
                 tiempoPrepStr.isEmpty() || puntuacionStr.isEmpty() ||
                 descripcion.isEmpty()) {
@@ -96,7 +95,7 @@ public class AddRecetaActivity extends BaseActivity {
             return;
         }
 
-        // 4) Parseamos y validamos tiempo de preparación
+        // Parseamos y validamos tiempo de preparación
         int tiempoPreparacion;
         try {
             tiempoPreparacion = Integer.parseInt(tiempoPrepStr);
@@ -109,7 +108,7 @@ public class AddRecetaActivity extends BaseActivity {
             return;
         }
 
-        // 5) Parseamos y validamos puntuación
+        // Parseamos y validamos puntuación
         double puntuacion;
         try {
             puntuacion = Double.parseDouble(puntuacionStr);
@@ -122,7 +121,7 @@ public class AddRecetaActivity extends BaseActivity {
             return;
         }
 
-        // 6) Construimos el mapa de datos
+        // Construimos el mapa de datos
         Map<String, Object> recetaData = new HashMap<>();
         // Genera la clave (ID único) con push()
         String userId = currentUser.getUid();

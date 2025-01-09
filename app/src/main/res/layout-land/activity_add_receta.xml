@@ -4,121 +4,165 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividades.EligeTuActivity">
+    android:clipToPadding="false"
+    tools:context=".actividades.AddRecetaActivity">
 
-    <!-- Layout principal horizontal -->
+    <!-- Layout horizontal dividido en dos secciones -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:padding="16dp">
 
-        <!-- Imagen principal a la izquierda -->
+        <!-- Imagen superior a la izquierda -->
         <ImageView
-            android:id="@+id/main_image"
-            android:layout_width="260dp"
-            android:layout_height="199dp"
+            android:id="@+id/header_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_eligetu"
+            android:src="@drawable/img_pareja_cocinando"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintEnd_toStartOf="@id/form_container"
+            app:layout_constraintDimensionRatio="4:3"
+            android:layout_marginEnd="16dp" />
 
-        <!-- ScrollView con el formulario y botones a la derecha -->
+        <!-- Formulario a la derecha -->
         <ScrollView
+            android:id="@+id/form_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toEndOf="@id/main_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="16dp">
+            app:layout_constraintStart_toEndOf="@id/header_image"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingTop="24dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:showDividers="middle">
 
-                <!-- Spinner Tipo -->
+                <!-- Nombre de la Receta -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selecciona Ir, Pedir o Recetas"
-                    android:textSize="18sp"
+                    android:text="@string/label_name"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
-                <Spinner
-                    android:id="@+id/spTipo"
+                <EditText
+                    android:id="@+id/etNombreReceta"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/spinner_background"
-                    android:layout_marginBottom="16dp" />
+                    android:hint="@string/hint_name"
+                    android:textSize="20sp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Spinner Categoría -->
+                <!-- Categoría -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selecciona una Categoría"
-                    android:textSize="18sp"
+                    android:text="@string/category"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
                 <Spinner
-                    android:id="@+id/spCategoria"
+                    android:id="@+id/spCategoriaReceta"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/spinner_background"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Spinner Favorito -->
+                <!-- Ingredientes -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Favorito (Sí/No)"
-                    android:textSize="18sp"
+                    android:text="@string/label_ingredients"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
-                <Spinner
-                    android:id="@+id/spFavorito"
+                <EditText
+                    android:id="@+id/etIngredientesReceta"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/spinner_background"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_height="70dp"
+                    android:hint="@string/hint_ingredients"
+                    android:textSize="18sp"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Spinner Nota -->
+                <!-- Tiempo de Preparación -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selecciona Nota (1-5)"
-                    android:textSize="18sp"
+                    android:text="@string/label_preparation_time"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
-                <Spinner
-                    android:id="@+id/spNota"
+                <EditText
+                    android:id="@+id/etTiempoPreparacion"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/spinner_background"
-                    android:layout_marginBottom="16dp" />
+                    android:hint="@string/hint_preparation_time"
+                    android:textSize="16sp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Spinner Precio -->
+                <!-- Precio Estimado -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selecciona Rango de Precio"
-                    android:textSize="18sp"
+                    android:text="@string/label_price"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="8dp" />
 
-                <Spinner
-                    android:id="@+id/spPrecio"
+                <EditText
+                    android:id="@+id/etPrecioReceta"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/spinner_background"
+                    android:hint="@string/hint_price"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Descripción -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_description"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etDescripcionReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/hint_description"
+                    android:textSize="18sp"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
                     android:layout_marginBottom="16dp" />
 
                 <!-- Botones -->
@@ -134,7 +178,7 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:text="Mostrar"
+                        android:text="@string/guardar"
                         android:textSize="22sp"
                         android:textAllCaps="false"
                         android:background="@drawable/selector_button"
@@ -149,23 +193,13 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
-                        android:text="Volver"
+                        android:text="@string/volver"
                         android:textSize="22sp"
                         android:textAllCaps="false"
                         android:background="@drawable/selector_button"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
-
-                <!-- RecyclerView -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvResultadosFiltro"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:scrollbars="vertical"
-                    android:layout_marginTop="16dp" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

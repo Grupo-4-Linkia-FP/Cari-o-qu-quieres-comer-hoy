@@ -63,22 +63,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contáctanos: grupoproyectodamgrupo4@gmail.com"
-            android:textColor="@color/link_color"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="16sp"
+            android:fontFamily="@font/robotobold"
             android:layout_marginBottom="8dp"
             android:gravity="center" />
 
         <!-- Botón de Volver -->
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="266dp"
+            android:layout_height="55dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/selector_button"
             android:text="Volver"
-            android:textSize="18sp"
-            android:textColor="?attr/colorOnBackground"
-            app:layout_constraintWidth_percent="0.6" />
+            android:fontFamily="@font/robotobold"
+            android:textSize="22sp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 </ScrollView>

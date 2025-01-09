@@ -20,13 +20,13 @@ public class SelectImagePerfilActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_base);
         super.onCreate(savedInstanceState);
-
-        setupNavigation();
+        setContentView(R.layout.activity_base);
 
         // Infla el layout específico de perfil dentro del content_frame del layout base
         View perfilView = getLayoutInflater().inflate(R.layout.activity_select_image_perfil, findViewById(R.id.content_frame), true);
+
+        setupNavigation();
 
         img1 = perfilView.findViewById(R.id.img_perfil_1);
         img2 = perfilView.findViewById(R.id.img_perfil_2);

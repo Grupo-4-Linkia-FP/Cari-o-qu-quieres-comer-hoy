@@ -1,11 +1,10 @@
 package com.example.cqqch.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-import android.content.Intent;
-
 import com.example.cqqch.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +15,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Verificar si el usuario ya inició sesión
+        SharedPreferences sharedPreferences = getSharedPreferences("UsuarioPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            // Redirigir directamente a la pantalla principal
+            startActivity(new Intent(MainActivity.this, MenuPrincipal.class));
+            finish(); // Evita que el usuario regrese a esta pantalla
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         // Vincula los elementos del layout
