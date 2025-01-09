@@ -30,9 +30,6 @@ public class AjustesActivity extends BaseActivity {
 
         View acercaDeView = getLayoutInflater().inflate(R.layout.activity_ajustes, findViewById(R.id.content_frame)); // Inflar el layout específico
 
-
-        View acercaDeView = getLayoutInflater().inflate(R.layout.activity_ajustes, findViewById(R.id.content_frame)); // Inflar el layout específico
-
         setupNavigation(); // Configurar navegación de BaseActivity
 
         // Inicializar vistas

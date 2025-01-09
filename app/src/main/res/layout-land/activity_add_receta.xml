@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    tools:context=".actividades.AddRecetaActivity">
+
+    <!-- Layout horizontal dividido en dos secciones -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Imagen superior a la izquierda -->
+        <ImageView
+            android:id="@+id/header_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_pareja_cocinando"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/form_container"
+            app:layout_constraintDimensionRatio="4:3"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Formulario a la derecha -->
+        <ScrollView
+            android:id="@+id/form_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/header_image"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="24dp"
+                android:paddingBottom="16dp"
+                android:showDividers="middle">
+
+                <!-- Nombre de la Receta -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_name"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etNombreReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/hint_name"
+                    android:textSize="20sp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Categoría -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <Spinner
+                    android:id="@+id/spCategoriaReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/spinner_background"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Ingredientes -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_ingredients"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etIngredientesReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="@string/hint_ingredients"
+                    android:textSize="18sp"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Tiempo de Preparación -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_preparation_time"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etTiempoPreparacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/hint_preparation_time"
+                    android:textSize="16sp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Precio Estimado -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_price"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etPrecioReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="@string/hint_price"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Descripción -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_description"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/etDescripcionReceta"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/hint_description"
+                    android:textSize="18sp"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Botones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <Button
+                        android:id="@+id/btnGuardarReceta"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="@string/guardar"
+                        android:textSize="22sp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/selector_button"
+                        android:textColor="@android:color/white" />
+
+                    <View
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/btnVolverMenuReceta"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="@string/volver"
+                        android:textSize="22sp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/selector_button"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
