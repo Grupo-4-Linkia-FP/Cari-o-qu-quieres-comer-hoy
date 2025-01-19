@@ -1,4 +1,4 @@
-# CQQCH - Cariño, ¿Qué Quieres Comer Hoy? 🍽️
+# CQQCH - Cari, ¿Qué Quieres Comer Hoy? 🍽️
 
 CQQCH es una aplicación desarrollada en **Android Studio** con el lenguaje **Java**, diseñada para ayudar a los usuarios a gestionar sus opciones culinarias, incluyendo restaurantes y recetas favoritas. La aplicación permite tomar decisiones rápidas y centralizar toda la información relacionada con la comida en un solo lugar. La aplicación utiliza **Firebase** como backend, aprovechando tanto **Authentication** para gestionar usuarios como **Realtime Database** para almacenar y sincronizar los datos.
 
@@ -55,7 +55,7 @@ Las recetas añadidas por el usuario se muestran en una lista con todos los deta
 - **Funcionamiento:** Al marcar un restaurante o receta como favorito, la información se almacena automáticamente en **Firebase**.
 - **Visualización:** Existe un apartado exclusivo para mostrar solo favoritos.
 
-#### 🎲 **2. Funcionalidad "Cariño, elige tú"**
+#### 🎲 **2. Funcionalidad "Cari, elige tú"**
 - **Descripción:** Herramienta para usuarios indecisos que permite filtrar y seleccionar un restaurante o receta según preferencias.
 - **Filtros disponibles:**
   - Restaurantes o recetas.
