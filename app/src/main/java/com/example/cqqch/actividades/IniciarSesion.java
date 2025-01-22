@@ -17,6 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
+/**
+ * Actividad para manejar el inicio de sesión del usuario.
+ * Incluye validación de credenciales, inicio de sesión y recuperación de contraseña.
+ */
 public class IniciarSesion extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -24,6 +28,12 @@ public class IniciarSesion extends AppCompatActivity {
     private Button btnIniciarSesion;
     private TextView forgotPasswordLink;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura la interfaz, inicializa Firebase y define las acciones de los botones.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +48,7 @@ public class IniciarSesion extends AppCompatActivity {
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         forgotPasswordLink = findViewById(R.id.forgot_password);
 
-        // Botón para iniciar sesión
+        // Configura el botón de iniciar sesión
         btnIniciarSesion.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
@@ -48,7 +58,7 @@ public class IniciarSesion extends AppCompatActivity {
             }
         });
 
-        // Enlace para recuperar contraseña
+        // Configura el enlace para recuperar contraseña
         forgotPasswordLink.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             if (TextUtils.isEmpty(email)) {
@@ -61,6 +71,13 @@ public class IniciarSesion extends AppCompatActivity {
         });
     }
 
+    /**
+     * Valida los campos de entrada de correo y contraseña.
+     *
+     * @param email Correo ingresado por el usuario.
+     * @param password Contraseña ingresada por el usuario.
+     * @return `true` si los campos son válidos, `false` en caso contrario.
+     */
     private boolean validateInputs(String email, String password) {
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Por favor ingresa tu correo", Toast.LENGTH_SHORT).show();
@@ -77,10 +94,22 @@ public class IniciarSesion extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Verifica si un correo tiene un formato válido.
+     *
+     * @param email Correo a validar.
+     * @return `true` si el correo es válido, `false` en caso contrario.
+     */
     private boolean esEmailValido(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    /**
+     * Intenta iniciar sesión con las credenciales proporcionadas.
+     *
+     * @param email Correo del usuario.
+     * @param password Contraseña del usuario.
+     */
     private void loginUsuario(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -101,6 +130,11 @@ public class IniciarSesion extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Maneja los errores de autenticación y muestra mensajes al usuario.
+     *
+     * @param exception Excepción capturada durante el inicio de sesión.
+     */
     private void manejarErroresDeAutenticacion(Exception exception) {
         if (exception instanceof FirebaseAuthInvalidUserException) {
             Toast.makeText(this, "No existe una cuenta asociada a este correo", Toast.LENGTH_SHORT).show();
@@ -111,6 +145,9 @@ public class IniciarSesion extends AppCompatActivity {
         }
     }
 
+    /**
+     * Muestra un cuadro de diálogo para ingresar el correo en caso de olvido de contraseña.
+     */
     private void showEmailInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Recuperar Contraseña");
@@ -132,6 +169,11 @@ public class IniciarSesion extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Envía un correo de recuperación de contraseña al usuario.
+     *
+     * @param email Correo del usuario.
+     */
     private void recuperarPassword(String email) {
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {

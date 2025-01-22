@@ -19,27 +19,40 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Actividad para añadir una nueva receta a la base de datos de Firebase.
+ * Permite al usuario ingresar detalles de la receta y guardarlos en la base de datos bajo su ID de usuario.
+ */
 public class AddRecetaActivity extends BaseActivity {
 
+    // Elementos de la interfaz
     private EditText etNombreReceta, etIngredientes, etTiempoPreparacion, etPuntuacion, etPrecio, etDescripcion;
     private Spinner spCategoriaReceta;
     private Button btnGuardar;
+
+    // Referencia a Firebase
     private DatabaseReference database;
     private FirebaseUser currentUser;
 
+    /**
+     * Método llamado cuando la actividad se crea.
+     * Configura la interfaz de usuario, inicializa Firebase y configura los listeners de los botones.
+     *
+     * @param savedInstanceState El estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // 1) Infla el layout específico dentro de content_frame
+        // Infla el layout específico dentro de content_frame
         ViewGroup contentFrame = findViewById(R.id.content_frame);
         View addRecetaView = getLayoutInflater().inflate(R.layout.activity_add_receta, contentFrame, true);
 
-        // 2) Configura la navegación
+        // Configura la navegación
         setupNavigation();
 
-        // 3) Inicializa Firebase
+        // Inicializa Firebase
         database = FirebaseDatabase.getInstance().getReference();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -69,7 +82,8 @@ public class AddRecetaActivity extends BaseActivity {
     }
 
     /**
-     * Crea una nueva receta en Firebase con un ID único generado por push().
+     * Método para guardar una nueva receta en Firebase.
+     * Verifica los campos del formulario, valida los datos y los guarda en la base de datos.
      */
     private void guardarReceta() {
         // Verificamos que el usuario esté autenticado
@@ -127,7 +141,7 @@ public class AddRecetaActivity extends BaseActivity {
         String userId = currentUser.getUid();
         String recetaId = database.child("Recetas").child(userId).push().getKey();
 
-        // Si por alguna razón push() falla (unlikely), avisamos y salimos
+        // Verificar si se pudo generar un ID único
         if (recetaId == null) {
             Toast.makeText(this, "Error generando ID único", Toast.LENGTH_SHORT).show();
             return;
@@ -144,7 +158,7 @@ public class AddRecetaActivity extends BaseActivity {
         recetaData.put("description", descripcion);
         recetaData.put("favorite", false); // Por defecto no es favorita
 
-        // 7) Guardamos el objeto en la ruta "Recetas/userId/recetaId"
+        // Guardamos el objeto en la ruta "Recetas/userId/recetaId"
         database.child("Recetas")
                 .child(userId)
                 .child(recetaId)

@@ -15,13 +15,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Actividad de ajustes que permite a los usuarios gestionar preferencias como notificaciones
+ * y realizar acciones como eliminar su cuenta.
+ */
 public class AjustesActivity extends BaseActivity {
 
+    // Elementos de la interfaz
     private CheckBox notificationsEnabled;
     private CheckBox notificationsMessages;
     private CheckBox notificationsRecommendations;
     private Button deleteAccountButton;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura las preferencias de usuario, inicializa las vistas y permite la gestión de la cuenta.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +61,10 @@ public class AjustesActivity extends BaseActivity {
         deleteAccountButton.setOnClickListener(v -> showDeleteAccountDialog());
     }
 
+    /**
+     * Carga las preferencias guardadas del usuario desde SharedPreferences.
+     * Establece los estados iniciales de los CheckBox basándose en las preferencias guardadas.
+     */
     private void loadPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
         notificationsEnabled.setChecked(sharedPreferences.getBoolean("notifications_enabled", true));
@@ -57,6 +72,10 @@ public class AjustesActivity extends BaseActivity {
         notificationsRecommendations.setChecked(sharedPreferences.getBoolean("notifications_recommendations", true));
     }
 
+    /**
+     * Guarda las preferencias actuales del usuario en SharedPreferences.
+     * Se llama automáticamente cuando el usuario cambia los estados de los CheckBox.
+     */
     private void savePreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -66,6 +85,10 @@ public class AjustesActivity extends BaseActivity {
         editor.apply();
     }
 
+    /**
+     * Muestra un cuadro de diálogo para confirmar la eliminación de la cuenta del usuario.
+     * Si el usuario confirma, se procede a eliminar la cuenta.
+     */
     private void showDeleteAccountDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Eliminar cuenta")
@@ -75,6 +98,10 @@ public class AjustesActivity extends BaseActivity {
                 .show();
     }
 
+    /**
+     * Elimina la cuenta del usuario autenticado.
+     * Borra los datos de Firebase Realtime Database y elimina la cuenta de Firebase Authentication.
+     */
     private void deleteAccount() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

@@ -19,28 +19,41 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Actividad que permite editar los detalles de un restaurante existente.
+ * Carga la información de un objeto `Restaurant` y guarda las actualizaciones
+ * en Firebase Realtime Database.
+ */
 public class EditRestaurantActivity extends BaseActivity {
 
+    // Modelo del restaurante
     private Restaurant restaurant;
+    // Elementos de la interfaz
     private EditText etName, etAddress, etPrice, etComment, etRating;
     private Spinner spCategory, spCanGo, spCanOrder;
     private Button btnGuardar;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura el diseño, inicializa las vistas y carga los datos del restaurante.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // 1) Infla el layout específico dentro de activity_base
+        // Infla el diseño específico dentro del diseño base
         getLayoutInflater().inflate(R.layout.activity_edit_restaurant, findViewById(R.id.content_frame));
 
-        // 2) Configura la navegación lateral
+        // Configura la barra de navegación (si corresponde)
         setupNavigation();
 
-        // 3) Inicializa vistas y spinners
+        // Inicializa las vistas de la actividad
         setupEditRestaurantActivity();
 
-        // 4) Recupera el objeto Restaurant del intent
+        // Recupera el objeto Restaurant del intent
         restaurant = getIntent().getParcelableExtra("restaurant");
 
         if (restaurant == null) {
@@ -49,12 +62,15 @@ public class EditRestaurantActivity extends BaseActivity {
             return;
         }
 
-        // 5) Carga los datos en la UI
+        // Carga los datos del restaurante en los campos de la interfaz
         cargarDatosRestaurante();
     }
 
+    /**
+     * Inicializa las vistas de la actividad y configura los spinners y el botón de guardar.
+     */
     private void setupEditRestaurantActivity() {
-        // Vistas
+
         etName = findViewById(R.id.etName);
         etAddress = findViewById(R.id.etAddress);
         spCategory = findViewById(R.id.spCategory);
@@ -65,15 +81,18 @@ public class EditRestaurantActivity extends BaseActivity {
         spCanOrder = findViewById(R.id.spCanOrder);
         btnGuardar = findViewById(R.id.btnSave);
 
-        // Configuramos spinners
+        // Configura los spinners de categorías y opciones
         configurarSpinners();
 
-        // Listener para el botón Guardar
+        // Configura el listener para el botón de guardar
         btnGuardar.setOnClickListener(v -> guardarCambios());
     }
 
+    /**
+     * Configura los spinners para categorías, "Se puede ir" y "Se puede pedir".
+     */
     private void configurarSpinners() {
-        // Categoría
+        // Categorías
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.categorias_restaurantes,
@@ -91,7 +110,7 @@ public class EditRestaurantActivity extends BaseActivity {
         canGoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCanGo.setAdapter(canGoAdapter);
 
-        // Se puede pedir
+        // Opciones "Sí" o "No"
         ArrayAdapter<CharSequence> canOrderAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.opciones_si_no,
@@ -101,6 +120,12 @@ public class EditRestaurantActivity extends BaseActivity {
         spCanOrder.setAdapter(canOrderAdapter);
     }
 
+    /**
+     * Establece un valor específico en un Spinner.
+     *
+     * @param spinner Spinner a modificar.
+     * @param value   Valor que debe seleccionarse.
+     */
     private void setSpinnerValue(Spinner spinner, String value) {
         @SuppressWarnings("unchecked")
         ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spinner.getAdapter();
@@ -111,7 +136,7 @@ public class EditRestaurantActivity extends BaseActivity {
     }
 
     /**
-     * Rellena la UI con los datos del objeto restaurant.
+     * Carga los datos del objeto `Restaurant` en los campos de la interfaz.
      */
     private void cargarDatosRestaurante() {
         etName.setText(restaurant.getName());
@@ -126,7 +151,7 @@ public class EditRestaurantActivity extends BaseActivity {
     }
 
     /**
-     * Actualiza el registro del restaurante en Firebase, sin crear uno nuevo.
+     * Guarda los cambios realizados en el restaurante y actualiza los datos en Firebase.
      */
     private void guardarCambios() {
         try {
@@ -140,16 +165,14 @@ public class EditRestaurantActivity extends BaseActivity {
             restaurant.setCanGo(spCanGo.getSelectedItem().toString().equals("Si"));
             restaurant.setCanOrder(spCanOrder.getSelectedItem().toString().equals("Si"));
 
-            // Validación mínima
+            // Validación: Verifica que el ID del restaurante exista
             if (restaurant.getId() == null || restaurant.getId().isEmpty()) {
                 Toast.makeText(this, "No se puede actualizar: ID inexistente.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Obtenemos el userId de FirebaseAuth
+            // Referencia a Firebase
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-            // NOTA: Usamos 'restaurant.getId()' como clave para no crear un nodo nuevo
             DatabaseReference restaurantRef = FirebaseDatabase.getInstance().getReference()
                     .child("Restaurantes")
                     .child(userId)
@@ -168,7 +191,7 @@ public class EditRestaurantActivity extends BaseActivity {
             updates.put("canOrder", restaurant.isCanOrder());
             updates.put("favorite", restaurant.isFavorite()); // Si tu modelo lo usa
 
-            // Actualizamos en Firebase
+            // Actualiza los datos en Firebase
             restaurantRef.updateChildren(updates)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Cambios guardados correctamente", Toast.LENGTH_SHORT).show();

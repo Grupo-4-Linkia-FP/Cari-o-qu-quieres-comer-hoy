@@ -24,8 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad para mostrar restaurantes que permiten pedidos ("canOrder").
+ * Proporciona opciones para marcar como favorito, editar o eliminar restaurantes.
+ */
 public class VerRestaurantePedirActivity extends BaseActivity {
 
+    // RecyclerView para mostrar la lista de restaurantes
     private RecyclerView recyclerView;
     private RestaurantAdapter adapter;
     private List<Restaurant> restaurantList;
@@ -35,13 +40,13 @@ public class VerRestaurantePedirActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Infla el diseño específico en el content_frame del BaseActivity
+        // Infla el diseño específico en el marco de contenido del diseño base
         View verRestaurantesPedirView = getLayoutInflater().inflate(R.layout.activity_ver_restaurante_pedir, findViewById(R.id.content_frame), true);
 
         // Configura la barra de navegación
         setupNavigation();
 
-        // Inicializar RecyclerView y lista
+        // Inicializa el RecyclerView y la lista de datos
         recyclerView = verRestaurantesPedirView.findViewById(R.id.restaurant_list);
         if (recyclerView == null) {
             Log.e("VerRestaurantesPedir", "RecyclerView no se encontró. Verifica el ID en el XML.");
@@ -52,10 +57,13 @@ public class VerRestaurantePedirActivity extends BaseActivity {
         adapter = new RestaurantAdapter(restaurantList, this::onFavoriteClicked, this::onDeleteClicked, this::onEditClicked);
         recyclerView.setAdapter(adapter);
 
-        // Cargar los datos reales desde Firebase
+        // Cargar datos desde Firebase
         cargarRestaurantesQueSePuedenPedir();
     }
 
+    /**
+     * Carga los restaurantes que permiten pedidos desde Firebase.
+     */
     private void cargarRestaurantesQueSePuedenPedir() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
@@ -88,11 +96,16 @@ public class VerRestaurantePedirActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * Marca o desmarca un restaurante como favorito.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onFavoriteClicked(Restaurant restaurant) {
         restaurant.setFavorite(!restaurant.isFavorite());
         adapter.notifyDataSetChanged();
 
-        // Actualizar estado favorito en Firebase
+        // Actualiza el estado de favorito en Firebase
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
@@ -116,6 +129,11 @@ public class VerRestaurantePedirActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Elimina un restaurante seleccionado.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onDeleteClicked(Restaurant restaurant) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -146,6 +164,11 @@ public class VerRestaurantePedirActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Lanza la actividad para editar un restaurante seleccionado.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onEditClicked(Restaurant restaurant) {
         Intent intent = new Intent(this, EditRestaurantActivity.class);
         intent.putExtra("restaurant", restaurant);

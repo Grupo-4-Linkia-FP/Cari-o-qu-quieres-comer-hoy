@@ -28,6 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad para mostrar los restaurantes y recetas marcados como favoritos.
+ * Los datos se obtienen de Firebase y se muestran en RecyclerViews.
+ */
 public class MisFavoritosActivity extends BaseActivity {
 
     private static final String TAG = "MisFavoritosActivity";
@@ -44,6 +48,12 @@ public class MisFavoritosActivity extends BaseActivity {
     private DatabaseReference database;
     private FirebaseUser user;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura la interfaz, inicializa Firebase y carga los favoritos.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +82,7 @@ public class MisFavoritosActivity extends BaseActivity {
         // Obtener usuario actual de Firebase
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
-            // Si no hay usuario logueado, muestra mensaje y termina la Activity
+            // Si no hay usuario autenticado, muestra un mensaje y cierra la actividad
             Toast.makeText(this, "No estás autenticado. Inicia sesión para ver favoritos.", Toast.LENGTH_SHORT).show();
             finish();
             return;
@@ -165,7 +175,11 @@ public class MisFavoritosActivity extends BaseActivity {
     }
 
 
-    // Cuando se hace clic en favorito de un Restaurant
+    /**
+     * Acción al marcar/desmarcar un restaurante como favorito.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onFavoriteClicked(Restaurant restaurant) {
         // Aquí podrías actualizar Firebase para marcar/desmarcar favorito
         Toast.makeText(this,
@@ -174,7 +188,11 @@ public class MisFavoritosActivity extends BaseActivity {
                 .show();
     }
 
-    // Cuando se hace clic en eliminar un Restaurant
+    /**
+     * Acción al eliminar un restaurante.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onDeleteClicked(Restaurant restaurant) {
         // Lógica para eliminarlo de Firebase si corresponde
         Toast.makeText(this,
@@ -183,7 +201,11 @@ public class MisFavoritosActivity extends BaseActivity {
                 .show();
     }
 
-    // Cuando se hace clic en favorito de una Receta
+    /**
+     * Acción al marcar/desmarcar una receta como favorita.
+     *
+     * @param receta Receta seleccionada.
+     */
     private void onFavoriteClickedReceta(Receta receta) {
         // Aquí podrías actualizar Firebase para marcar/desmarcar favorito
         Toast.makeText(this,
@@ -192,7 +214,11 @@ public class MisFavoritosActivity extends BaseActivity {
                 .show();
     }
 
-    // Cuando se hace clic en eliminar una Receta
+    /**
+     * Acción al eliminar una receta.
+     *
+     * @param receta Receta seleccionada.
+     */
     private void onDeleteClickedReceta(Receta receta) {
         // Lógica para eliminarla de Firebase si corresponde
         Toast.makeText(this,
@@ -201,14 +227,22 @@ public class MisFavoritosActivity extends BaseActivity {
                 .show();
     }
 
-    // Cuando se hace clic en editar un Restaurant
+    /**
+     * Acción al editar un restaurante.
+     *
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onEditClicked(Restaurant restaurant) {
         Intent intent = new Intent(this, EditRestaurantActivity.class);
         intent.putExtra("restaurant", restaurant);
         startActivity(intent);
     }
 
-    // Cuando se hace clic en editar una Receta
+    /**
+     * Acción al editar una receta.
+     *
+     * @param receta Receta seleccionada.
+     */
     private void onEditClickedReceta(Receta receta) {
         Intent intent = new Intent(this, EditRecipeActivity.class);
         intent.putExtra("receta", receta);

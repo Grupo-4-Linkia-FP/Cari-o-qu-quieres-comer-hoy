@@ -29,14 +29,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Actividad que permite añadir un restaurante a la base de datos de Firebase.
+ * Proporciona un formulario para ingresar información sobre el restaurante,
+ * como su nombre, dirección, categoría, y características adicionales.
+ */
 public class AddRestaurantActivity extends BaseActivity {
 
+    // Elementos de la interfaz
     private EditText etNombre, etDireccion, etNota, etPrecios, etComentarios;
     private Spinner spCategoria, spSePuedeIr, spSePuedePedir;
     private Button btnGuardar;
+
+    // Referencias a Firebase
     private DatabaseReference database;
     private FirebaseUser currentUser;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura la interfaz de usuario, inicializa Firebase y Google Places,
+     * y asigna los listeners a los botones y campos interactivos.
+     *
+     * @param savedInstanceState El estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +112,13 @@ public class AddRestaurantActivity extends BaseActivity {
         btnVolver.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Maneja los resultados de la actividad de autocompletado de Google Places.
+     *
+     * @param requestCode Código de solicitud enviado con la intención.
+     * @param resultCode Código de resultado devuelto por la actividad.
+     * @param data Datos devueltos por la actividad.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,6 +134,10 @@ public class AddRestaurantActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Guarda los datos del restaurante en Firebase.
+     * Realiza validaciones y genera un ID único para el restaurante.
+     */
     private void guardarRestaurante() {
         if (currentUser == null) {
             Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show();

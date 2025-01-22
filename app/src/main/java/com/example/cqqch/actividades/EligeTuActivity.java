@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,56 +25,69 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad que permite a los usuarios filtrar y seleccionar restaurantes o recetas basados
+ * en criterios como tipo, categoría, favoritos, nota y precio.
+ */
 public class EligeTuActivity extends BaseActivity {
 
+    // Elementos de la interfaz
     private Spinner spTipo, spCategoria, spFavorito, spNota, spPrecio;
     private Button btnBuscar, btnVolverMenu;
     private RecyclerView rvResultadosFiltro;
 
+    // Firebase
     private DatabaseReference database;
     private FirebaseUser user;
 
+    // Adaptadores para los resultados
     private RestaurantAdapter restauranteAdapter;
     private RecetaAdapter recetaAdapter;
 
+    // Listas para almacenar los resultados
     private List<Restaurant> listaRestaurantes;
     private List<Receta> listaRecetas;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura la interfaz, inicializa Firebase y gestiona las acciones del usuario.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Inflamos el layout específico dentro del content_frame de activity_base
+        // Infla el diseño específico en el contenedor base
         getLayoutInflater().inflate(R.layout.activity_elige_tu, findViewById(R.id.content_frame));
 
-        // Configuramos la navegación lateral
+        // Configura la navegación (heredada de BaseActivity)
         setupNavigation();
 
         // Inicializa las vistas
         setupEligeTuActivity();
 
-        // Inicializa Firebase
+        // Configura Firebase
         database = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         listaRestaurantes = new ArrayList<>();
         listaRecetas = new ArrayList<>();
 
-        // Configurar spinners con Arrays del resources
+        // Configura los spinners con datos de los recursos
         configurarSpinners();
 
-        // Botón Buscar
+        // Acciones de los botones
         btnBuscar.setOnClickListener(v -> buscarResultados());
-
-        // Botón Volver
         btnVolverMenu.setOnClickListener(v -> {
             Toast.makeText(this, "Volviendo al menú", Toast.LENGTH_SHORT).show();
             finish();
         });
     }
 
+    /**
+     * Inicializa los elementos de la interfaz de usuario.
+     */
     private void setupEligeTuActivity() {
         spTipo = findViewById(R.id.spTipo);
         spCategoria = findViewById(R.id.spCategoria);
@@ -90,6 +102,9 @@ public class EligeTuActivity extends BaseActivity {
         rvResultadosFiltro.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Configura los spinners de la actividad con datos de los recursos XML.
+     */
     private void configurarSpinners() {
         ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(
                 this,
@@ -132,6 +147,9 @@ public class EligeTuActivity extends BaseActivity {
         spPrecio.setAdapter(adapterPrecio);
     }
 
+    /**
+     * Realiza la búsqueda de resultados basada en los filtros seleccionados.
+     */
     private void buscarResultados() {
         if (user == null) {
             Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show();
@@ -189,7 +207,9 @@ public class EligeTuActivity extends BaseActivity {
         }
     }
 
-
+    /**
+     * Carga restaurantes que cumplen los filtros para la opción "Ir".
+     */
     private void cargarOpcionesIr(String categoria, Boolean favorito, int nota, String precio) {
         listaRestaurantes.clear();
         database.child("Restaurantes").child(user.getUid())
@@ -226,6 +246,9 @@ public class EligeTuActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * Carga restaurantes que cumplen los filtros para la opción "Pedir".
+     */
     private void cargarOpcionesPedir(String categoria, Boolean favorito, int nota, String precio) {
         listaRestaurantes.clear();
         database.child("Restaurantes").child(user.getUid())
@@ -262,6 +285,9 @@ public class EligeTuActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * Carga recetas que cumplen los filtros seleccionados.
+     */
     private void cargarRecetas(String categoria, Boolean favorito, int nota, String precio) {
         listaRecetas.clear();
         database.child("Recetas").child(user.getUid())
@@ -310,6 +336,9 @@ public class EligeTuActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * Verifica si un precio está dentro de un rango.
+     */
     private boolean cumpleRangoPrecio(String precio, String rango) {
         try {
             double precioDouble = Double.parseDouble(precio);
@@ -323,31 +352,60 @@ public class EligeTuActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Marca un restaurante como favorito y muestra un mensaje al usuario.
+     *
+     * @param restaurant Restaurante que será marcado como favorito.
+     */
     private void onFavoriteClicked(Restaurant restaurant) {
         Toast.makeText(this, restaurant.getName() + " marcado como favorito", Toast.LENGTH_SHORT).show();
-        // Aquí actualiza o persiste el cambio en Firebase si lo deseas
     }
 
+    /**
+     * Elimina un restaurante y muestra un mensaje al usuario.
+     *
+     * @param restaurant Restaurante que será eliminado.
+     */
     private void onDeleteClicked(Restaurant restaurant) {
         Toast.makeText(this, restaurant.getName() + " eliminado", Toast.LENGTH_SHORT).show();
-        // Aquí podrías eliminarlo de Firebase
     }
 
+    /**
+     * Edita los detalles de un restaurante.
+     * Abre la actividad de edición de restaurantes con los datos del restaurante seleccionado.
+     *
+     * @param restaurant Restaurante cuyos detalles serán editados.
+     */
     private void onEditClicked(Restaurant restaurant) {
         Intent intent = new Intent(this, EditRestaurantActivity.class);
         intent.putExtra("restaurant", restaurant);
         startActivity(intent);
     }
 
+    /**
+     * Marca una receta como favorita y muestra un mensaje al usuario.
+     *
+     * @param receta Receta que será marcada como favorita.
+     */
     private void onFavoriteClickedReceta(Receta receta) {
         Toast.makeText(this, receta.getName() + " marcado como favorito", Toast.LENGTH_SHORT).show();
-        // Aquí actualiza o persiste el cambio en Firebase si lo deseas
     }
 
+    /**
+     * Elimina una receta y muestra un mensaje al usuario.
+     *
+     * @param receta Receta que será eliminada.
+     */
     private void onDeleteClickedReceta(Receta receta) {
         Toast.makeText(this, receta.getName() + " eliminado", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Edita los detalles de una receta.
+     * Abre la actividad de edición de recetas con los datos de la receta seleccionada.
+     *
+     * @param receta Receta cuyos detalles serán editados.
+     */
     private void onEditClickedReceta(Receta receta) {
         Intent intent = new Intent(this, EditRecipeActivity.class);
         intent.putExtra("receta", receta);

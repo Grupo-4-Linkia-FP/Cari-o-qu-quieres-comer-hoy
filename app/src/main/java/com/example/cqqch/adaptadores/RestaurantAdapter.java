@@ -18,6 +18,10 @@ import com.example.cqqch.modelos.Restaurant;
 
 import java.util.List;
 
+/**
+ * Adaptador para mostrar una lista de restaurantes en un RecyclerView.
+ * Permite manejar las interacciones con los elementos de la lista (editar, eliminar, marcar como favorito).
+ */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
     private List<Restaurant> restaurantList;
@@ -25,6 +29,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     private OnDeleteClickListener deleteClickListener;
     private OnEditClickListener editClickListener;
 
+    /**
+     * Constructor del adaptador.
+     *
+     * @param restaurantList       Lista de restaurantes a mostrar.
+     * @param favoriteClickListener Listener para manejar clics en el ícono de favorito.
+     * @param deleteClickListener   Listener para manejar clics en el ícono de eliminación.
+     * @param editClickListener     Listener para manejar clics en el ícono de edición.
+     */
     public RestaurantAdapter(List<Restaurant> restaurantList, OnFavoriteClickListener favoriteClickListener, OnDeleteClickListener deleteClickListener, OnEditClickListener editClickListener) {
         this.restaurantList = restaurantList;
         this.favoriteClickListener = favoriteClickListener;
@@ -42,10 +54,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
+        // Obtiene el restaurante actual
         Restaurant restaurant = restaurantList.get(position);
 
+        // Asigna los datos al ViewHolder
         holder.name.setText(restaurant.getName());
         holder.address.setText(restaurant.getAddress());
+
         // Categoría
         String tituloCategoria = "Categoría: ";
         String contenidoCategoria = restaurant.getCategory();
@@ -107,6 +122,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         return restaurantList.size();
     }
 
+    /**
+     * ViewHolder que contiene las vistas de un elemento de la lista.
+     */
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
         TextView name, address, category, price, rating, comment, tvCanGo, tvCanOrder;
         ImageView favoriteIcon, deleteIcon, editIcon, responseImage;
@@ -128,6 +146,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }
     }
 
+    /**
+     * Retorna la imagen adecuada según si el restaurante permite ir o pedir.
+     *
+     * @param canGo    Si se puede ir al restaurante.
+     * @param canOrder Si se puede pedir del restaurante.
+     * @return ID del recurso de imagen.
+     */
     private int getImageBasedOnAnswers(boolean canGo, boolean canOrder) {
         if (canGo && canOrder) {
             return R.drawable.ic_can_go_and_can_order_yes; // Ambas son "Sí"
@@ -145,10 +170,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         void onEditClick(Restaurant restaurant);
     }
 
+    // Interfaz para manejar el evento de clic en eliminar
     public interface OnFavoriteClickListener {
         void onFavoriteClick(Restaurant restaurant);
     }
 
+    // Interfaz para manejar el evento de clic en editar
     public interface OnDeleteClickListener {
         void onDeleteClick(Restaurant restaurant);
     }

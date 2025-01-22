@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("com.google.gms.google-services")
-    id("org.jetbrains.kotlin.android")
+    id("com.android.application") version "8.6.1"
+    id("com.google.gms.google-services") version "4.3.15"
+    id("org.jetbrains.kotlin.android") version "1.8.22"
 }
 
 android {

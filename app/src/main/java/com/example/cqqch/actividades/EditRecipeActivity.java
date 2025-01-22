@@ -19,33 +19,44 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Actividad para editar los detalles de una receta existente.
+ * Permite al usuario cargar datos desde un objeto Receta, realizar cambios
+ * y guardar las actualizaciones en Firebase.
+ */
 public class EditRecipeActivity extends BaseActivity {
 
-    // Modelo
+    // Modelo de receta
     private Receta receta;
 
-    // Vistas
+    // Elementos de la interfaz
     private EditText etName, etDescription, etIngredients, etPreparationTime, etPrice, etRating;
     private Spinner spCategory;
     private Button btnGuardar;
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura el diseño, inicializa las vistas y carga los datos de la receta a editar.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 1) Usamos un layout base que contiene un FrameLayout para “inyectar” nuestra UI
+        // Usar un diseño base para inflar el contenido específico
         setContentView(R.layout.activity_base);
 
-        // 2) Inflamos el layout específico en el FrameLayout (content_frame)
+        // Infla el diseño específico en el marco de contenido del diseño base
         getLayoutInflater().inflate(R.layout.activity_edit_recipe, findViewById(R.id.content_frame));
 
-        // 3) Configuramos la navegación lateral (Drawer, si corresponde)
+        // Configura la navegación heredada de BaseActivity
         setupNavigation();
 
-        // 4) Inicializamos las vistas
+        // Inicializa las vistas y configura los elementos de la actividad
         setupEditRecipeActivity();
 
-        // 5) Obtenemos la receta del intent
+        // Obtiene la receta desde el Intent
         receta = getIntent().getParcelableExtra("receta");
         if (receta == null) {
             Toast.makeText(this, "Error al cargar la receta", Toast.LENGTH_SHORT).show();
@@ -53,12 +64,15 @@ public class EditRecipeActivity extends BaseActivity {
             return;
         }
 
-        // 6) Cargamos los datos de la receta en los campos
+        // Carga los datos de la receta en los campos de la interfaz
         cargarDatosReceta();
     }
 
+    /**
+     * Inicializa las vistas de la actividad y configura el spinner y el botón de guardar.
+     */
     private void setupEditRecipeActivity() {
-        // EditTexts
+        // Inicializa los campos de texto
         etName = findViewById(R.id.etName);
         etDescription = findViewById(R.id.etDescription);
         etIngredients = findViewById(R.id.etIngredients);
@@ -66,28 +80,34 @@ public class EditRecipeActivity extends BaseActivity {
         etPrice = findViewById(R.id.etPrice);
         etRating = findViewById(R.id.etRating);
 
-        // Spinner Categoría
+        // Inicializa el spinner de categoría
         spCategory = findViewById(R.id.spCategory);
 
-        // Botón Guardar
+        // Inicializa el botón de guardar
         btnGuardar = findViewById(R.id.btnSave);
 
-        // Configuramos el spinner y el botón
+        // Configura el spinner y el evento del botón
         configurarSpinnerCategoria();
         btnGuardar.setOnClickListener(v -> guardarCambios());
     }
 
+    /**
+     * Configura el spinner de categorías con datos desde un recurso de arrays.
+     */
     private void configurarSpinnerCategoria() {
-        // Puedes tener un array en res/values/arrays.xml (por ejemplo, R.array.categorias_recetas)
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
-                R.array.categorias_recetas, // EJEMPLO: "Postres", "Ensaladas", "Carnes"...
+                R.array.categorias_recetas,
                 android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategory.setAdapter(adapter);
     }
 
+    /**
+     * Carga los datos de la receta en los campos de texto y selecciona la categoría correspondiente.
+     */
     private void cargarDatosReceta() {
         etName.setText(receta.getName());
         etDescription.setText(receta.getDescription());
@@ -96,13 +116,15 @@ public class EditRecipeActivity extends BaseActivity {
         etPrice.setText(receta.getPrice());
         etRating.setText(String.valueOf(receta.getRating()));
 
-
-        // Asignar la categoría actual en el spinner
+        // Selecciona la categoría actual en el spinner
         setSpinnerValue(spCategory, receta.getCategory());
     }
 
     /**
-     * Utilidad para seleccionar el valor correspondiente en un Spinner
+     * Selecciona un valor específico en un Spinner.
+     *
+     * @param spinner El Spinner a modificar.
+     * @param value   El valor a seleccionar.
      */
     private void setSpinnerValue(Spinner spinner, String value) {
         if (value == null) return;
@@ -117,30 +139,29 @@ public class EditRecipeActivity extends BaseActivity {
     }
 
 
+    /**
+     * Guarda los cambios realizados en la receta y actualiza los datos en Firebase.
+     */
     private void guardarCambios() {
         try {
-            // Recogemos los valores editados
+            // Recoge los valores de los campos de texto
             receta.setName(etName.getText().toString());
             receta.setDescription(etDescription.getText().toString());
             receta.setIngredients(etIngredients.getText().toString());
-            // Convertimos a int
             receta.setPreparationTime(Integer.parseInt(etPreparationTime.getText().toString()));
             receta.setPrice(etPrice.getText().toString());
-            // Convertimos a double
             receta.setRating(Double.parseDouble(etRating.getText().toString()));
             receta.setCategory(spCategory.getSelectedItem().toString());
 
-            // Actualizamos en Firebase
+            // Referencia a Firebase
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-            // Usamos un ID único
             DatabaseReference recipeRef = FirebaseDatabase.getInstance().getReference()
                     .child("Recetas")
                     .child(userId)
                     .child(receta.getId());
 
 
-            // Preparamos los campos a actualizar
+            // Crea un mapa con los datos actualizados
             Map<String, Object> updates = new HashMap<>();
             updates.put("name", receta.getName());
             updates.put("description", receta.getDescription());
@@ -148,9 +169,8 @@ public class EditRecipeActivity extends BaseActivity {
             updates.put("preparationTime", receta.getPreparationTime());
             updates.put("price", receta.getPrice());
             updates.put("rating", receta.getRating());
-            // Si tienes más campos (isFavorite, etc.), inclúyelos también
 
-            // Realizamos la actualización
+            // Actualiza los datos en Firebase
             recipeRef.updateChildren(updates)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(EditRecipeActivity.this,

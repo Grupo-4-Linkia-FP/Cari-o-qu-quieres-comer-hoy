@@ -24,40 +24,48 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad que muestra una lista de recetas guardadas por el usuario.
+ * Permite marcar recetas como favoritas, eliminarlas o editarlas.
+ */
 public class VerRecetasActivity extends BaseActivity {
 
     private static final String TAG = "VerRecetasActivity";
 
+    // RecyclerView y Adaptador para mostrar las recetas
     private RecyclerView recyclerView;
     private RecetaAdapter adapter;
     private final List<Receta> listaRecetas = new ArrayList<>();
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura el diseño, inicializa la navegación y carga los datos de las recetas.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // 1) Inflar el layout específico en el content_frame del BaseActivity
+        // Inflar el layout específico en el marco base
         View verRecetasView = getLayoutInflater().inflate(
                 R.layout.activity_ver_recetas,
                 findViewById(R.id.content_frame),
                 true
         );
 
-        // 2) Configurar la navegación (Drawer, etc.)
+        // Configurar la navegación
         setupNavigation();
 
-        // 3) Inicializar vistas
+        // Inicializar vistas y adaptador
         recyclerView = verRecetasView.findViewById(R.id.recetas_list);
         if (recyclerView == null) {
             Log.e(TAG, "RecyclerView no se encontró. Verifica el ID en el XML.");
             return;
         }
 
-        // 4) Configurar RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // 5) Inicializar el adaptador
         adapter = new RecetaAdapter(
                 listaRecetas,           // Lista de recetas
                 this::onFavoriteClicked,  // Favorito
@@ -66,7 +74,7 @@ public class VerRecetasActivity extends BaseActivity {
         );
         recyclerView.setAdapter(adapter);
 
-        // 6) Cargar datos de Firebase
+        // Cargar las recetas desde Firebase
         cargarRecetas();
     }
 
@@ -109,23 +117,23 @@ public class VerRecetasActivity extends BaseActivity {
     }
 
     /**
-     * Evento: el usuario hace clic en el ícono de favorito de una receta.
+     * Marca o desmarca una receta como favorita.
+     *
+     * @param receta Objeto de receta seleccionada.
      */
     private void onFavoriteClicked(Receta receta) {
-        // 1) Invertimos localmente el estado de favorito
+        // Invierte localmente el estado de favorito
         boolean nuevoValor = !receta.isFavorite();
         receta.setFavorite(nuevoValor);
         adapter.notifyDataSetChanged();
 
-        // 2) Actualizamos en Firebase
+        // Actualiza en Firebase
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             final String userId = currentUser.getUid();
             FirebaseDatabase.getInstance()
                     .getReference("Recetas")
                     .child(userId)
-                    // Aquí podemos usar un ID único en vez de "orderByChild("name")"
-                    // si tu modelo tiene un campo 'id' para la receta.
                     .orderByChild("name")
                     .equalTo(receta.getName())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -136,11 +144,9 @@ public class VerRecetasActivity extends BaseActivity {
                                         .child("favorite")
                                         .setValue(nuevoValor)
                                         .addOnSuccessListener(aVoid -> {
-                                            // Éxito
                                             Log.d(TAG, "Favorito actualizado en Firebase");
                                         })
                                         .addOnFailureListener(e -> {
-                                            // Error -> revertir
                                             receta.setFavorite(!nuevoValor);
                                             adapter.notifyDataSetChanged();
                                             Log.e(TAG, "Error al actualizar favorito", e);
@@ -158,7 +164,9 @@ public class VerRecetasActivity extends BaseActivity {
     }
 
     /**
-     * Evento: el usuario hace clic en el ícono de eliminar de una receta.
+     * Elimina una receta seleccionada.
+     *
+     * @param receta Objeto de receta seleccionada.
      */
     private void onDeleteClicked(Receta receta) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -203,11 +211,12 @@ public class VerRecetasActivity extends BaseActivity {
     }
 
     /**
-     * Evento: el usuario hace clic en el ícono de editar de una receta.
-     * Si no manejas la edición, puedes eliminar este método.
+     * Lanza la actividad para editar la receta seleccionada.
+     *
+     * @param receta Objeto de receta seleccionada.
      */
     private void onEditClicked(Receta receta) {
-        // Lanzamos la pantalla de edición
+        // Lanza la pantalla de edición
         Intent intent = new Intent(this, EditRecipeActivity.class);
         intent.putExtra("receta", receta);
         startActivity(intent);

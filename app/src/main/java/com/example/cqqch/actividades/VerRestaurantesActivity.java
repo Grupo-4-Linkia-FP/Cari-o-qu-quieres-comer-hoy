@@ -24,8 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad para mostrar una lista de restaurantes a los que se puede ir ("canGo = true").
+ * Proporciona funciones para marcar como favorito, editar o eliminar restaurantes.
+ */
 public class VerRestaurantesActivity extends BaseActivity {
 
+    // Componentes principales
     private RecyclerView recyclerView;
     private RestaurantAdapter adapter;
     private List<Restaurant> listaRestaurantes;
@@ -35,17 +40,16 @@ public class VerRestaurantesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        // Infla el diseño específico en el content_frame del BaseActivity
+        // Infla el diseño específico dentro del marco base
         View verRestaurantesView = getLayoutInflater().inflate(R.layout.activity_ver_restaurantes, findViewById(R.id.content_frame), true);
 
-        // Llama a setupNavigation() después de inflar el layout
+        // Configura la barra de navegación
         setupNavigation();
 
-        // Inicializa la lista y el RecyclerView
+        // Inicializa componentes
         listaRestaurantes = new ArrayList<>();
         recyclerView = verRestaurantesView.findViewById(R.id.restaurant_list);
 
-        // Llama a setupNavigation() después de inflar el layout
         if (recyclerView == null) {
             Log.e("VerRestaurantesActivity", "RecyclerView no se encontró. Verifica el ID en el XML.");
             return;
@@ -57,7 +61,7 @@ public class VerRestaurantesActivity extends BaseActivity {
 
         recyclerView.setAdapter(adapter);
 
-        // Cargar los datos de Firebase
+        // Carga los datos de Firebase
         cargarRestaurantes();
     }
 
@@ -116,6 +120,10 @@ public class VerRestaurantesActivity extends BaseActivity {
     }
 
 
+    /**
+     * Marca o desmarca un restaurante como favorito.
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onFavoriteClicked(Restaurant restaurant) {
         restaurant.setFavorite(!restaurant.isFavorite());
         adapter.notifyDataSetChanged();
@@ -144,6 +152,10 @@ public class VerRestaurantesActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Elimina un restaurante de Firebase y de la lista local.
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onDeleteClicked(Restaurant restaurant) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
@@ -174,6 +186,10 @@ public class VerRestaurantesActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Lanza la actividad para editar el restaurante seleccionado.
+     * @param restaurant Restaurante seleccionado.
+     */
     private void onEditClicked(Restaurant restaurant) {
 
         Intent intent = new Intent(this, EditRestaurantActivity.class);

@@ -8,8 +8,19 @@ import android.widget.Toast;
 import com.example.cqqch.R;
 import com.example.cqqch.base.BaseActivity;
 
+/**
+ * Actividad principal para la sección "Cocinar".
+ * Permite al usuario navegar hacia la visualización de recetas existentes
+ * o la adición de nuevas recetas.
+ */
 public class CocinarActivity extends BaseActivity {
 
+    /**
+     * Método llamado al crear la actividad.
+     * Configura el diseño base, inicializa la navegación y configura los botones específicos de la actividad.
+     *
+     * @param savedInstanceState Estado previamente guardado de la actividad (si existe).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Configura el layout base
@@ -26,6 +37,10 @@ public class CocinarActivity extends BaseActivity {
         setupCocinarActivity();
     }
 
+    /**
+     * Método que configura los elementos específicos de la actividad "Cocinar".
+     * Incluye la configuración de botones y acciones relacionadas.
+     */
     private void setupCocinarActivity() {
         // Muestra un mensaje de bienvenida
         Toast.makeText(this, "Bienvenido a Cocinar", Toast.LENGTH_SHORT).show();
